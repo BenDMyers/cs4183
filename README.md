@@ -3,6 +3,6 @@
 
 ## Sprint 0
 
-* [Static Scene](http://rawgit.com/BenDMyers/cs4143/master/sprint0/cs4143engine0.html?url=staticScene.json)
+* [Static Scene](http://rawgit.com/BenDMyers/cs4143/master/sprint0/cs4143engine0.html?url=staticScene.json&debug=false)
 
-* [Invaders Game](http://rawgit.com/BenDMyers/cs4143/master/sprint0/cs4143engine0.html?url=INVADERS.json)
+* [Invaders Game](http://rawgit.com/BenDMyers/cs4143/master/sprint0/cs4143engine0.html?url=INVADERS.json&debug=false)
