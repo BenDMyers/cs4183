@@ -1,0 +1,111 @@
+{
+"COMMENT": "Fun with lights",
+"type": "node",
+"name": "rootNode",
+"scriptFiles": [ "lettherebelight.js" ],
+
+"children":
+[
+	{
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [-100, 4, 9],
+		"center": [0, 0.85, 0],
+		"vup": [0, 1, 0],
+		"fov": 24
+	},
+	{
+		"type": "hemisphereLight",
+		"name": "hlight",
+		"skyColor": [1, 1, 0],
+		"groundColor": [1, 1, 0],
+		"intensity": 0.1
+	},
+	{
+		"type": "node",
+		"name": "spotTarget",
+		"translate": [0,0,0]
+	},
+	{
+		"type": "spotLight",
+		"name": "slight",
+		"position": [-1.5,5,1],
+		"target": "spotTarget",
+		"color": [1.5, 1.3, 0.9],
+		"intensity": 1.0,
+		"angle": 0.7,
+		"penumbra": 0.2,
+		"decay": 1.0,
+		"distance": 100,
+		"castShadow": true
+	},
+	{
+		"type": "pointLight",
+		"name": "sunlight",
+		"position": [0,1.3,0],
+		"target": "spotTarget",
+		"color": [1.5, 1.3, 0.9],
+		"intensity": 1,
+		"angle": 0.7,
+		"penumbra": 0.2,
+		"decay": 0.1,
+		"distance": 1000,
+		"castShadow": true
+	},
+	{
+		"type": "mesh",
+		"name": "earth",
+		"scale": [1, 1, 1],
+		"translate": [-21, 0, 0],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 32,
+		"material":
+		{
+			"type": "meshPhongMaterial",
+			"name": "sm2",
+			"diffuseColor": [1, 1, 1],
+			"specularColor": [0.04, 0.04, 0.04],
+			"diffuseMap": "earth2k.jpg",
+			"bumpMap": "earth2k.jpg",
+			"bumpScale": 0.01,
+			"shininess": 200
+		},
+		"userData":
+		{
+			"scripts": ["rotateScript2", "bounceScript", "orbitScript"],
+			"rotationSpeed": 0.275,
+			"bounceBottom": 0,
+			"bounceHeight": 0,
+			"dist": 21.5
+		}
+	},
+	{
+		"type": "mesh",
+		"name": "sun",
+		"scale": [10, 10, 10],
+		"translate": [0, 1.3, 0],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 32,
+		"material":
+		{
+			"type": "meshBasicMaterial",
+			"name": "sm2",
+			"color": [1, 1, 0],
+			"specularColor": [0.04, 0.04, 0.04],
+			"map": "sun.jpg",
+			"bumpMap": "sun.jpg",
+			"bumpScale": 0.01,
+			"shininess": 200
+		},
+		"userData":
+		{
+			"scripts": ["bounceScript","rotateScript2"],
+			"rotationSpeed": 0.01,
+			"bounceBottom": 0,
+			"bounceHeight": 0
+		}
+	}
+]
+}

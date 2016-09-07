@@ -1,0 +1,71 @@
+{ 
+"COMMENT": "Cube with point light",
+"type": "node",
+"name": "rootNode",
+
+"children":
+[
+	{
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30
+	},
+	{
+		"type": "pointLight",
+		"name": "plight1",
+		"color": [1, 0, 0],
+		"intensity": 1.0,
+		"position": [-2, 2, 3]
+	},
+	{
+		"type": "pointLight",
+		"name": "plight2",
+		"color": [0, 1, 0],
+		"intensity": 1.0,
+		"position": [2, 2, 3]
+	},
+	{
+		"type": "pointLight",
+		"name": "plight3",
+		"color": [0, 0, 1],
+		"intensity": 1.0,
+		"position": [0, -2, 3]
+	},
+	{
+		"type": "mesh",
+		"name": "theCube",
+		"scale": [2, 2, 2],
+		"translate": [0, 0, 0],
+		"geometry": "cube",
+		"material": 
+		{
+			"type": "meshPhongMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [1, 1, 1],
+			"specularColor": [0.01, 0.01, 0.01],
+			"shininess": 200
+		}
+	},
+	{
+		"type": "mesh",
+		"name": "theSphere",
+		"scale": [1, 1, 1],
+		"translate": [0, 0, 2],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 16,
+		"material": 
+		{
+			"type": "meshPhongMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [1, 1, 1],
+			"specularColor": [0.01, 0.01, 0.01],
+			"shininess": 200
+		}
+	}
+]
+}
+

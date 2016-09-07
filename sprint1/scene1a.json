@@ -1,0 +1,82 @@
+{
+"COMMENT": "A CUBE, SPHERE, AND DIRECTIONAL LIGHTS",
+"type": "node",
+"name": "rootNode",
+
+"children":
+[
+	{
+		"COMMENT": "CAMERA LOOKING AT ORIGIN FROM ALONG THE Z AXIS",
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light1",
+		"color": [1, 0, 0],
+		"position": [0.5, 1, 0.5]
+	},
+	{
+		"COMMENT": "AMBIENT LIGHT",
+		"type": "ambientLight",
+		"name": "lightA",
+		"color": [0, 1, 0],
+	},
+	{
+		"COMMENT": "POINT LIGHT",
+		"type": "pointLight",
+		"name": "lightP",
+		"intensity": 1.0,
+		"color": [0, 0, 1],
+		"position": [0.5, 1, 0.5],
+		"distance": 2.0
+	},
+	{
+		"COMMENT": "HEMISPHERE LIGHT",
+		"type": "hemisphereLight",
+		"name": "lightH",
+		"color": [1, 1, 0.5],
+		"position": [0.5, 1, 0.5]
+	},
+	{
+		"COMMENT": "SPOT LIGHT",
+		"type": "spotLight",
+		"name": "light2",
+		"color": [0.3, 0.3, 1],
+		"position": [-0.5, -1, 0.5]
+	},
+	{
+		"COMMENT": "GREEN SPHERE",
+		"type": "mesh",
+		"name": "sphere1",
+		"translate": [-1.8, 0, 0],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 16,
+		"material":
+		{
+			"type": "meshLambertMaterial",
+			"name": "sphereMat",
+			"diffuseColor": [0.2, 0.8, 0.2]
+		}
+	},
+	{
+		"COMMENT": "red cube to left of origin",
+		"type": "mesh",
+		"name": "myCube",
+		"translate": [1.8, 0, 0],
+		"geometry": "cube",
+		"material":
+		{
+			"type": "meshLambertMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [1, 0.2, 0.2]
+		}
+	}
+]
+}

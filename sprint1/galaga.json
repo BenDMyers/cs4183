@@ -1,0 +1,424 @@
+{
+"COMMENT": "GALAGA",
+"type": "node",
+"name": "rootNode",
+
+"scriptFiles":
+[
+	"game.js"
+],
+
+"userData":
+{
+	"scripts": ["sceneControl"]
+},
+
+"children":
+[
+	{
+		"COMMENT": "CAMERA LOOKING AT ORIGIN FROM ALONG THE Z AXIS",
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 10],
+		"center": [0, 2.1, 0],
+		"vup": [0, 1, 0],
+		"fov": 30
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light1",
+		"color": [1, 1, 0.5],
+		"position": [0.5, 1, 0.5]
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light2",
+		"color": [0.3, 0.3, 1],
+		"position": [-0.5, -1, 0.5]
+	},
+	{
+		"COMMENT": "OUR SHIP",
+		"type": "mesh",
+		"name": "ship",
+		"translate": [0,0,0],
+		"rotate": [0, 0, 1, 0],
+		"scale": [0.1, 0.2, 0.2],
+		"geometry": "sphere",
+		"widthSegments": 4,
+		"heightSegments": 4,
+		"material":
+		{
+			"type": "meshLambertMaterial",
+			"name": "sphereMat",
+			"diffuseColor": [0.95, 0.49, 0]
+		},
+		"userData":
+		{
+			"win": "play"
+		}
+	},
+	{
+		"COMMENT": "BULLET",
+		"type": "mesh",
+		"name": "bullet",
+		"translate": [0,0,0],
+		"rotate": [0, 0, 1, 0],
+		"scale": [0.05, 0.05, 0.05],
+		"geometry": "sphere",
+		"widthSegments": 2,
+		"heightSegments": 2,
+		"material":
+		{
+			"type": "meshLambertMaterial",
+			"name": "sphereMat",
+			"diffuseColor": [1, 1, 1]
+		},
+		"userData":
+		{
+			"firing": false,
+			"collided": false
+		}
+	},
+	{
+		"COMMENT": "ENEMY SHIPS",
+		"type": "node",
+		"name": "enemies",
+		"children":
+		[
+			{
+				"COMMENT": "FAR LEFT ENEMY",
+				"type": "mesh",
+				"name": "enemy0",
+				"translate": [-4,3,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": -3,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": -4,
+					"dir": 1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "MIDDLE LEFT ENEMY",
+				"type": "mesh",
+				"name": "enemy1",
+				"translate": [-2.5,3,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": -1.5,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": -2.5,
+					"dir": 1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "MIDDLE ENEMY",
+				"type": "mesh",
+				"name": "enemy2",
+				"translate": [-1,3,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": 0,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": -1,
+					"dir": 1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "MIDDLE RIGHT ENEMY",
+				"type": "mesh",
+				"name": "enemy3",
+				"translate": [0.5,3,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": 1.5,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": 0.5,
+					"dir": 1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "FAR RIGHT ENEMY",
+				"type": "mesh",
+				"name": "enemy4",
+				"translate": [2,3,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": 3,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": 2,
+					"dir": 1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "FAR LEFT ENEMY - t",
+				"type": "mesh",
+				"name": "enemy5",
+				"translate": [-4,4,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": -3,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": -3,
+					"dir": -1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "MIDDLE LEFT ENEMY - t",
+				"type": "mesh",
+				"name": "enemy6",
+				"translate": [-2.5,4,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": -1.5,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": -1.5,
+					"dir": -1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "MIDDLE ENEMY -t",
+				"type": "mesh",
+				"name": "enemy7",
+				"translate": [-1,4,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": 0,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": 0,
+					"dir": -1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "MIDDLE RIGHT ENEMY - t",
+				"type": "mesh",
+				"name": "enemy8",
+				"translate": [0.5,4,0],
+				"rotate": [0, 0, 1, 0],
+				"baseX": 1.5,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": 1.5,
+					"dir": -1,
+					"hit": false
+				}
+			},
+			{
+				"COMMENT": "FAR RIGHT ENEMY - t",
+				"type": "mesh",
+				"name": "enemy9",
+				"translate": [2,4,0],
+				"rotate": [1, 0, 0, 0],
+				"baseX": 3,
+				"scale": [0.1, 0.2, 0.2],
+				"geometry": "sphere",
+				"widthSegments": 4,
+				"heightSegments": 4,
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "sphereMat",
+					"diffuseColor": [1, 1, 0]
+				},
+				"userData":
+				{
+					"baseX": 3,
+					"dir": -1,
+					"hit": false
+				}
+			}
+		]
+	},
+	{
+		"COMMENT": "lose",
+		"type": "node",
+		"name": "lose",
+		"children":
+		[
+			{
+				"COMMENT": "X - tl-br",
+				"type": "mesh",
+				"name": "tlbr",
+				"translate": [0, 3, -2],
+				"scale": [0.3, 1, 0.3],
+				"rotate": [0, 0, 1, 0.785398],
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "cubeMat",
+					"diffuseColor": [0, 0, 0]
+				}
+			},
+			{
+				"COMMENT": "X - tr-bl",
+				"type": "mesh",
+				"name": "trbl",
+				"translate": [0, 3, -2],
+				"scale": [0.3, 1, 0.3],
+				"rotate": [0, 0, 1, -0.785398],
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "cubeMat",
+					"diffuseColor": [0, 0, 0]
+				}
+			}
+		]
+	},
+	{
+		"COMMENT": "win",
+		"type": "node",
+		"name": "win",
+		"children":
+		[
+			{
+				"COMMENT": "check - tl-br",
+				"type": "mesh",
+				"name": "ctlbr",
+				"translate": [-1, 2, -3],
+				"scale": [0.3, 1, 0.3],
+				"rotate": [0, 0, 1, 0.785398],
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "cubeMat",
+					"diffuseColor": [0, 0, 0]
+				}
+			},
+			{
+				"COMMENT": "check - tr-bl",
+				"type": "mesh",
+				"name": "ctrbl",
+				"translate": [1, 3, -3],
+				"scale": [0.3, 2, 0.3],
+				"rotate": [0, 0, 1, -0.785398],
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "cubeMat",
+					"diffuseColor": [0, 0, 0]
+				}
+			}
+		]
+	},
+	{
+		"COMMENT": "COUNTDOWN BAR",
+		"type": "node",
+		"name": "clock",
+		"type": "mesh",
+		"translate": [5, 6, -3],
+		"scale": [1, 0.15, 0.15],
+		"geometry": "cube",
+		"material":
+		{
+			"type": "meshLambertMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [0, 1, 0]
+		}
+	}
+]
+}
