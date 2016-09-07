@@ -2,7 +2,7 @@
 "COMMENT": "Fun with lights",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": [ "lettherebelight.js" ],
+"scriptFiles": [ "orbit.js" ],
 
 "children":
 [
