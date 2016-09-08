@@ -45,7 +45,7 @@
 			"name": "sm2",
 			"diffuseMap": "discotex.png",
 			"bumpMap": "discotex.png",
-			"bumpScale": .3,
+			"bumpScale": 0.3,
 			"diffuseColor": [0.3, 1.0, 0.3],
 			"specularColor": [0.02, 0.02, 0.02],
 			"shininess": 200
