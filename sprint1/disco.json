@@ -53,7 +53,7 @@
 		"userData":
 		{
 			"scripts": ["rotatescript2"],
-			"rotationspeed": 0.1
+			"rotationSpeed": 0.1
 		}
 	}
 ]
