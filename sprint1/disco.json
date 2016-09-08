@@ -52,7 +52,7 @@
 		},
 		"userData":
 		{
-			"scripts": ["rotatescript2"],
+			"scripts": ["rotateScript2"],
 			"rotationSpeed": 0.1
 		}
 	}
