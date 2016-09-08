@@ -43,8 +43,8 @@
 		{
 			"type": "meshPhongMaterial",
 			"name": "sm2",
-			"diffuseMap": "discotiles.jpg",
-			"bumpMap": "discotiles.jpg",
+			"diffuseMap": "discotiles.png",
+			"bumpMap": "discotiles.png",
 			"bumpScale": -0.3,
 			"diffuseColor": [0.3, 1.0, 0.3],
 			"specularColor": [0.02, 0.02, 0.02],
