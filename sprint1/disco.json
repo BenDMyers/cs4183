@@ -49,6 +49,11 @@
 			"diffuseColor": [0.3, 1.0, 0.3],
 			"specularColor": [0.02, 0.02, 0.02],
 			"shininess": 200
+		},
+		"userData":
+		{
+			"scripts": ["rotatescript2"],
+			"rotationspeed": 0.1
 		}
 	}
 ]
