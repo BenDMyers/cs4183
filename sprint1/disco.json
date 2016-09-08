@@ -9,8 +9,8 @@
 	{
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [0, 0, 0],
-		"center": [0, 0.85, 0],
+		"eye": [0, 0, 20],
+		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 24
 	},
@@ -54,57 +54,19 @@
 	},
 	{
 		"type": "mesh",
-		"name": "earth",
-		"scale": [1, 1, 1],
-		"translate": [-21, 0, 0],
+		"name": "discoball",
+		"scale": [2, 2, 2],
+		"translate": [4, 0, 0],
 		"geometry": "sphere",
 		"widthSegments": 32,
-		"heightSegments": 32,
-		"material":
+		"heightSegments": 16,
+		"material": 
 		{
 			"type": "meshPhongMaterial",
-			"name": "sm2",
-			"diffuseColor": [1, 1, 1],
-			"specularColor": [0.04, 0.04, 0.04],
-			"diffuseMap": "earth2k.jpg",
-			"bumpMap": "earth2k.jpg",
-			"bumpScale": 0.01,
+			"name": "sm3",
+			"diffuseColor": [0.3, 0.3, 1.0],
+			"specularColor": [0.01, 0.01, 0.01],
 			"shininess": 200
-		},
-		"userData":
-		{
-			"scripts": ["rotateScript2", "bounceScript", "orbitScript"],
-			"rotationSpeed": 0.275,
-			"bounceBottom": 0,
-			"bounceHeight": 0,
-			"dist": 21.5
-		}
-	},
-	{
-		"type": "mesh",
-		"name": "sun",
-		"scale": [3, 3, 3],
-		"translate": [0, -5, 0],
-		"geometry": "sphere",
-		"widthSegments": 32,
-		"heightSegments": 32,
-		"material":
-		{
-			"type": "meshBasicMaterial",
-			"name": "sm2",
-			"color": [1, 1, 0],
-			"specularColor": [0.04, 0.04, 0.04],
-			"map": "sun.jpg",
-			"bumpMap": "sun.jpg",
-			"bumpScale": 0.01,
-			"shininess": 200
-		},
-		"userData":
-		{
-			"scripts": ["bounceScript","rotateScript2"],
-			"rotationSpeed": 0.01,
-			"bounceBottom": 0,
-			"bounceHeight": 0
 		}
 	}
 ]
