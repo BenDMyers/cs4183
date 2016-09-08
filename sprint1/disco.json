@@ -2,7 +2,7 @@
 "COMMENT": "Fun with lights",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": [ "orbit.js" ],
+"scriptFiles": [ "disco.js" ],
 
 "children":
 [
@@ -83,8 +83,8 @@
 	{
 		"type": "mesh",
 		"name": "sun",
-		"scale": [10, 10, 10],
-		"translate": [0, -10, 0],
+		"scale": [3, 3, 10],
+		"translate": [0, 2, 0],
 		"geometry": "sphere",
 		"widthSegments": 32,
 		"heightSegments": 32,
