@@ -83,8 +83,8 @@
 	{
 		"type": "mesh",
 		"name": "sun",
-		"scale": [3, 3, 10],
-		"translate": [0, 2, 0],
+		"scale": [3, 3, 3],
+		"translate": [0, -5, 0],
 		"geometry": "sphere",
 		"widthSegments": 32,
 		"heightSegments": 32,
