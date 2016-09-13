@@ -19,8 +19,8 @@ The repository for the Sprint 1 assignment in CS 4183 under [Dr. David Cline](ht
 - scene1gSpotLight.json
 
 **Assets**
--Earth texture provided by Dr. Cline.
--Sun texture from [smash!ngapps](http://www.smashingapps.com/2014/03/28/free-high-quality-texture-packs.html).
+- Earth texture provided by Dr. Cline.
+- Sun texture from [smash!ngapps](http://www.smashingapps.com/2014/03/28/free-high-quality-texture-packs.html).
 
 > # Sprint 1: Lights and Basic Materials
 >
