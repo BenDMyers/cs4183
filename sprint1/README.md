@@ -1,4 +1,26 @@
-The repository for Sprint 1
+The repository for the Sprint 1 assignment in CS 4183 under [Dr. David Cline](http://www.cs.okstate.edu/~clined/)
+
+**Created by me**
+- orbit.js
+- orbit.json
+
+**Created by instructor but improved by me**
+- cs4143engine0.html
+
+**Created by instructor**
+- scene1aPhongMaterial.json
+- scene1bPointLight.json
+- scene1cAmbientLight.json
+- scene1dHemisphereLight.json
+- scene1eBasicMaterial.json
+- scene1fGlobe.json
+- scene1fscript.js
+- scene1gScript.js
+- scene1gSpotLight.json
+
+**Assets**
+-Earth texture provided by Dr. Cline.
+-Sun texture from [smash!ngapps](http://www.smashingapps.com/2014/03/28/free-high-quality-texture-packs.html).
 
 > # Sprint 1: Lights and Basic Materials
 >
@@ -46,7 +68,3 @@ The repository for Sprint 1
 > Demonstrate your scenes to the instructor, running from this web server.
 >
 > Zip up your sprint files (code and scenes) into a single .zip file (not .rar!) and turn it in to D2L.
-
-Earth texture provided by [Dr. Cline](http://www.cs.okstate.edu/~clined/).
-
-Sun texture from [smash!ngapps](http://www.smashingapps.com/2014/03/28/free-high-quality-texture-packs.html).
