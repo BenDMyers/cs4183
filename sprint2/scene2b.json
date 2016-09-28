@@ -1,0 +1,68 @@
+{ 
+"COMMENT": "Sprite",
+"type": "node",
+"name": "rootNode",
+"scriptFiles": [ "scene2bScript.js" ],
+
+"children":
+[
+	{
+		"COMMENT": "CAMERA --------------------------------------------------------",
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 20
+	},
+	{
+		"COMMENT": "LIGHTS --------------------------------------------------------",
+		"type": "hemisphereLight",
+		"name": "hlight",
+		"skyColor": [1, 1, 1],
+		"groundColor": [0, 0, 0],
+		"intensity": 0.6 
+	},
+
+	{
+		"COMMENT": "WALL --------------------------------------------------------",
+		"type": "mesh",
+		"name": "floor",
+		"translate": [0, 0, -0.5],
+		"geometry": "plane",
+		"width": 8,
+		"height": 8,
+		"material": 
+		{
+			"type": "meshPhongMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [0.5, 0.5, 0.5],
+			"specularColor": [0, 0, 0],
+			"shininess": 100
+		}
+	},
+
+	{
+		"COMMENT": "SPRITE --------------------------------------------------------",
+		"type": "mesh",
+		"name": "sprite",
+		"translate": [0, 0, 0],
+		"scale": [1, 1, 1],
+		"geometry": "sprite",
+		"material": 
+		{
+			"type": "spriteMaterial",
+			"name": "spriteMat",
+			"color": [1,1,1],
+			"repeat": [0.5,1],
+			"offset": [0.5,0],
+			"map": "aship.png"
+		},
+		"userData":
+		{ 
+			"scripts": ["blinkScript"]
+		}
+	}
+]
+}
+

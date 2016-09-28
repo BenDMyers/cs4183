@@ -1,0 +1,240 @@
+{ 
+"COMMENT": "Sprite",
+"type": "node",
+"name": "rootNode",
+"scriptFiles": [ "scene2dAsteroidsLight.js" ],
+"userData": { "scripts": ["asteroidsMain"] },
+
+"children":
+[
+	{
+		"COMMENT": "CAMERA --------------------------------------------------------",
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 1000],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 45
+	},
+	
+	{
+		"COMMENT": "BACKGROUND --------------------------------------------------------",
+		"type": "mesh",
+		"name": "background",
+		"translate": [0, 0, -0.5],
+		"geometry": "plane",
+		"width": 1000,
+		"height": 800,
+		"material": 
+		{
+			"type": "meshBasicMaterial",
+			"name": "backgroundMaterial",
+			"color": [0.35, 0.6, 0.65]
+		}
+	},
+
+	{
+		"COMMENT": "TOP",
+		"type": "mesh",
+		"name": "top",
+		"translate": [0, 400, -0.4],
+		"geometry": "plane",
+		"width": 1000,
+		"height": 2,
+		"material": 
+		{
+			"type": "meshBasicMaterial",
+			"name": "backgroundMaterial",
+			"color": [1, 1, 0]
+		}
+	},
+
+	{
+		"COMMENT": "BOTTOM",
+		"type": "mesh",
+		"name": "bottom",
+		"translate": [0, -400, -0.4],
+		"geometry": "plane",
+		"width": 1000,
+		"height": 2,
+		"material": 
+		{
+			"type": "meshBasicMaterial",
+			"name": "backgroundMaterial",
+			"color": [1, 1, 0]
+		}
+	},
+
+	{
+		"COMMENT": "LEFT",
+		"type": "mesh",
+		"name": "left",
+		"translate": [-500, 0, -0.4],
+		"geometry": "plane",
+		"width": 2,
+		"height": 800,
+		"material": 
+		{
+			"type": "meshBasicMaterial",
+			"name": "backgroundMaterial",
+			"color": [1, 1, 0]
+		}
+	},
+
+	{
+		"COMMENT": "RIGHT",
+		"type": "mesh",
+		"name": "right",
+		"translate": [500, 0, -0.4],
+		"geometry": "plane",
+		"width": 2,
+		"height": 800,
+		"material": 
+		{
+			"type": "meshBasicMaterial",
+			"name": "backgroundMaterial",
+			"color": [1, 1, 0]
+		}
+	},
+
+	{
+		"COMMENT": "SHIP --------------------------------------------------------",
+		"type": "mesh",
+		"name": "ship",
+		"translate": [0, 0, 0],
+		"scale": [60, 64, 64],
+		"geometry": "sprite",
+		"material": 
+		{
+			"type": "spriteMaterial",
+			"name": "spriteMat",
+			"color": [1,1,1],
+			"repeat": [0.5,1],
+			"offset": [0.5,0],
+			"map": "aship.png"
+		},
+		"userData": { "velocity": [0,0,0] }
+	},
+
+	{
+		"COMMENT": "SHOTS --------------------------------------------------------",
+		"type": "node", 
+		"name": "shots",
+		"children":
+		[
+			{
+				"type": "mesh",
+				"name": "shot",
+				"translate": [0, 0, 0],
+				"scale": [4.5, 4.5, 4.5],
+				"geometry": "sprite",
+				"material": 
+				{
+					"type": "spriteMaterial",
+					"name": "spriteMat",
+					"color": [1,1,0],
+					"repeat": [0.5,1],
+					"offset": [0.5,0]
+				},
+				"userData": { "velocity": [10,0,0] }
+			}
+		]
+	},
+
+	{
+		"COMMENT": "PARTICLES --------------------------------------------------------",
+		"type": "node", 
+		"name": "particles",
+		"children":
+		[
+			{
+				"type": "mesh",
+				"name": "particle",
+				"translate": [0, 0, 0],
+				"scale": [2.5, 2.5, 2.5],
+				"geometry": "sprite",
+				"material": 
+				{
+					"type": "spriteMaterial",
+					"name": "spriteMat",
+					"color": [0.5,1,0.5],
+					"repeat": [0.5,1],
+					"offset": [0.5,0]
+				},
+				"userData": { "velocity": [10,0,0], "desVelocity": [0,0,0] }
+			}
+		]
+	},
+
+	{
+		"COMMENT": "ASTEROIDS --------------------------------------------------------",
+		"type": "node", 
+		"name": "asteroids"
+	},
+
+
+	{
+		"COMMENT": "ASTEROID PROTOTYPES --------------------------------------------------------",
+		"type": "node", 
+		"name": "asteroidPrototypes",
+		"children":
+		[
+			{
+				"type": "mesh",
+				"name": "asteroid0",
+				"translate": [0, 0, 0],
+				"scale": [100,100,100],
+				"geometry": "sprite",
+				"visible": false,
+				"material": 
+				{
+					"type": "spriteMaterial",
+					"name": "spriteMat",
+					"color": [1,1,1],
+					"repeat": [0.2,1],
+					"offset": [0,0],
+					"map": "asteroid1.png"
+				},
+				"userData": { "velocity": [10,0,0], "rotation": 1 }
+			},
+			{
+				"type": "mesh",
+				"name": "asteroid1",
+				"translate": [0, 0, 0],
+				"scale": [70,70,70],
+				"geometry": "sprite",
+				"visible": false,
+				"material": 
+				{
+					"type": "spriteMaterial",
+					"name": "spriteMat",
+					"color": [0.5,1,0.5],
+					"repeat": [0.5,1],
+					"offset": [0.5,0],
+					"map": "asteroid2.png"
+				},
+				"userData": { "velocity": [10,0,0], "rotation": 1 }
+			},
+			{
+				"type": "mesh",
+				"name": "asteroid2",
+				"translate": [0, 0, 0],
+				"scale": [50,50,50],
+				"geometry": "sprite",
+				"visible": false,
+				"material": 
+				{
+					"type": "spriteMaterial",
+					"name": "spriteMat",
+					"color": [0.5,1,0.5],
+					"repeat": [0.5,1],
+					"offset": [0.5,0],
+					"map": "asteroid3.png"
+				},
+				"userData": { "velocity": [10,0,0], "rotation": 1 }
+			}
+		]
+	}
+]
+}
+
