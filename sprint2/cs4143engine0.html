@@ -695,8 +695,8 @@ function parseMesh(jsonNode)
 		var tube = 40;
 		var radialSegments = 8;
 		var tubularSegments = 6;
-		if ("radius"         in jsonNode) radius         = jsonNode["radius"];
-		if ("height"         in jsonNode) height         = jsonNode["height"];
+		if ("radius"          in jsonNode) radius          = jsonNode["radius"];
+		if ("tube"            in jsonNode) tube            = jsonNode["tube"];
 		if ("radialSegments"  in jsonNode) radialSegments  = jsonNode["radialSegments"];
 		if ("tubularSegments" in jsonNode) tubularSegments = jsonNode["tubularSegments"];
 		geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
