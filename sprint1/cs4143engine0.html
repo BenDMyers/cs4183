@@ -771,12 +771,13 @@ function parseMaterial(jsonNode)
 
 function parseTexture(textureURL)
 {
-	//debug("parseTexture: " + textureURL + "\n");
+	debug("parseTexture: " + textureURL + "\n");
 	var texture = new THREE.Texture();
 	var loader = new THREE.ImageLoader(loadingManager);
 	loader.load(
 		textureURL,
 		function(image) { // callback function
+			debug("Load " + textureURL);
 			texture.image = image;
 			texture.needsUpdate = true;
 		}
