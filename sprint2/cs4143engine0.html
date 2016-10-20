@@ -888,7 +888,7 @@ function parseMaterial(jsonNode)
 
 function parseTexture(textureURL, jsonNode)
 {
-	//debug("parseTexture: " + textureURL + "\n");
+	debug("parseTexture: " + textureURL + "\n");
 	var texture = new THREE.Texture();
 	texture.anisotropy = currentRenderer.getMaxAnisotropy();
 	
