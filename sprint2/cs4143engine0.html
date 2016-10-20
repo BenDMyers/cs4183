@@ -449,12 +449,12 @@ function parseSprite(jsonNode)
 	mesh = new THREE.Sprite(material);
 	mesh.castShadow = true;
 	mesh.receiveShadow = true;
-	if ("translate" in spriteNode) {
-		var t = spriteNode["translate"];
+	if ("translate" in jsonNode) {
+		var t = jsonNode["translate"];
 		sprite.position.set(t[0], t[1], t[2]);
 	}
-	if ("scale" in spriteNode) {
-		var scale = spriteNode["scale"];
+	if ("scale" in jsonNode) {
+		var scale = jsonNode["scale"];
 		sprite.scale.set(scale[0], scale[1], scale[2]);
 	}
 	return mesh;
