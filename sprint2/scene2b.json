@@ -51,7 +51,7 @@
 		"geometry": "sphere",
 		"material": 
 		{
-			"type": "spriteMaterial",
+			"type": "meshPhongMaterial",
 			"name": "spriteMat",
 			"color": [1,1,1],
 			"repeat": [0.5,1],
