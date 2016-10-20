@@ -451,11 +451,11 @@ function parseSprite(jsonNode)
 	mesh.receiveShadow = true;
 	if ("translate" in jsonNode) {
 		var t = jsonNode["translate"];
-		sprite.position.set(t[0], t[1], t[2]);
+		mesh.position.set(t[0], t[1], t[2]);
 	}
 	if ("scale" in jsonNode) {
 		var scale = jsonNode["scale"];
-		sprite.scale.set(scale[0], scale[1], scale[2]);
+		mesh.scale.set(scale[0], scale[1], scale[2]);
 	}
 	return mesh;
 }
