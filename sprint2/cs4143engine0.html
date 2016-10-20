@@ -892,7 +892,7 @@ function parseTexture(textureURL, jsonNode)
 	var texture = new THREE.Texture();
 	texture.anisotropy = currentRenderer.getMaxAnisotropy();
 	
-	if("repeat" in jsonNode) {
+	/*if("repeat" in jsonNode) {
 		var r = jsonNode["repeat"];
 		texture.repeat.x = r[0];
 		texture.repeat.y = r[1];
@@ -902,7 +902,7 @@ function parseTexture(textureURL, jsonNode)
 		var o = jsonNode["offset"];
 		texture.offset.x = o[0];
 		texture.offset.y = o[1]
-	}
+	}*/
 	
 	if (texture.anisotropy > 4.0) texture.anisotropy = 4.0;
 	
