@@ -840,6 +840,7 @@ function parseMaterial(jsonNode)
 	// spriteMaterial
 	if (type == "spriteMaterial") {
 		var material = new THREE.SpriteMaterial();
+		
 		if ("color" in jsonNode) {
 			var c = jsonNode["color"];
 			material.color = c;
@@ -858,7 +859,7 @@ function parseMaterial(jsonNode)
 		}
 		if("offset" in jsonNode) {
 			var o = jsonNode["offset"];
-			material.offset = o;
+			material.map.offset = o;
 		}
 		if("repeat" in jsonNode) {
 			var r = jsonNode["repeat"];
