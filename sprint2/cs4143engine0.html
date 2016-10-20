@@ -738,7 +738,7 @@ function parseMesh(jsonNode)
 		var height = 1;
 		var widthSegments = 1;
 		var heightSegments = 1;
-		if ("width"      	 in jsonNode) width      	 = jsonNode["width"];
+		if ("width"          in jsonNode) width      	 = jsonNode["width"];
 		if ("height"         in jsonNode) height         = jsonNode["height"];
 		if ("widthSegments"  in jsonNode) widthSegments  = jsonNode["widthSegments"];
 		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
@@ -775,7 +775,7 @@ function parseMaterial(jsonNode)
 			material.color = new THREE.Color(d[0], d[1], d[2]);
 		}
 		if ("diffuseMap" in jsonNode) {
-			var tex = parseTexture( jsonNode["diffuseMap"] );
+			var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
 			material.map = tex;
 		}
 		return material;
@@ -790,7 +790,7 @@ function parseMaterial(jsonNode)
 			material.color = new THREE.Color(c[0], c[1], c[2]);
 		}
 		if ("map" in jsonNode) {
-			var m = parseTexture( jsonNode["map"] );
+			var m = parseTexture( jsonNode["map"], jsonNode );
 			material.map = m;
 		}
 		return material;
@@ -805,7 +805,7 @@ function parseMaterial(jsonNode)
 			material.color = new THREE.Color(d[0], d[1], d[2]);
 		}
 		if ("diffuseMap" in jsonNode) {
-			var tex = parseTexture( jsonNode["diffuseMap"] );
+			var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
 			tex.anisotropy = currentRenderer.getMaxAnisotropy();
 			material.map = tex;
 		}
@@ -857,14 +857,6 @@ function parseMaterial(jsonNode)
 			var f = jsonNode["fog"];
 			material.fog = f;
 		}
-		if("offset" in jsonNode) {
-			var o = jsonNode["offset"];
-			material.map.offset = o;
-		}
-		if("repeat" in jsonNode) {
-			var r = jsonNode["repeat"];
-			material.repeat = r;
-		}
 		return material;
 	}
 
@@ -872,10 +864,23 @@ function parseMaterial(jsonNode)
 	return new THREE.MeshLambertMaterial();
 }
 
-function parseTexture(textureURL)
+function parseTexture(textureURL, jsonNode)
 {
 	//debug("parseTexture: " + textureURL + "\n");
 	var texture = new THREE.Texture();
+	
+	if("offset" in jsonNode) {
+		var o = jsonNode["offset"];
+		texture.offset.x = o[0];
+		texture.offset.y = o[1]
+	}
+	
+	if("repeat" in jsonNode) {
+		var r = jsonNode["repeat"];
+		texture.repeat.x = r[0];
+		texture.repeat.y = r[1];
+	}
+	
 	var loader = new THREE.ImageLoader(loadingManager);
 	loader.load(
 		textureURL,
@@ -884,6 +889,7 @@ function parseTexture(textureURL)
 			texture.needsUpdate = true;
 		}
 	);
+	
 	return texture;
 }
 
