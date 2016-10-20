@@ -445,8 +445,8 @@ function parseSceneNode(jsonNode, sceneNode)
 //----------------------------------------------------------------------//
 function parseSprite(jsonNode)
 {
-	material = parseMaterial(jsonNode["material"]);
-	mesh = new THREE.Sprite(material);
+	var material = parseMaterial(jsonNode["material"]);
+	var mesh = new THREE.Sprite(material);
 	mesh.castShadow = true;
 	mesh.receiveShadow = true;
 	if ("translate" in jsonNode) {
