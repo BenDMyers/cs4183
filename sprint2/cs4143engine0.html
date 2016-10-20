@@ -773,26 +773,40 @@ function parseMaterial(jsonNode)
 	//debug("parseMaterial\n");
 	if (jsonNode === undefined) return new MeshLambertMaterial();
 	var type = jsonNode["type"];
+	
+	var material;
+	if (type == "meshPhongMaterial") {
+		material = new THREE.MeshPhongMaterial();
+	}
+	else if (type == "meshBasicMaterial") {
+		material = new THREE.MeshBasicMaterial();
+	}
+	else if (type == "spriteMaterial") {
+		material = new THREE.SpriteMaterial();
+	}
+	else { // meshLambertMaterial
+		material = new THREE.MeshLambertMaterial();
+	}
 
 	// Lambertian material
-	if (type == "meshLambertMaterial")
-	{
-		var material = new THREE.MeshLambertMaterial();
+	//if (type == "meshLambertMaterial")
+	//{
+		//var material = new THREE.MeshLambertMaterial();
 		if ("diffuseColor" in jsonNode) {
 			var d = jsonNode["diffuseColor"];
 			material.color = new THREE.Color(d[0], d[1], d[2]);
 		}
-		if ("diffuseMap" in jsonNode) {
-			var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
-			material.map = tex;
-		}
-		return material;
-	}
+	//	if ("diffuseMap" in jsonNode) {
+	//		var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
+	//		material.map = tex;
+	//	}
+	//	return material;
+	//}
 
 	// MeshBasicMaterial
-	if (type == "meshBasicMaterial")
-	{
-		var material = new THREE.MeshBasicMaterial();
+	//if (type == "meshBasicMaterial")
+	//{
+	//	var material = new THREE.MeshBasicMaterial();
 		if ("color" in jsonNode) {
 			var c = jsonNode["color"];
 			material.color = new THREE.Color(c[0], c[1], c[2]);
@@ -801,17 +815,17 @@ function parseMaterial(jsonNode)
 			var m = parseTexture( jsonNode["map"], jsonNode );
 			material.map = m;
 		}
-		return material;
-	}
+	//	return material;
+	//}
 
 	// meshPhongMaterial
-	if (type == "meshPhongMaterial")
-	{
-		var material = new THREE.MeshPhongMaterial();
-		if ("diffuseColor" in jsonNode) {
-			var d = jsonNode["diffuseColor"];
-			material.color = new THREE.Color(d[0], d[1], d[2]);
-		}
+	//if (type == "meshPhongMaterial")
+	//{
+	//	var material = new THREE.MeshPhongMaterial();
+	//	if ("diffuseColor" in jsonNode) {
+	//		var d = jsonNode["diffuseColor"];
+	//		material.color = new THREE.Color(d[0], d[1], d[2]);
+	//	}
 		if ("diffuseMap" in jsonNode) {
 			var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
 			tex.anisotropy = currentRenderer.getMaxAnisotropy();
@@ -842,21 +856,21 @@ function parseMaterial(jsonNode)
 			material.envMap = parseTexture(em);
 		}
 
-		return material;
-	}
+	//	return material;
+	//}
 
 	// spriteMaterial
-	if (type == "spriteMaterial") {
-		var material = new THREE.SpriteMaterial();
+	//if (type == "spriteMaterial") {
+	//	var material = new THREE.SpriteMaterial();
 		
-		if ("color" in jsonNode) {
-			var c = jsonNode["color"];
-			material.color = c;
-		}
-		if ("map" in jsonNode) {
-			var m = jsonNode["map"];
-			material.map = m;
-		}
+	//	if ("color" in jsonNode) {
+	//		var c = jsonNode["color"];
+	//		material.color = c;
+	//	}
+	//	if ("map" in jsonNode) {
+	//		var m = jsonNode["map"];
+	//		material.map = m;
+	//	}
 		if ("rotation" in jsonNode) {
 			var r = jsonNode["rotation"];
 			material.rotation = r;
@@ -865,11 +879,11 @@ function parseMaterial(jsonNode)
 			var f = jsonNode["fog"];
 			material.fog = f;
 		}
-		return material;
-	}
+	//	return material;
+	//}
 
 	// Failed to make a material, so return a default
-	return new THREE.MeshLambertMaterial();
+	//return new THREE.MeshLambertMaterial();
 }
 
 function parseTexture(textureURL, jsonNode)
