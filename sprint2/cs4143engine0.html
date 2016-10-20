@@ -910,6 +910,7 @@ function parseTexture(textureURL, jsonNode)
 	loader.load(
 		textureURL,
 		function(image) { // callback function
+			debug("Load " + textureURL);
 			texture.image = image;
 			texture.needsUpdate = true;
 		}
