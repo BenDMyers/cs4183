@@ -60,7 +60,7 @@
 		},
 		"userData":
 		{ 
-			"scripts": ["blinkScript"]
+			"ascripts": ["blinkScript"]
 		}
 	}
 ]
