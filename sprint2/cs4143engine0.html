@@ -426,6 +426,11 @@ function parseSceneNode(jsonNode, sceneNode)
 				sceneNode.add(light);
 				parseSceneNode(childJsonNode, light);
 			}
+			else if (childType == "sprite") {
+				var mesh = parseSprite(childJsonNode);
+				sceneNode.add(mesh);
+				parseSceneNode(childJsonNode, mesh);
+			}
 			else if (childType == "mesh") {
 				var mesh = parseMesh(childJsonNode);
 				sceneNode.add(mesh);
@@ -433,6 +438,18 @@ function parseSceneNode(jsonNode, sceneNode)
 			}
 		}
 	}
+}
+
+//----------------------------------------------------------------------//
+// PARSE A SPRITE
+//----------------------------------------------------------------------//
+function parseSprite(jsonNode)
+{
+
+	mesh = new THREE.Sprite(material);
+	mesh.castShadow = true;
+	mesh.receiveShadow = true;
+	return mesh;
 }
 
 //----------------------------------------------------------------------//
@@ -695,8 +712,8 @@ function parseMesh(jsonNode)
 		var tube = 40;
 		var radialSegments = 8;
 		var tubularSegments = 6;
-		if ("radius"          in jsonNode) radius          = jsonNode["radius"];
-		if ("tube"            in jsonNode) tube            = jsonNode["tube"];
+		if ("radius"         in jsonNode) radius         = jsonNode["radius"];
+		if ("tube"         in jsonNode) tube         = jsonNode["tube"];
 		if ("radialSegments"  in jsonNode) radialSegments  = jsonNode["radialSegments"];
 		if ("tubularSegments" in jsonNode) tubularSegments = jsonNode["tubularSegments"];
 		geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
@@ -726,6 +743,10 @@ function parseMesh(jsonNode)
 		if ("widthSegments"  in jsonNode) widthSegments  = jsonNode["widthSegments"];
 		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
 		geometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
+	}
+	else if(geometryType == "sprite") {
+
+		return parseSprite(jsonNode);
 	}
 
 	// Create the mesh and return it
@@ -813,6 +834,36 @@ function parseMaterial(jsonNode)
 			material.envMap = parseTexture(em);
 		}
 
+		return material;
+	}
+
+	// spriteMaterial
+	if (type == "spriteMaterial") {
+		var material = new THREE.SpriteMaterial();
+		if ("color" in jsonNode) {
+			var c = jsonNode["color"];
+			material.color = c;
+		}
+		if ("map" in jsonNode) {
+			var m = jsonNode["map"];
+			material.map = m;
+		}
+		if ("rotation" in jsonNode) {
+			var r = jsonNode["rotation"];
+			material.rotation = r;
+		}
+		if ("fog" in jsonNode) {
+			var f = jsonNode["fog"];
+			material.fog = f;
+		}
+		if("offset" in jsonNode) {
+			var o = jsonNode["offset"];
+			material.offset = o;
+		}
+		if("repeat" in jsonNode) {
+			var r = jsonNode["repeat"];
+			material.repeat = r;
+		}
 		return material;
 	}
 
