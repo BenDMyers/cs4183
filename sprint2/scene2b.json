@@ -44,11 +44,11 @@
 
 	{
 		"COMMENT": "SPRITE --------------------------------------------------------",
-		"type": "sprite",
+		"type": "mesh",
 		"name": "sprite",
 		"translate": [0, 0, 0],
 		"scale": [1, 1, 1],
-		"geometry": "sprite",
+		"geometry": "cube",
 		"material": 
 		{
 			"type": "spriteMaterial",
