@@ -176,11 +176,11 @@ function init()
 	// Create renderer and add it to the container (div element)
 	var renderer = new THREE.WebGLRenderer( {antialias:true} );
 	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	windowWidth = window.innerWidth;
 	windowHeight = window.innerHeight;
 	renderer.setSize( windowWidth, windowHeight );
-	renderer.shadowMap.enabled = true;
-	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	rendererContainer.appendChild( renderer.domElement );
 	currentRenderer = renderer;
 
@@ -325,6 +325,7 @@ function parseScene(jsonParseTree)
 	currentScene = scene;
 	parseSceneNode(jsonParseTree, scene);
 	startTime = (new Date()).getTime() * 0.001; // reset start time
+	currentScene = scene;
 }
 
 //----------------------------------------------------------------------//
@@ -373,7 +374,7 @@ function parseSceneNode(jsonNode, sceneNode)
 
 	// Whether the node starts out as visible.
 	if ("visible" in jsonNode) {
-		sceneNode.setVisible(jsonNode["visible"]);
+		sceneNode.visible = jsonNode["visible"];
 	}
 
 	// Traverse all the child nodes. The typical code pattern here is:
@@ -426,38 +427,18 @@ function parseSceneNode(jsonNode, sceneNode)
 				sceneNode.add(light);
 				parseSceneNode(childJsonNode, light);
 			}
-			else if (childType == "sprite") {
-				var mesh = parseSprite(childJsonNode);
-				sceneNode.add(mesh);
-				parseSceneNode(childJsonNode, mesh);
-			}
 			else if (childType == "mesh") {
 				var mesh = parseMesh(childJsonNode);
 				sceneNode.add(mesh);
 				parseSceneNode(childJsonNode, mesh);
 			}
+			else if (childType == "sprite") {
+				var sprite = parseSprite(childJsonNode);
+				sceneNode.add(sprite);
+				parseSceneNode(childJsonNode, sprite);
+			}
 		}
 	}
-}
-
-//----------------------------------------------------------------------//
-// PARSE A SPRITE
-//----------------------------------------------------------------------//
-function parseSprite(jsonNode)
-{
-	var material = parseMaterial(jsonNode["material"]);
-	var mesh = new THREE.Sprite(material);
-	mesh.castShadow = true;
-	mesh.receiveShadow = true;
-	if ("translate" in jsonNode) {
-		var t = jsonNode["translate"];
-		mesh.position.set(t[0], t[1], t[2]);
-	}
-	if ("scale" in jsonNode) {
-		var scale = jsonNode["scale"];
-		mesh.scale.set(scale[0], scale[1], scale[2]);
-	}
-	return mesh;
 }
 
 //----------------------------------------------------------------------//
@@ -550,42 +531,17 @@ function parseDirectionalLight(jsonNode)
 
 function parseAmbientLight(jsonNode)
 {
-	//debug("parseDirectionalLight\n");
+	//debug("parseAmbientLight\n");
 
 	// Start with default values
 	var color = [1.0, 1.0, 1.0];
 
 	// Replace with data from jsonNode
-	if ("color"    in jsonNode) color    = jsonNode["color"];
+	if ("color" in jsonNode) color = jsonNode["color"];
 
 	// Create the light and return it
 	var c = new THREE.Color(color[0], color[1], color[2]);
 	var light = new THREE.AmbientLight( c );
-	return light;
-}
-
-//----------------------------------------------------------------------//
-// PARSE A HEMISPHERE LIGHT
-//----------------------------------------------------------------------//
-
-function parseHemisphereLight(jsonNode)
-{
-	//debug("parseDirectionalLight\n");
-
-	// Start with default values
-	var skyColor = [1.0, 1.0, 1.0];
-	var groundColor = [1.0, 1.0, 1.0];
-	var intensity = 0;
-
-	// Replace with data from jsonNode
-	if ("skyColor"    in jsonNode) skyColor    = jsonNode["skyColor"];
-	if ("groundColor" in jsonNode) groundColor = jsonNode["groundColor"];
-	if ("intensity" in jsonNode) intensity = jsonNode["intensity"];
-
-	// Create the light and return it
-	var s = new THREE.Color(skyColor[0], skyColor[1], skyColor[2]);
-	var g = new THREE.Color(groundColor[0], groundColor[1], groundColor[2]);
-	var light = new THREE.HemisphereLight(s, g, intensity);
 	return light;
 }
 
@@ -595,26 +551,49 @@ function parseHemisphereLight(jsonNode)
 
 function parsePointLight(jsonNode)
 {
-	//debug("parseDirectionalLight\n");
+	//debug("parsePointLight\n");
 
 	// Start with default values
 	var color = [1.0, 1.0, 1.0];
-	var position = [0.0, 0.0, 0.0];
-	var intensity = 0.0;
-	var distance = 0.0;
-	var decay = 0.0;
+	var intensity = 1.0;
+	var distance = 1000;
+	var position = [1.0, 1.0, 1.0];
 
 	// Replace with data from jsonNode
-	if ("color"    in jsonNode) color    = jsonNode["color"];
-	if ("position" in jsonNode) position = jsonNode["position"];
-	if ("intensity" in jsonNode) intensity = jsonNode["intensity"];
-	if ("distance" in jsonNode) distance = jsonNode["distance"];
-	if ("decay" in jsonNode) decay = jsonNode["decay"];
+	if ("color"     in jsonNode) color      = jsonNode["color"];
+	if ("intensity" in jsonNode) intensity  = jsonNode["intensity"];
+	if ("distance"  in jsonNode) distance   = jsonNode["distance"];
+	if ("position"  in jsonNode) position   = jsonNode["position"];
 
 	// Create the light and return it
 	var c = new THREE.Color(color[0], color[1], color[2]);
-	var light = new THREE.PointLight(c, intensity, distance, decay);
+	var light = new THREE.PointLight( c, intensity, distance );
 	light.position.set( position[0], position[1], position[2] );
+	return light;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A HEMISPHERE LIGHT
+//----------------------------------------------------------------------//
+
+function parseHemisphereLight(jsonNode)
+{
+	//debug("parseHemisphereLight\n");
+
+	// Start with default values
+	var skyColor = [1.0, 1.0, 1.0];
+	var groundColor = [1.0, 1.0, 1.0];
+	var intensity = [1.0, 1.0, 1.0];
+
+	// Replace with data from jsonNode
+	if ("skyColor"    in jsonNode) skyColor    = jsonNode["skyColor"];
+	if ("groundColor" in jsonNode) groundColor = jsonNode["groundColor"];
+	if ("intensity"   in jsonNode) intensity   = jsonNode["intensity"];
+
+	// Create the light and return it
+	var sc = new THREE.Color(skyColor[0], skyColor[1], skyColor[2]);
+	var gc = new THREE.Color(groundColor[0], groundColor[1], groundColor[2]);
+	var light = new THREE.HemisphereLight( sc, gc, intensity );
 	return light;
 }
 
@@ -624,50 +603,41 @@ function parsePointLight(jsonNode)
 
 function parseSpotLight(jsonNode)
 {
-	//debug("parseDirectionalLight\n");
+	//debug("parseSpotLight\n");
 
 	// Start with default values
 	var color = [1.0, 1.0, 1.0];
+	var intensity = 1.0;
+	var distance = 1000;
+	var angle = 0.1;
+	var penumbra = 0;
 	var position = [1.0, 1.0, 1.0];
-	var angle = 0.0;
-	var intensity = 0.0;
-	var distance = 0.0;
-	var penumbra = 0.0;
-	var decay = 0.0;
+	var decay = 1.0;
 	var castShadow = false;
 
 	// Replace with data from jsonNode
-	if ("color"    in jsonNode) color    = jsonNode["color"];
-	if ("position" in jsonNode) position = jsonNode["position"];
-	if ("angle" in jsonNode) angle = jsonNode["angle"];
-	if ("intensity" in jsonNode) intensity = jsonNode["intensity"];
-	if ("distance" in jsonNode) distance = jsonNode["distance"];
-	if ("penumbra" in jsonNode) penumbra = jsonNode["penumbra"];
-	if ("decay" in jsonNode) decay = jsonNode["decay"];
-	if ("castShadow" in jsonNode) castShadow = jsonNode["castShadow"];
+	if ("color"      in jsonNode) color       = jsonNode["color"];
+	if ("intensity"  in jsonNode) intensity   = jsonNode["intensity"];
+	if ("distance"   in jsonNode) distance    = jsonNode["distance"];
+	if ("angle"      in jsonNode) angle       = jsonNode["angle"];
+	if ("penumbra"   in jsonNode) penumbra    = jsonNode["penumbra"];
+	if ("position"   in jsonNode) position    = jsonNode["position"];
+	if ("decay"      in jsonNode) decay       = jsonNode["decay"];
+	if ("castShadow" in jsonNode) castShadow  = jsonNode["castShadow"];
 
 	// Create the light and return it
 	var c = new THREE.Color(color[0], color[1], color[2]);
-	var light = new THREE.SpotLight(c, intensity, distance, angle, penumbra, decay);
+	var light = new THREE.SpotLight( c, intensity, distance, angle, penumbra, decay);
 	light.position.set( position[0], position[1], position[2] );
-	if ("target" in jsonNode) light.target = currentScene.getObjectByName(jsonNode["target"]);
 	light.castShadow = castShadow;
-	// if(castShadow)
-	// {
-	// 	//light.shadow = new THREE.SpotLightShadow(currentCamera);
-	// 	light.shadow.mapSize.width = 1024;
-	// 	light.shadow.mapSize.height = 1024;
-	// 	light.shadow.camera.near = 500;
-	// 	light.shadow.camera.far = 4000;
-	// 	light.shadow.camera.fov = 30;
-	// }
+	if ("target" in jsonNode) light.target = currentScene.getObjectByName(jsonNode["target"]);
+
 	return light;
 }
 
 //----------------------------------------------------------------------//
 // PARSE A MESH
 //----------------------------------------------------------------------//
-
 
 function parseMesh(jsonNode)
 {
@@ -680,7 +650,10 @@ function parseMesh(jsonNode)
 	var geometryType = jsonNode["geometry"];
 	var geometry;
 
-	if (geometryType == "cube") {
+	if (geometryType == "sprite") {
+		return parseSprite(jsonNode);
+	}
+	else if (geometryType == "cube") {
 		var width = 2;
 		var height = 2;
 		var depth = 2;
@@ -698,69 +671,56 @@ function parseMesh(jsonNode)
 		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
 		geometry = new THREE.SphereGeometry(radius, heightSegments, widthSegments);
 	}
-	else if(geometryType == "cone") {
+	else if (geometryType == "plane") {
+		var width = 2;
+		var height = 2;
+		if ("width"  in jsonNode) width  = jsonNode["width"];
+		if ("height" in jsonNode) height = jsonNode["height"];
+		geometry = new THREE.PlaneGeometry(width, height);
+	}
+	else if (geometryType == "cone") {
 		var radius = 1;
 		var height = 1;
 		var radiusSegments = 8;
-		var heightSegments = 6;
-		var openEnded = false;
-		var thetaStart = 0;
-		var thetaLength = 2*Math.PI;
+		var heightSegments = 8;
 		if ("radius"         in jsonNode) radius         = jsonNode["radius"];
 		if ("height"         in jsonNode) height         = jsonNode["height"];
-		if ("radiusSegments"  in jsonNode) radiusSegments  = jsonNode["radiusSegments"];
+		if ("radiusSegments" in jsonNode) radiusSegments = jsonNode["radiusSegments"];
 		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
-		if ("openEnded"		 in jsonNode) openEnded		 = jsonNode["openEnded"];
-		if ("thetaStart"     in jsonNode) thetaStart	 = jsonNode["thetaStart"];
-		if ("thetaLength"	 in jsonNode) thetaLength	 = jsonNode["thetaLength"];
-		geometry = new THREE.ConeGeometry(radius, height, radiusSegments, heightSegments, thetaStart, thetaLength);
+		geometry = new THREE.ConeGeometry(radius, height, radiusSegments, heightSegments);
 	}
-	else if(geometryType == "torus") {
-		var radius = 100;
-		var tube = 40;
-		var radialSegments = 8;
-		var tubularSegments = 6;
-		if ("radius"         in jsonNode) radius         = jsonNode["radius"];
-		if ("tube"         in jsonNode) tube         = jsonNode["tube"];
-		if ("radialSegments"  in jsonNode) radialSegments  = jsonNode["radialSegments"];
-		if ("tubularSegments" in jsonNode) tubularSegments = jsonNode["tubularSegments"];
-		geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
-	}
-	else if(geometryType == "cylinder") {
-		var radiusTop = 20;
-		var radiusBottom = 20;
-		var height = 100;
+	else if (geometryType == "cylinder") {
+		var radiusTop = 1;
+		var radiusBottom = 1;
+		var height = 1;
 		var radiusSegments = 8;
-		var heightSegments = 6;
-		var openEnded = false;
+		var heightSegments = 8;
 		if ("radiusTop"      in jsonNode) radiusTop      = jsonNode["radiusTop"];
 		if ("radiusBottom"   in jsonNode) radiusBottom   = jsonNode["radiusBottom"];
 		if ("height"         in jsonNode) height         = jsonNode["height"];
 		if ("radiusSegments" in jsonNode) radiusSegments = jsonNode["radiusSegments"];
 		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
-		if ("openEnded"		 in jsonNode) openEnded		 = jsonNode["openEnded"];
-		geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded);
+		geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments);
 	}
-	else if(geometryType == "plane") {
-		var width = 1;
-		var height = 1;
-		var widthSegments = 1;
-		var heightSegments = 1;
-		if ("width"          in jsonNode) width      	 = jsonNode["width"];
-		if ("height"         in jsonNode) height         = jsonNode["height"];
-		if ("widthSegments"  in jsonNode) widthSegments  = jsonNode["widthSegments"];
-		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
-		geometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
+	else if (geometryType = "torus") {
+		var radius = 1;
+		var tube = 0.5;
+		var radialSegments = 8;
+		var tubularSegments = 8;
+		if ("radius"          in jsonNode) radius          = jsonNode["radius"];
+		if ("tube"            in jsonNode) tube            = jsonNode["tube"];
+		if ("radialSegments"  in jsonNode) radialSegments  = jsonNode["radialSegments"];
+		if ("tubularSegments" in jsonNode) tubularSegments = jsonNode["tubularSegments"];
+		geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
 	}
-	else if(geometryType == "sprite") {
+	else if (geometryType = "sprite") {
 
-		return parseSprite(jsonNode);
 	}
 
 	// Create the mesh and return it
 	var mesh = new THREE.Mesh( geometry, material );
-	mesh.castShadow = true;
 	mesh.receiveShadow = true;
+	mesh.castShadow = true;
 	return mesh;
 }
 
@@ -770,10 +730,12 @@ function parseMesh(jsonNode)
 
 function parseMaterial(jsonNode)
 {
-	//debug("parseMaterial\n");
 	if (jsonNode === undefined) return new MeshLambertMaterial();
 	var type = jsonNode["type"];
-	
+
+	debug("parseMaterial " + type + "\n");
+
+	// Make the material
 	var material;
 	if (type == "meshPhongMaterial") {
 		material = new THREE.MeshPhongMaterial();
@@ -788,135 +750,100 @@ function parseMaterial(jsonNode)
 		material = new THREE.MeshLambertMaterial();
 	}
 
-	// Lambertian material
-	//if (type == "meshLambertMaterial")
-	//{
-		//var material = new THREE.MeshLambertMaterial();
-		if ("diffuseColor" in jsonNode) {
-			var d = jsonNode["diffuseColor"];
-			material.color = new THREE.Color(d[0], d[1], d[2]);
-		}
-	//	if ("diffuseMap" in jsonNode) {
-	//		var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
-	//		material.map = tex;
-	//	}
-	//	return material;
-	//}
+	// Set the material properties
+	if ("color" in jsonNode) {
+		var d = jsonNode["color"];
+		material.color = new THREE.Color(d[0], d[1], d[2]);
+	}
+	if ("diffuseColor" in jsonNode) {
+		var d = jsonNode["diffuseColor"];
+		material.color = new THREE.Color(d[0], d[1], d[2]);
+	}
+	if ("map" in jsonNode) {
+		var tex = parseTexture( jsonNode["map"], jsonNode );
+		material.map = tex;
+	}
+	if ("diffuseMap" in jsonNode) {
+		var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
+		material.map = tex;
+	}
+	if ("specularColor" in jsonNode) {
+		var c = jsonNode["specularColor"];
+		material.specular = new THREE.Color(c[0], c[1], c[2]);
+	}
+	if ("specularMap" in jsonNode) {
+		var tex = parseTexture( jsonNode["specularMap"], jsonNode );
+		material.specularMap = tex;
+	}
+	if ("shininess" in jsonNode) {
+		var s = jsonNode["shininess"];
+		material.shininess = s;
+	}
+	if ("bumpMap" in jsonNode) {
+		var tex = parseTexture( jsonNode["bumpMap"], jsonNode );
+		material.bumpMap = tex;
+	}
+	if ("bumpScale" in jsonNode) {
+		var s = jsonNode["bumpScale"];
+		material.bumpScale = s;
+	}
 
-	// MeshBasicMaterial
-	//if (type == "meshBasicMaterial")
-	//{
-	//	var material = new THREE.MeshBasicMaterial();
-		if ("color" in jsonNode) {
-			var c = jsonNode["color"];
-			material.color = new THREE.Color(c[0], c[1], c[2]);
-		}
-		if ("map" in jsonNode) {
-			var m = parseTexture( jsonNode["map"], jsonNode );
-			material.map = m;
-		}
-	//	return material;
-	//}
-
-	// meshPhongMaterial
-	//if (type == "meshPhongMaterial")
-	//{
-	//	var material = new THREE.MeshPhongMaterial();
-	//	if ("diffuseColor" in jsonNode) {
-	//		var d = jsonNode["diffuseColor"];
-	//		material.color = new THREE.Color(d[0], d[1], d[2]);
-	//	}
-		if ("diffuseMap" in jsonNode) {
-			var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
-			tex.anisotropy = currentRenderer.getMaxAnisotropy();
-			material.map = tex;
-		}
-		if ("specularColor" in jsonNode) {
-			var s = jsonNode["specularColor"];
-			material.specular = new THREE.Color(s[0], s[1], s[2]);
-		}
-		if ("specularMap" in jsonNode) {
-			var sm = jsonNode["specularMap"];
-			material.specularMap = parseTexture(sm);
-		}
-		if ("shininess" in jsonNode) {
-			var sh = jsonNode["shininess"];
-			material.shininess = sh;
-		}
-		if ("bumpMap" in jsonNode) {
-			var bm = jsonNode["bumpMap"];
-			material.bumpMap = parseTexture(bm);
-		}
-		if ("bumpScale" in jsonNode) {
-			var bs = jsonNode["bumpScale"];
-			material.bumpScale = bs;
-		}
-		if ("envMap" in jsonNode) {
-			var em = jsonNode["envMap"];
-			material.envMap = parseTexture(em);
-		}
-
-	//	return material;
-	//}
-
-	// spriteMaterial
-	//if (type == "spriteMaterial") {
-	//	var material = new THREE.SpriteMaterial();
-		
-	//	if ("color" in jsonNode) {
-	//		var c = jsonNode["color"];
-	//		material.color = c;
-	//	}
-	//	if ("map" in jsonNode) {
-	//		var m = jsonNode["map"];
-	//		material.map = m;
-	//	}
-		if ("rotation" in jsonNode) {
-			var r = jsonNode["rotation"];
-			material.rotation = r;
-		}
-		if ("fog" in jsonNode) {
-			var f = jsonNode["fog"];
-			material.fog = f;
-		}
-	//	return material;
-	//}
-
-	// Failed to make a material, so return a default
-	//return new THREE.MeshLambertMaterial();
+	// Return the material
+	return material;
 }
+
+//----------------------------------------------------------------------//
+// PARSE A TEXTURE MAP - ASYNCHRONOUSLY LOADS THE TEXTURE IMAGE
+//----------------------------------------------------------------------//
 
 function parseTexture(textureURL, jsonNode)
 {
-	debug("parseTexture: " + textureURL + "\n");
+	//debug("parseTexture: " + textureURL + "\n");
 	var texture = new THREE.Texture();
 	texture.anisotropy = currentRenderer.getMaxAnisotropy();
-	
-	/*if("repeat" in jsonNode) {
-		var r = jsonNode["repeat"];
-		texture.repeat.x = r[0];
-		texture.repeat.y = r[1];
+	if ("repeat" in jsonNode) {
+		var repeat = jsonNode["repeat"];
+		texture.repeat.x = repeat[0];
+		texture.repeat.y = repeat[1];
 	}
-	
-	if("offset" in jsonNode) {
-		var o = jsonNode["offset"];
-		texture.offset.x = o[0];
-		texture.offset.y = o[1]
-	}*/
-	
+	if ("offset" in jsonNode) {
+		var offset = jsonNode["offset"];
+		texture.offset.x = offset[0];
+		texture.offset.y = offset[1];
+	}
+
 	if (texture.anisotropy > 4.0) texture.anisotropy = 4.0;
-	
 	var loader = new THREE.ImageLoader(loadingManager);
 	loader.load(
 		textureURL,
 		function(image) { // callback function
-			debug("Load " + textureURL);
 			texture.image = image;
 			texture.needsUpdate = true;
 		}
 	);
-	
 	return texture;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A SPRITE
+//----------------------------------------------------------------------//
+
+function parseSprite(spriteNode)
+{
+	var material = parseMaterial(spriteNode["material"]);
+
+	var sprite = new THREE.Sprite(material);
+
+	if ("translate" in spriteNode) {
+		var t = spriteNode["translate"];
+		sprite.position.set(t[0], t[1], t[2]);
+	}
+	if ("scale" in spriteNode) {
+		var scale = spriteNode["scale"];
+		sprite.scale.set(scale[0], scale[1], scale[2]);
+	}
+
+	return sprite;
 }
 
 //----------------------------------------------------------------------//
@@ -957,6 +884,11 @@ function animateFrame()
 	// Update the current camera and scene
 	if (currentCamera !== undefined) currentCamera.updateProjectionMatrix();
 	if (currentScene  !== undefined) currentScene.traverse(runScripts);
+
+	var t = getElapsedTime();
+  frameDuration = t - frameStartTime;
+  frameStartTime = t;
+  frameNum++;
 
 	// Update previous mouse state here because animateFrame
 	// out of sync with mouse listeners (onMouseMove, onMouseWheel)
