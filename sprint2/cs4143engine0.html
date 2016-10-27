@@ -120,6 +120,11 @@ var currentScene;		// The current scene graph
 var currentCamera;		// The current camera used to render the scene
 var currentRenderer;	// The current renderer used to render the scene
 
+var startTime = 0;
+var frameStartTime = 0;
+var frameDuration = 0;  // duration of last frame
+var frameNum = 0;       // current frame number
+
 // INITIALIZATION AND STARTUP (EXECUTES WHEN PAGE LOADS)
 processArgs();
 init();
