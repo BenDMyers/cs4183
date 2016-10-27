@@ -48,21 +48,20 @@
 		"name": "sprite",
 		"translate": [0, 0, 0],
 		"scale": [1, 1, 1],
-		"geometry": "sphere",
+		"geometry": "sprite",
 		"material": 
 		{
-			"type": "meshPhongMaterial",
+			"type": "spriteMaterial",
 			"name": "spriteMat",
 			"color": [1,1,1],
 			"repeat": [0.5,1],
 			"offset": [0.5,0],
-			"diffuseMap": "aship.png"
+			"map": "aship.png"
 		},
 		"userData":
 		{ 
-			"ascripts": ["blinkScript"]
+			"scripts": ["blinkScript"]
 		}
 	}
 ]
 }
-
