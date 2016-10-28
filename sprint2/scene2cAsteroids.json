@@ -102,7 +102,7 @@
 		"type": "mesh",
 		"name": "ship",
 		"translate": [0, 0, 0],
-		"scale": [60, 64, 64],
+		"scale": [0.9375, 1, 1],
 		"geometry": "sprite",
 		"material": 
 		{
@@ -126,7 +126,7 @@
 				"type": "mesh",
 				"name": "shot",
 				"translate": [0, 0, 0],
-				"scale": [4.5, 4.5, 4.5],
+				"scale": [0.0703125, 0.0703125, 0.0703125],
 				"geometry": "sprite",
 				"material": 
 				{
@@ -151,7 +151,7 @@
 				"type": "mesh",
 				"name": "particle",
 				"translate": [0, 0, 0],
-				"scale": [2.0, 2.0, 2.0],
+				"scale": [0.03125, 0.03125, 0.03125],
 				"geometry": "sprite",
 				"material": 
 				{
@@ -183,7 +183,7 @@
 				"type": "mesh",
 				"name": "asteroid0",
 				"translate": [0, 0, 0],
-				"scale": [100,100,100],
+				"scale": [1.5625,1.5625,1.5625],
 				"geometry": "sprite",
 				"visible": false,
 				"material": 
@@ -201,7 +201,7 @@
 				"type": "mesh",
 				"name": "asteroid1",
 				"translate": [0, 0, 0],
-				"scale": [70,70,70],
+				"scale": [1.09375,1.09375,1.09375],
 				"geometry": "sprite",
 				"visible": false,
 				"material": 
@@ -219,7 +219,7 @@
 				"type": "mesh",
 				"name": "asteroid2",
 				"translate": [0, 0, 0],
-				"scale": [50,50,50],
+				"scale": [0.78125,0.78125,0.78125],
 				"geometry": "sprite",
 				"visible": false,
 				"material": 
