@@ -76,6 +76,8 @@ SimpleHTTPServer:
 
 <!-- INCLUDE SCRIPTS HERE -->
 <script src="http://cs.okstate.edu/~clined/classes/gameDesignFall2016/code/threejs/build/three.js"></script>
+<script src="http://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
 
 <!-- ==================================================================== -->
 <!-- THE ACTUAL JAVASCRIPT ENGINE CODE -->
@@ -315,6 +317,14 @@ function loadScene(sceneURL)
             parseScene(jsonParseTree);
             debug("done.\n");
         }
+}
+
+//----------------------------------------------------------------------//
+// SETS THE CURRENT CAMERA
+//----------------------------------------------------------------------//
+function setCurrentCamera(camera)
+{
+	currentCamera = camera;
 }
 
 //----------------------------------------------------------------------//
@@ -658,6 +668,9 @@ function parseMesh(jsonNode)
 	if (geometryType == "sprite") {
 		return parseSprite(jsonNode);
 	}
+	else if(geometryType == "obj") {
+		return parseObj(jsonNode);
+	}
 	else if (geometryType == "cube") {
 		var width = 2;
 		var height = 2;
@@ -852,6 +865,33 @@ function parseSprite(spriteNode)
 }
 
 //----------------------------------------------------------------------//
+// PARSE A .OBJ EXTERNAL MESH
+//----------------------------------------------------------------------//
+
+function parseObj(objNode)
+{
+	var objLoader = new THREE.OBJLoader();
+	var material = objNode["material"];
+	var object;
+	var url = "";
+	if("url" in objNode)
+	{
+		url = objNode["url"];
+	}
+	objLoader.load(url, function(obj){
+		obj.traverse(function (child)
+		{
+            if (child instanceof THREE.Mesh)
+			{
+                child.material = material;
+            }
+		}
+		object = obj;
+	)});
+	return object;
+}
+
+//----------------------------------------------------------------------//
 // ADD A SCRIPT TO THE RUNNING PAGE FROM AN EXTERNAL URL
 //----------------------------------------------------------------------//
 
@@ -888,12 +928,14 @@ function animateFrame()
 {
 	// Update the current camera and scene
 	if (currentCamera !== undefined) currentCamera.updateProjectionMatrix();
+
+	TWEEN.update();
 	if (currentScene  !== undefined) currentScene.traverse(runScripts);
 
 	var t = getElapsedTime();
-  frameDuration = t - frameStartTime;
-  frameStartTime = t;
-  frameNum++;
+	frameDuration = t - frameStartTime;
+ 	frameStartTime = t;
+ 	frameNum++;
 
 	// Update previous mouse state here because animateFrame
 	// out of sync with mouse listeners (onMouseMove, onMouseWheel)
@@ -930,6 +972,23 @@ function render()
 	else {
 		//debug("Problem rendering\n");
 	}
+}
+
+//----------------------------------------------------------------------//
+// INTERPOLATES TWO COORDINATES USING TWEEN.JS
+// 		mesh IS THE OBJECT WHOSE POSITION SHOULD BE INTERPOLATED
+//		initialPosition AND targetPosition SHOULD BE 2D ARRAYS ({X,Y})
+//		timespan SHOULD BE A NUMBER IN MILLISECONDS
+//----------------------------------------------------------------------//
+function tween(mesh, initialPosition, targetPosition, timespan)
+{
+	var tween = new TWEEN.Tween(initialPosition).to(targetPosition, timespan);
+	tween.onUpdate(function()
+	{
+    	mesh.position.x = position.x;
+    	mesh.position.y = position.y;
+	});
+	tween.start();
 }
 
 //----------------------------------------------------------------------//
