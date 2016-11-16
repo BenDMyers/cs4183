@@ -38,7 +38,7 @@ SimpleHTTPServer:
 
 <!-- HTML HEAD TAG -->
 <head>
-<title>SPRINT 2 -- Ben Myers</title>
+<title>SPRINT 3 -- Ben Myers</title>
 <meta charset="utf-8">
 
 <!-- CSS THAT DEFINES THE STYLE IN WHICH HTML ELEMENTS WILL BE RENDERED -->
@@ -879,7 +879,7 @@ function parseSprite(spriteNode)
 function parseObj(objNode)
 {
 	var objLoader = new THREE.OBJLoader();
-	var material = objNode["material"];
+	var material = parseMaterial(objNode["material"]);
 	var object;
 	var url = "";
 	if("url" in objNode)
