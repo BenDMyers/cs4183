@@ -65,7 +65,7 @@
 		"name": "robot1",
 		"scale": [1, 1, 1],
 		"translate": [-0.2, 0, 4],
-		"geometry": "osubota.obj",
+		"geometry": "osubot.obj",
 		"material": 
 		{
 			"type": "meshPhongMaterial",
@@ -89,7 +89,7 @@
 		"name": "robot2",
 		"scale": [1, 1, 1],
 		"translate": [1, 0, 0],
-		"geometry": "osubota.obj",
+		"geometry": "osubot.obj",
 		"material": 
 		{
 			"type": "meshPhongMaterial",
