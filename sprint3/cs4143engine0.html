@@ -675,7 +675,7 @@ function parseMesh(jsonNode)
 	if (geometryType == "sprite") {
 		return parseSprite(jsonNode);
 	}
-	else if(geometryType == "obj") {
+	else if(geometryType.endsWith("obj")) {
 		return parseObj(jsonNode);
 	}
 	else if (geometryType == "cube") {
