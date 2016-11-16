@@ -875,7 +875,7 @@ function parseSprite(spriteNode)
 // PARSE A .OBJ EXTERNAL MESH
 //----------------------------------------------------------------------//
 
-function parseObj(objNode)
+function parseObj(jsonNode)
 {
 	var material = parseMaterial(jsonNode["material"]);
 	var modelURL = jsonNode["geometry"];
