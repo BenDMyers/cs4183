@@ -888,13 +888,13 @@ function parseObj(objNode)
 	objLoader.load(url, function(obj){
 		obj.traverse(function (child)
 		{
-            if (child instanceof THREE.Mesh)
+            		if (child instanceof THREE.Mesh)
 			{
-                child.material = material;
-            }
-		}
+                		child.material = material;
+            		}
+		});
 		object = obj;
-	)});
+	});
 	return object;
 }
 
