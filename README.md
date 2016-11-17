@@ -14,4 +14,4 @@
 
 ## Sprint 3
 
-* __Instructor-created test scenes__: [OSUBot](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3aObj.json&debug=false)
+* __Instructor-created test scenes__: [OSUBot](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3aObj.json&debug=false), [Moving/Switching Cameras](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3cCameras.json) *(use number keys to switch cameras)*
