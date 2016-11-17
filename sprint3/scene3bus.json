@@ -32,7 +32,7 @@
 				"COMMENT": "BUS BODY",
 				"type": "mesh",
 				"name": "busBody",
-				"translate": [1.8, 0, 0],
+				"translate": [0, 0, 0],
 				"geometry": "cube",
 				"material":
 				{
