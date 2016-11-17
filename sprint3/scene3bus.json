@@ -19,20 +19,29 @@
 		"type": "directionalLight",
 		"name": "light2",
 		"color": [1, 1, 1],
-		"position": [0, 0, 0]
+		"position": [-0.5, -1, 0.5]
 	},
 	{
-		"COMMENT": "BUS BODY",
-		"type": "mesh",
-		"name": "myCube",
+		"COMMENT": "It's a bus!",
+		"type": "node",
+		"name": "bus",
 		"translate": [1.8, 0, 0],
-		"geometry": "cube",
-		"material":
-		{
-			"type": "meshLambertMaterial",
-			"name": "cubeMat",
-			"diffuseColor": [1, 1, 0]
-		}
+		"children":
+		[
+			{
+				"COMMENT": "BUS BODY",
+				"type": "mesh",
+				"name": "busBody",
+				"translate": [1.8, 0, 0],
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "busBodyMat",
+					"diffuseColor": [1, 1, 0]
+				}
+			}
+		]
 	}
 ]
 }
