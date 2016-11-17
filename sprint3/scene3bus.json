@@ -18,7 +18,7 @@
 		"COMMENT": "AMBIENT",
 		"type": "ambientLight",
 		"name": "alight",
-		"color": [0.1, 0.1, 0.1]
+		"color": [1, 1, 1]
 	},
 	{
 		"COMMENT": "It's a bus!",
@@ -33,6 +33,7 @@
 				"name": "busBody",
 				"translate": [0, 0, 0],
 				"depth": 8,
+				"rotate": [0, 1, 0, 0.78539816339],
 				"geometry": "cube",
 				"material":
 				{
