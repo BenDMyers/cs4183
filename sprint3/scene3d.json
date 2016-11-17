@@ -1,0 +1,80 @@
+{ 
+"COMMENT": "A CUBE, SPHERE, AND DIRECTIONAL LIGHTS",
+"type": "node",
+"name": "rootNode",
+
+"scriptFiles": 
+[
+	"scene3dScript.js"
+],
+
+"userData":
+{
+	"scripts": ["blurScript"]
+},
+
+"children":
+[
+	{
+		"COMMENT": "CAMERA LOOKING AT ORIGIN FROM ALONG THE Z AXIS",
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30
+	},
+	{
+		"COMMENT": "test camera",
+		"type": "perspectiveCamera",
+		"name": "testCam",
+		"eye": [-10, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light1",
+		"color": [2, 2, 0.5],
+		"position": [0.5, 1, 0.5]
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light2",
+		"color": [0.3, 0.3, 1],
+		"position": [-0.5, -1, 0.5]
+	},
+	{
+		"COMMENT": "GREEN SPHERE",
+		"type": "mesh",
+		"name": "sphere1",
+		"translate": [-1.8, 0, 0],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 16,
+		"material": 
+		{
+			"type": "meshLambertMaterial",
+			"name": "sphereMat",
+			"diffuseColor": [0.8, 0.8, 0.8]
+		}
+	},
+	{
+		"COMMENT": "red cube to left of origin",
+		"type": "mesh",
+		"name": "myCube",
+		"translate": [1.8, 0, 0],
+		"geometry": "cube",
+		"material": 
+		{
+			"type": "meshLambertMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [1, 0.2, 0.2]
+		}
+	}
+]
+}
+
