@@ -450,7 +450,7 @@ function parseSceneNode(jsonNode, sceneNode)
 				parseSceneNode(childJsonNode, light);
 			}
 			else if (childType == "mesh") {
-				var mesh = parseMesh(childJsonNode);
+				var mesh = parseMesh(childJsonNode, sceneNode);
 				sceneNode.add(mesh);
 				parseSceneNode(childJsonNode, mesh);
 			}
@@ -661,7 +661,7 @@ function parseSpotLight(jsonNode)
 // PARSE A MESH
 //----------------------------------------------------------------------//
 
-function parseMesh(jsonNode)
+function parseMesh(jsonNode, sceneNode)
 {
 	//debug("parseMesh\n");
 
@@ -676,7 +676,7 @@ function parseMesh(jsonNode)
 		return parseSprite(jsonNode);
 	}
 	else if(geometryType.endsWith("obj")) {
-		return parseObj(jsonNode);
+		return parseObj(jsonNode, sceneNode);
 	}
 	else if (geometryType == "cube") {
 		var width = 2;
@@ -875,7 +875,7 @@ function parseSprite(spriteNode)
 // PARSE A .OBJ EXTERNAL MESH
 //----------------------------------------------------------------------//
 
-function parseObj(jsonNode)
+function parseObj(jsonNode, parentSceneNode)
 {
 	var material = parseMaterial(jsonNode["material"]);
 	var modelURL = jsonNode["geometry"];
