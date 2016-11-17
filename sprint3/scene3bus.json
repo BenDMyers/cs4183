@@ -42,48 +42,23 @@
 		"color": [0, 0, 0.3],
 		"position": [-0.4, -0.2, 1.0]
 	},
-
-	{
-		"type": "mesh",
-		"name": "robot1",
-		"scale": [1, 1, 1],
+  	{
+		"COMMENT": "NODE THAT HANDLES THE ENTIRE BUS",
+		"type": "node",
+		"name": "bus",
 		"translate": [-0.2, 0, 4],
-		"geometry": "osubot.obj",
-		"material": 
-		{
-			"type": "meshPhongMaterial",
-			"name": "sm2",
-			"diffuseColor": [1, 1, 1],
-			"specularColor": [0.01, 0.01, 0.01],
-			"diffuseMap": "osubotAObake.png",
-			"bumpMap": "osubotAObake.png",
-			"bumpScale": 0.002,
-			"shininess": 100
-		},
-		"userData": 
-		{ 
-			"scripts": ["rotateScript"],
-			"rotationSpeed": 0.45
-		}
-	},
-  
-  {
-    "COMMENT": "NODE THAT HANDLES THE ENTIRE BUS",
-    "type": "node",
-    "name": "bus",
-    "translate": [-0.2, 0, 4],
-    "children":
-    [
-      {
-        "type": "meshPhongMaterial",
-        "name": "busBody",
-        "geometry": "cube",
-        "scale": [10, 10, 10],
-        "diffuseColor": [1, 1, 0],
-        "specularColor": [1, 1, 1],
-        "shininess": 10
-      }
-    ]
-  }
+		"children":
+		[
+			{
+				"type": "meshPhongMaterial",
+				"name": "busBody",
+				"geometry": "cube",
+				"scale": [10, 10, 10],
+				"diffuseColor": [1, 1, 0],
+				"specularColor": [1, 1, 1],
+				"shininess": 10
+			}
+		]
+	}
 ]
 }
