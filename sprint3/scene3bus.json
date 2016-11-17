@@ -24,7 +24,7 @@
 		"COMMENT": "It's a bus!",
 		"type": "node",
 		"name": "bus",
-		"translate": [1.8, 0, 0],
+		"translate": [0, 0, 0],
 		"children":
 		[
 			{
@@ -32,6 +32,7 @@
 				"type": "mesh",
 				"name": "busBody",
 				"translate": [0, 0, 0],
+				"depth": 8,
 				"geometry": "cube",
 				"material":
 				{
