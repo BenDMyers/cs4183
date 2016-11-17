@@ -65,7 +65,7 @@
 			"scripts": ["rotateScript"],
 			"rotationSpeed": 0.45
 		}
-	}
+	},
   
   {
     "COMMENT": "NODE THAT HANDLES THE ENTIRE BUS"
