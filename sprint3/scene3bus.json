@@ -68,7 +68,7 @@
 	},
   
   {
-    "COMMENT": "NODE THAT HANDLES THE ENTIRE BUS"
+    "COMMENT": "NODE THAT HANDLES THE ENTIRE BUS",
     "type": "node",
     "name": "bus",
     "translate": [-0.2, 0, 4],
@@ -76,7 +76,7 @@
     [
       {
         "type": "meshPhongMaterial",
-        "name": "busBody"
+        "name": "busBody",
         "geometry": "cube",
         "scale": [10, 10, 10],
         "diffuseColor": [1, 1, 0],
