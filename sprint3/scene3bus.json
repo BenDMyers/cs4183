@@ -15,11 +15,10 @@
 		"fov": 30
 	},
 	{
-		"COMMENT": "DIRECTIONAL LIGHT",
-		"type": "directionalLight",
-		"name": "light2",
-		"color": [1, 1, 1],
-		"position": [-0.5, -1, 0.5]
+		"COMMENT": "AMBIENT",
+		"type": "ambientLight",
+		"name": "alight",
+		"color": [0.1, 0.1, 0.1]
 	},
 	{
 		"COMMENT": "It's a bus!",
