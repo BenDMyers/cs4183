@@ -11,3 +11,7 @@
 
 * __Instructor-created test scenes__: [MeshPhongMaterial](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1aPhongMaterial.json), [PointLight](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1bPointLight.json), [Ambient Light](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1cAmbientLight.json), [Hemisphere Light](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1dHemisphereLight.json), [MeshBasicMaterial](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1eBasicMaterial.json), [Globe](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1fGlobe.json), [SpotLight](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=scene1gSpotLight.json)
 * __Student-created scene__: [Orbit](http://rawgit.com/BenDMyers/cs4183/master/sprint1/cs4143engine0.html?url=orbit.json)
+
+## Sprint 3
+
+* __Instructor-created test scenes__: [OSUBot](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3aObj.json&debug=false)
