@@ -1,0 +1,115 @@
+{ 
+"COMMENT": "A CUBE, SPHERE, AND DIRECTIONAL LIGHTS",
+"type": "node",
+"name": "rootNode",
+"scriptFiles": [ "scene3cCamerasScript.js" ],
+"userData": { "scripts": ["cameraSwitch"] },
+
+"children":
+[
+
+	{
+		"type": "perspectiveCamera",
+		"name": "camera0",
+		"eye": [0, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30
+	},
+	{
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30,
+		"userData": 
+		{
+			"scripts": ["cameraTrack"],
+			"target": "blueSphere"
+		}
+	},
+	{
+		"type": "perspectiveCamera",
+		"name": "camera2",
+		"eye": [-10, 0, 10],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30,
+		"userData":
+		{
+			"scripts": ["cameraMove"],
+			"points": 
+			[ 
+				-10,0,10, 
+				0,0,3,
+				10,10,10
+			],
+			"speed": 0.1
+		}
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light1",
+		"color": [2, 2, 1],
+		"position": [0.5, 1, 0.5]
+	},
+	{
+		"COMMENT": "DIRECTIONAL LIGHT",
+		"type": "directionalLight",
+		"name": "light2",
+		"color": [0.3, 0.3, 1],
+		"position": [-0.5, -1, 0.5]
+	},
+	{
+		"COMMENT": "GREEN SPHERE",
+		"type": "mesh",
+		"name": "sphere1",
+		"translate": [-3, 0, 0],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 16,
+		"material": 
+		{
+			"type": "meshLambertMaterial",
+			"name": "sphereMat",
+			"diffuseColor": [0.2, 0.8, 0.2]
+		}
+	},
+	{
+		"COMMENT": "BLUE SPHERE",
+		"type": "mesh",
+		"name": "blueSphere",
+		"translate": [0, 0, 0],
+		"geometry": "sphere",
+		"widthSegments": 32,
+		"heightSegments": 16,
+		"material": 
+		{
+			"type": "meshLambertMaterial",
+			"name": "sphereMat",
+			"diffuseColor": [0.2, 0.2, 1]
+		},
+		"userData": 
+		{
+			"scripts": ["targetFun"],
+			"speed": 1.0
+		}
+	},
+	{
+		"COMMENT": "red cube to left of origin",
+		"type": "mesh",
+		"name": "myCube",
+		"translate": [3, 0, 0],
+		"geometry": "cube",
+		"material": 
+		{
+			"type": "meshLambertMaterial",
+			"name": "cubeMat",
+			"diffuseColor": [1, 0.2, 0.2]
+		}
+	}
+]
+}
+
