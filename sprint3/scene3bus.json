@@ -59,7 +59,14 @@
 						"radiusTop": 0.33333,
 						"radiusBottom": 0.33333,
 						"height": 0.125,
-						"radiusSegments": 8
+						"radiusSegments": 8,
+						"material":
+						{
+							"type": "meshLambertMaterial",
+							"name": "wheelMat",
+							"DIFFUSE COLOR COMMENT": "DARKISH GRAY",
+							"diffuseColor": [0.2, 0.2, 0.2]
+						}
 					}
 				]
 			}
