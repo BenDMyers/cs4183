@@ -39,7 +39,8 @@
 				{
 					"type": "meshLambertMaterial",
 					"name": "busBodyMat",
-					"diffuseColor": [1, 1, 0]
+					"DIFFUSE COLOR COMMENT": "SCHOOL BUS YELLOW IS #FFD800",
+					"diffuseColor": [1, 0.84705882352, 0]
 				}
 			}
 		]
