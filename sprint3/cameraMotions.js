@@ -18,7 +18,7 @@ function moveCamera(sceneNode)
     }
     if(pressedKeys[81] == true || pressedKeys[222] == true) // FORWARD
     {
-        sceneNode.position.z = sceneNode.position.y + frameDuration;
+        sceneNode.position.z = sceneNode.position.z + frameDuration;
     }
     if(pressedKeys[90] == true || pressedKeys[191] == true) // BACKWARDS
     {
