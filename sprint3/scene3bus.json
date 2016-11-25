@@ -2,7 +2,7 @@
 "COMMENT": "BUS SCENE",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": "cameraMotions.js",
+"scriptFiles": ["cameraMotions.js"],
 "userData": { "scripts": ["moveCamera"]},
 
 "children":
@@ -14,7 +14,11 @@
 		"eye": [0, 0, 10],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
-		"fov": 30
+		"fov": 30,
+		"userData":
+		{
+			"scripts": ["moveCamera"]
+		}
 	},
 	{
 		"COMMENT": "AMBIENT",
