@@ -62,7 +62,7 @@
 						"type": "mesh",
 						"name": "frontRightWheel",
 						"geometry": "cylinder",
-						"translate": [-3, -3, 3],
+						"translate": [-3, -3, 0],
 						"radiusTop": 0.33333,
 						"radiusBottom": 0.33333,
 						"height": 0.125,
