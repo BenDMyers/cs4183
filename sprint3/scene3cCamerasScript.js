@@ -8,7 +8,10 @@ function targetFun(node)
 function cameraTrack(node)
 {
 	var target = currentScene.getObjectByName(node.userData["target"]);
-	node.lookAt(target.position);
+	if(target !== undefined)
+	{
+		node.lookAt(target.position);
+	}
 }
 
 var numberKeys = ['0', '1', '2', '3'];
@@ -50,16 +53,3 @@ function cameraMove(node)
 	node.position.copy(p);
 	node.lookAt(new THREE.Vector3(0,0,0));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
