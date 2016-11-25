@@ -25,6 +25,7 @@
 		"type": "node",
 		"name": "bus",
 		"translate": [0, 0, 0],
+		"rotate": [0, 1, 0, 0.78539816339],
 		"children":
 		[
 			{
@@ -33,7 +34,6 @@
 				"name": "busBody",
 				"translate": [0, 0, 0],
 				"depth": 8,
-				"rotate": [0, 1, 0, 0.78539816339],
 				"geometry": "cube",
 				"material":
 				{
@@ -42,6 +42,26 @@
 					"DIFFUSE COLOR COMMENT": "SCHOOL BUS YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0]
 				}
+			},
+			{
+				"COMMENT": "Wheels Node",
+				"type": "node",
+				"name": "wheelsNode",
+				"angularVelocity": 0,
+				"children":
+				[
+					{
+						"COMMENT": "Front Right Wheel",
+						"type": "mesh",
+						"name": "frontRightWheel",
+						"geometry": "cylinder",
+						"translate": [-0.33333, -0.33333, 0.5],
+						"radiusTop": 0.33333,
+						"radiusBottom": 0.33333,
+						"height": 0.125,
+						"radiusSegments": 8
+					}
+				]
 			}
 		]
 	}
