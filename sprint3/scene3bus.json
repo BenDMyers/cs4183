@@ -2,6 +2,8 @@
 "COMMENT": "BUS SCENE",
 "type": "node",
 "name": "rootNode",
+"scriptFiles": "cameraMotions.js",
+"userData": { "scripts": ["moveCamera"]},
 
 "children":
 [
