@@ -2,8 +2,8 @@
 "COMMENT": "BUS SCENE",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": ["cameraMotions.js"],
-"userData": { "scripts": ["moveCamera"]},
+"scriptFiles": ["cameraMotions.js", "scene3cCamerasScript.js"],
+"userData": { "scripts": ["moveCamera", "cameraTrack"]},
 
 "children":
 [
@@ -17,7 +17,8 @@
 		"fov": 30,
 		"userData":
 		{
-			"scripts": ["moveCamera"]
+			"scripts": ["moveCamera", "cameraTrack"],
+			"target": "bus"
 		}
 	},
 	{

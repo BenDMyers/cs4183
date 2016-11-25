@@ -18,10 +18,18 @@ function moveCamera(sceneNode)
     }
     if(pressedKeys[81] == true || pressedKeys[222] == true) // FORWARD
     {
-        sceneNode.position.z = sceneNode.position.z + frameDuration;
+        sceneNode.position.z = sceneNode.position.z - frameDuration;
     }
     if(pressedKeys[90] == true || pressedKeys[191] == true) // BACKWARDS
     {
-        sceneNode.position.z = sceneNode.position.z - frameDuration;
+        sceneNode.position.z = sceneNode.position.z + frameDuration;
+    }
+}
+
+function watch(sceneNode, target)
+{
+    if(pressedKeys[16] == true) // SHIFT
+    {
+        sceneNode.lookAt(target);
     }
 }
