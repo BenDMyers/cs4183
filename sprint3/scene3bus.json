@@ -32,7 +32,7 @@
 		"type": "node",
 		"name": "bus",
 		"translate": [0, 0, 0],
-		"rotate": [0, 1, 0, 0.78539816339],
+		"rotatea": [0, 1, 0, 0.78539816339],
 		"children":
 		[
 			{
@@ -62,7 +62,7 @@
 						"type": "mesh",
 						"name": "frontRightWheel",
 						"geometry": "cylinder",
-						"translate": [-2.125, 0, 3.8],
+						"translate": [-2.125, -2, 3.8],
 						"rotate": [0, 0, 1, 1.57079632679],
 						"radiusTop": 0.33333,
 						"radiusBottom": 0.33333,
