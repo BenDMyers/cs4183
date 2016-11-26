@@ -17,7 +17,7 @@
 		"fov": 30,
 		"userData":
 		{
-			"scripts": ["drive"],
+			"ascripts": ["moveCamera", "cameraTrack"],
 			"target": "bus"
 		}
 	},
@@ -134,7 +134,11 @@
 							"diffuseColor": [0.2, 0.2, 0.2]
 						}
 					}
-				]
+				],
+				"userData":
+				{
+					"scripts": ["drive"]
+				}
 			}
 		]
 	}
