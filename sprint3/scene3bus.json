@@ -2,8 +2,8 @@
 "COMMENT": "BUS SCENE",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": ["cameraMotions.js", "scene3cCamerasScript.js"],
-"userData": { "scripts": ["moveCamera", "cameraTrack"]},
+"scriptFiles": ["scene3cCamerasScript.js", "busScripts"],
+"userData": { "scripts": ["drive"]},
 
 "children":
 [
@@ -17,7 +17,7 @@
 		"fov": 30,
 		"userData":
 		{
-			"scripts": ["moveCamera", "cameraTrack"],
+			"scripts": ["drive"],
 			"target": "bus"
 		}
 	},
@@ -32,6 +32,7 @@
 		"type": "node",
 		"name": "bus",
 		"translate": [0, 0, 0],
+		"wheelAngularVelocity": 0,
 		"rotatea": [0, 1, 0, 0.78539816339],
 		"children":
 		[
