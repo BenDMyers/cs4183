@@ -2,7 +2,7 @@
 "COMMENT": "BUS SCENE",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": ["scene3cCamerasScript.js", "busScripts"],
+"scriptFiles": ["scene3cCamerasScript.js", "busScripts.js"],
 "userData": { "scripts": ["drive"]},
 
 "children":
