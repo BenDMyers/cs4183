@@ -22,7 +22,7 @@ function drive(node)
 
         // ACTUALLY ROTATE THE WHEELS
         var children = node.children;
-        var wheels = children["wheelsNode"];
+        var wheels = children.wheelsNode;
         if(wheels !== undefined)
         {
             for (var i = 0; i < wheels.children.length; i++)
