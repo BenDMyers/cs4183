@@ -32,8 +32,7 @@
 		"type": "node",
 		"name": "bus",
 		"translate": [0, 0, 0],
-		"wheelAngularVelocity": 0,
-		"rotatea": [0, 1, 0, 0.78539816339],
+		"rotate": [0, 1, 0, 0],
 		"children":
 		[
 			{
@@ -137,7 +136,8 @@
 				],
 				"userData":
 				{
-					"scripts": ["drive"]
+					"scripts": ["drive"],
+					"wheelAngularVelocity": 0
 				}
 			}
 		]
