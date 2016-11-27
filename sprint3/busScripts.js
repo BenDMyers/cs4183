@@ -29,8 +29,9 @@ function drive(node)
             {
                 wheels.children[i].rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
             }
+            debug("WAV: " + node.userData["wheelAngularVelocity"] + " | Wheel angle: " + wheels.children[0].rotate);
         }
-        
+
         // MOVE THE BUS
         // node.position.z
     }
