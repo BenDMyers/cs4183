@@ -18,16 +18,19 @@ function drive(node)
     if(pressedKeys[UP_ARROW] == true) // FORWARD
     {
         // DETERMINE WHEELS' ROTATIONAL VELOCITY
-        node["wheelAngularVelocity"] = Math.min(node["wheelAngularVelocity"] + frameDuration, 1.0);
+        node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration, 1.0);
 
         // ACTUALLY ROTATE THE WHEELS
         var children = node.children;
         var wheels = children["wheelsNode"];
-        for (var i = 0; i < wheels.children.length; i++)
+        if(wheels !== undefined)
         {
-            wheels.children[i].rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
+            for (var i = 0; i < wheels.children.length; i++)
+            {
+                wheels.children[i].rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
+            }
         }
-
+        
         // MOVE THE BUS
         // node.position.z
     }
