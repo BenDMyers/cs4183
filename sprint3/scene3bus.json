@@ -3,7 +3,7 @@
 "type": "node",
 "name": "rootNode",
 "scriptFiles": ["scene3cCamerasScript.js", "busScripts.js"],
-"userData": { "scripts": ["drive"]},
+"userData": { "scripts": ["drive", "moveCamera", "cameraTrack"]},
 
 "children":
 [
@@ -17,7 +17,7 @@
 		"fov": 30,
 		"userData":
 		{
-			"ascripts": ["moveCamera", "cameraTrack"],
+			"scripts": ["moveCamera", "cameraTrack"],
 			"target": "bus"
 		}
 	},

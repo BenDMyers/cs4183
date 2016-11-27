@@ -1,6 +1,6 @@
 function moveCamera(sceneNode)
 {
-    if(pressedKeys[87] == true || pressedKeys[38] == true) // UP
+    if(pressedKeys[87] == true/* || pressedKeys[38] == true*/) // UP
     {
         sceneNode.position.y = sceneNode.position.y + frameDuration;
     }
