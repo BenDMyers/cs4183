@@ -1,14 +1,31 @@
+// KEYBOARD CONSTANTS
+var SPACE_BAR = 32;
+var UP_ARROW = 38;
+var DOWN_ARROW = 40;
+var LEFT_ARROW = 37;
+var RIGHT_ARROW = 39;
+var COMMA_KEY = 222;
+var PERIOD_KEY = 191;
+var A_KEY = 65;
+var D_KEY = 68;
+var Q_KEY = 81;
+var S_KEY = 83;
+var W_KEY = 87;
+var Z_KEY = 90;
+
 function drive(node)
 {
-    if(pressedKeys[38] == true) // FORWARD
+    if(pressedKeys[UP_ARROW] == true) // FORWARD
     {
         // DETERMINE WHEELS' ROTATIONAL VELOCITY
         node["wheelAngularVelocity"] = Math.min(node["wheelAngularVelocity"] + frameDuration, 1.0);
 
         // ACTUALLY ROTATE THE WHEELS
-        for(var wheel in node["children"]["wheelsNode"])
+        var children = node.children;
+        var wheels = children["wheelsNode"];
+        for (var i = 0; i < wheels.children.length; i++)
         {
-            wheel.rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
+            wheels.children[i].rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
         }
 
         // MOVE THE BUS
