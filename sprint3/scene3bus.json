@@ -57,9 +57,9 @@
 				"COMMENT": "BUS HOOD",
 				"type": "mesh",
 				"name": "busHood",
-				"translate": [0, 0, 4],
+				"translate": [0, -1, 4],
 				"height": 1,
-				"depth": 1,
+				"depth": 2,
 				"geometry": "cube",
 				"material":
 				{
