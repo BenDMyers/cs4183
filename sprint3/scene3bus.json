@@ -172,7 +172,10 @@
 							"diffuseColor": [0.2, 0.2, 0.2]
 						}
 					}
-				]
+				],
+				"userData": {
+					"angularVelocity": 0.0
+				}
 			}
 		]
 	},
