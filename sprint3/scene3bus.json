@@ -9,17 +9,30 @@
 "children":
 [
 	{
-		"COMMENT": "CAMERA LOOKING AT ORIGIN FROM ALONG THE Z AXIS",
+		"COMMENT": "CAMERA TRACKING BUS",
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [-5, 0, 10],
+		"eye": [-5, 10, 12],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 30,
 		"userData":
 		{
-			"scripts": ["moveCamera", "cameraTrack"],
+			"scripts": ["cameraTrack"],
 			"target": "bus"
+		}
+	},
+	{
+		"COMMENT": "FREELY MOVABLE CAMERA",
+		"type": "perspectiveCamera",
+		"name": "camera2",
+		"eye": [-5, 10, 12],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 30,
+		"userData":
+		{
+			"scripts": ["moveCamera"]
 		}
 	},
 	{
@@ -159,12 +172,7 @@
 							"diffuseColor": [0.2, 0.2, 0.2]
 						}
 					}
-				],
-				"userData":
-				{
-					"scripts": ["drive"],
-					"wheelAngularVelocity": 0
-				}
+				]
 			}
 		]
 	},
