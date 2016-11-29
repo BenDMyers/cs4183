@@ -174,7 +174,7 @@
 					}
 				],
 				"userData": {
-					"angularVelocity": 0.0
+					"wheelAngularVelocity": 0.0
 				}
 			}
 		]
