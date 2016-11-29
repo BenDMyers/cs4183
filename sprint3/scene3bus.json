@@ -176,6 +176,7 @@
 		"height": 10000,
 		"depth": 10000,
 		"geometry": "cube",
+		"invert": "true",
 		"material":
 		{
 			"type": "meshBasicMaterial",
