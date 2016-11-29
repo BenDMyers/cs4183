@@ -854,7 +854,7 @@ function parseTexture(textureURL, jsonNode)
 	if("tile" in jsonNode && jsonNode["tile"] === "true")
 	{
 		// Eternal gratitude for @stemoski for this: https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Repeat.html
-		texture.wrapS = material.texture.wrapT = THREE.RepeatWrapping;
+		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set(200, 200);
 	}
 
