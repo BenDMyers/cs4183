@@ -42,6 +42,10 @@ function drive(node)
         var sign = wav/Math.abs(wav) // 1 if positive, -1 if negative
         wav = wav - sign * frameDuration/10; // this will get wheel angular velocity to approach zero
     }
+    else
+    {
+        return; // wheels aren't spinning, wav = 0
+    }
     wheels.userData["wheelAngularVelocity"] = wav;
 
     // ACTUALLY ROTATE THE WHEELS
