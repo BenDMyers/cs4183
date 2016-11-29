@@ -23,6 +23,12 @@
 		}
 	},
 	{
+		"COMMENT": "AMBIENT",
+		"type": "ambientLight",
+		"name": "alight",
+		"color": [0.1, 0.1, 0.1]
+	},
+	{
 		"COMMENT": "HEMISPHERE",
 		"type": "hemisphereLight",
 		"name": "hlight",
