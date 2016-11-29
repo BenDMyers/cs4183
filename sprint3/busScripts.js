@@ -25,7 +25,7 @@ function drive(node)
         return;
     }
 
-    var wav = node.userData["wheelAngularVelocity"];
+    var wav = wheels.userData["wheelAngularVelocity"];
 
     if(pressedKeys[UP_ARROW] == true) // FORWARD
     {
