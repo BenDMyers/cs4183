@@ -172,7 +172,7 @@
 		"geometry": "cube",
 		"material":
 		{
-			"type": "meshLambertMaterial",
+			"type": "meshBasicMaterial",
 			"name": "skyMat",
 			"DIFFUSE COLOR COMMENT": "PURPLE SKY IS #8470FF",
 			"diffuseColor": [0,517647, 0.439216, 1.0]
