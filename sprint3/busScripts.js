@@ -56,5 +56,4 @@ function drive(node)
 
         // MOVE THE BUS
         // node.position.z
-    }
 }
