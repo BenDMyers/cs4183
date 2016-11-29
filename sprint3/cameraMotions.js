@@ -19,7 +19,7 @@ function moveCamera(sceneNode)
     {
         sceneNode.position.y = sceneNode.position.y + frameDuration;
     }
-    if(pressedKeys[S_KEY] == true || pressedKeys[DOWN_ARROW] == true) // DOWN
+    if(pressedKeys[S_KEY] == true/* || pressedKeys[DOWN_ARROW] == true*/) // DOWN
     {
         sceneNode.position.y = sceneNode.position.y - frameDuration;
     }
