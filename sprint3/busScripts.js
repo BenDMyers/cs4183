@@ -33,7 +33,7 @@ function drive(node)
             {
                 wheels.children[i].rotateY(-1 * wheels.userData["wheelAngularVelocity"] * frameDuration);
             }
-            console.log("ω: " + wheels.userData["wheelAngularVelocity"] + " | θ: " + wheels.children[0].rotate.y  + " | α: " + frameDuration/1000);
+            console.log("ω: " + wheels.userData["wheelAngularVelocity"] + " | θ: " + wheels.children[0].rotate[1]  + " | α: " + frameDuration/1000);
         }
         else
         {
