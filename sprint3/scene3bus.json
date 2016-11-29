@@ -22,10 +22,12 @@
 		}
 	},
 	{
-		"COMMENT": "AMBIENT",
-		"type": "ambientLight",
-		"name": "alight",
-		"color": [1, 1, 1]
+		"COMMENT": "HEMISPHERE",
+		"type": "hemisphereLight",
+		"name": "hlight",
+		"skyColor": [1, 1, 1],
+		"groundColor": [0, 0, 0],
+		"intensity": 1.0
 	},
 	{
 		"COMMENT": "It's a bus!",
