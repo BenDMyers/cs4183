@@ -26,13 +26,14 @@
 		"COMMENT": "AMBIENT",
 		"type": "ambientLight",
 		"name": "alight",
-		"color": [0.1, 0.1, 0.1]
+		"color": [0.001, 0.001, 0.001]
 	},
 	{
 		"COMMENT": "HEMISPHERE",
 		"type": "hemisphereLight",
 		"name": "hlight",
-		"skyColor": [1, 1, 1],
+		"SKY COLOR COMMENT": "PURPLE SKY IS #8470FF",
+		"skyColor": [0.517647, 0.439216, 1.0],
 		"groundColor": [0, 0, 0],
 		"intensity": 1.0
 	},

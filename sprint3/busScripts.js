@@ -21,7 +21,7 @@ function drive(node)
     if(pressedKeys[UP_ARROW] == true) // FORWARD
     {
         // DETERMINE WHEELS' ROTATIONAL VELOCITY
-        node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration/10, 1.0);
+        node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration/10, 2.0);
 
         // ACTUALLY ROTATE THE WHEELS
         // var children = node.children;
