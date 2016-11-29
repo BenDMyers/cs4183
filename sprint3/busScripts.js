@@ -59,6 +59,6 @@ function drive(node)
 
     // MOVE THE BUS
     // v = ωr
-    var linearVelocity = wav * 0.5;
+    var linearVelocity = wav / 0.5;
     node.position.z += linearVelocity * frameDuration;
 }
