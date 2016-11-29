@@ -87,6 +87,10 @@
 					"name": "busBodyMat",
 					"DIFFUSE COLOR COMMENT": "SCHOOL BUS YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0]
+				},
+				"userData":
+				{
+					"scripts": ["drive"]
 				}
 			},
 			{
