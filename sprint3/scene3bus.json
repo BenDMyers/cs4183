@@ -12,7 +12,7 @@
 		"COMMENT": "CAMERA LOOKING AT ORIGIN FROM ALONG THE Z AXIS",
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [-3, 0, 10],
+		"eye": [-5, 0, 10],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 30,
