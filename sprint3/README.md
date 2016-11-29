@@ -35,6 +35,6 @@ The repository for Sprint 3
 
 ## Attributions
 
-🎵 [*"Dreams Become Real"* -- Kevin Macleod](https://incompetech.com/wordpress/2015/04/dreams-become-real/)
+🎵 [*"Dreams Become Real"* — Kevin Macleod](https://incompetech.com/wordpress/2015/04/dreams-become-real/)
 
-🛣 [Road Texture](https://www.freecreatives.com/textures/road-texture.html)
+🛣 [Road Texture — FreeCreatives](https://www.freecreatives.com/textures/road-texture.html)
