@@ -32,7 +32,8 @@
 		"fov": 30,
 		"userData":
 		{
-			"scripts": ["moveCamera"]
+			"scripts": ["moveCamera", "cameraTrack"],
+			"target": "bus"
 		}
 	},
 	{
