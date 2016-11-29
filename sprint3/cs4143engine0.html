@@ -667,7 +667,10 @@ function parseMesh(jsonNode, sceneNode)
 
 	// Get the material
 	var material = parseMaterial(jsonNode["material"]);
-	material.side = THREE.BackSide;
+	if("invert" in jsonNode && jsonNode["invert"] === "true")
+	{
+		material.side = THREE.BackSide;
+	}
 
 	// Create the mesh geometry
 	var geometryType = jsonNode["geometry"];
