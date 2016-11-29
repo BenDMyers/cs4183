@@ -72,6 +72,10 @@
 		"name": "bus",
 		"translate": [0, 0, 0],
 		"rotate": [0, 1, 0, 0],
+		"userData":
+		{
+			"scripts": ["drive"]
+		},
 		"children":
 		[
 			{
@@ -87,10 +91,6 @@
 					"name": "busBodyMat",
 					"DIFFUSE COLOR COMMENT": "SCHOOL BUS YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0]
-				},
-				"userData":
-				{
-					"scripts": ["drive"]
 				}
 			},
 			{
