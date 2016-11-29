@@ -21,11 +21,12 @@ function drive(node)
         node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration, 1.0);
 
         // ACTUALLY ROTATE THE WHEELS
-        var children = node.children;
-        var wheels = children["wheelsNode"];
+        // var children = node.children;
+        // var wheels = children["wheelsNode"];
+        var wheels = currentScene.getObjectByName("wheelsNode");
         if(wheels !== undefined)
         {
-            for (var i = 0; i < wheels["children"].length; i++)
+            for (var i = 0; i < wheels.children.length; i++)
             {
                 wheels.children[i].rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
             }
