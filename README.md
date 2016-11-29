@@ -15,3 +15,5 @@
 ## Sprint 3
 
 * __Instructor-created test scenes__: [OSUBot](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3aObj.json&debug=false), [Moving/Switching Cameras](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3cCameras.json) *(use __0__, __1__, and __2__ number keys to switch cameras)*, [Shaders/Postprocessing](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3d.json&debug=false)
+
+* __Student-created scenes__: [The Wheels on the Bus Go Round and Round](http://rawgit.com/BenDMyers/cs4183/master/sprint3/cs4143engine0.html?url=scene3bus.json&debug=false)
