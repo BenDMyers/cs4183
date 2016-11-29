@@ -2,7 +2,7 @@ The repository for Sprint 3
 
 > # Sprint 3: External meshes, multiple cameras, animation
 >
-> CS 4183 : Video Game Design (CS 4143) 
+> CS 4183 : Video Game Design (CS 4143)
 > Dr. David Cline
 >
 > In this sprint, you will add the capability to load external meshes to your scenes. Another important feature that you will add in this sprint is the ability to store and switch between multiple cameras. You will also add some animation facilities to your engine by creating general animation scripts.
@@ -32,3 +32,9 @@ The repository for Sprint 3
 > Demonstrate your scenes to the instructor, running from this web server.
 >
 > Zip up your sprint files (code and scenes) into a single .zip file (not .rar!) and turn it in to D2L.
+
+## Attributions
+
+🎵 [*"Dreams Become Real"* -- Kevin Macleod](https://incompetech.com/wordpress/2015/04/dreams-become-real/)
+
+🛣 [Road Texture](https://www.freecreatives.com/textures/road-texture.html)
