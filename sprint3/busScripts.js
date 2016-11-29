@@ -13,6 +13,9 @@ var S_KEY = 83;
 var W_KEY = 87;
 var Z_KEY = 90;
 
+// OTHER CONSTANTS
+var XAXIS = new THREE.Vector3(1,0,0);
+
 function drive(node)
 {
     if(pressedKeys[UP_ARROW] == true) // FORWARD
@@ -28,9 +31,9 @@ function drive(node)
         {
             for (var i = 0; i < wheels.children.length; i++)
             {
-                wheels.children[i].rotateOnAxis(XAXIS, node["wheelAngularVelocity"] * frameDuration);
+                wheels.children[i].rotateOnAxis(XAXIS, wheels.userData["wheelAngularVelocity"] * frameDuration);
             }
-            console.log("WAV: " + node.userData["wheelAngularVelocity"] + " | Wheel angle: " + wheels.children[0].rotate);
+            console.log("ω: " + wheels.userData["wheelAngularVelocity"] + " | θ: " + wheels.children[0].rotate);
         }
         else
         {
