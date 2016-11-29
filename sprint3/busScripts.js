@@ -58,7 +58,7 @@ function drive(node)
     console.log("ω: " + wav + " | θ: " + wheels.children[0].rotation.y  + " | α: " + frameDuration/10);
 
     // MOVE THE BUS
-    // v = ωr (multiplied by timestep)
-    var linearVelocity = wav * 0.5 * frameDuration;
-    node.position.z += linearVelocity;
+    // v = ωr
+    var linearVelocity = wav * 0.5;
+    node.position.z += linearVelocity * frameDuration;
 }

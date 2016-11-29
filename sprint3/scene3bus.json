@@ -51,6 +51,22 @@
 		"intensity": 1.0
 	},
 	{
+		"COMMENT": "SAMPLE SPHERE",
+		"type": "mesh",
+		"name": "sphere",
+		"translate": [-2, 1, 0],
+		"geometry": "sphere",
+		"scale": [2, 2, 2],
+		"material":
+		{
+			"type": "meshPhongMaterial",
+			"name": "sm1",
+			"diffuseColor": [1, 0.3, 0.3],
+			"specularColor": [0.1, 0.1, 0.1],
+			"shininess": 10
+		}
+	}
+	{
 		"COMMENT": "It's a bus!",
 		"type": "node",
 		"name": "bus",
