@@ -38,3 +38,5 @@ The repository for Sprint 3
 🎵 [*"Dreams Become Real"* — Kevin Macleod](https://incompetech.com/wordpress/2015/04/dreams-become-real/)
 
 🛣 [Road Texture — FreeCreatives](https://www.freecreatives.com/textures/road-texture.html)
+
+🏜 [Sand Texture — creativeswall](http://www.creativeswall.com/30-free-sand-textures/)

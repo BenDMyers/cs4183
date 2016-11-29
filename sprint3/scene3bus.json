@@ -185,6 +185,26 @@
 			"DIFFUSE COLOR COMMENT": "PURPLE SKY IS #8470FF",
 			"diffuseColor": [0.517647, 0.439216, 1.0]
 		}
+	},
+	{
+		"COMMENT": "DESERT SAND",
+		"type": "mesh",
+		"name": "sand",
+		"translate": [0, -3, 0],
+		"width": 10000,
+		"height": 10000,
+		"geometry": "plane",
+		"tile": "true",
+		"material":
+		{
+			"type": "meshLambertMaterial",
+			"name": "sandMat",
+			"DIFFUSE COLOR COMMENT": "WON'T SHOW ANYWAY",
+			"diffuseColor": [1, 1, 1],
+			"diffuseMap": "sand.jpg",
+			"bumpMap": "sand.jpg",
+			"bumpScale": 0.01
+		}
 	}
 ]
 }
