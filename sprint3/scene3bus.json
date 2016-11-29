@@ -53,6 +53,21 @@
 				}
 			},
 			{
+				"COMMENT": "BUS HOOD",
+				"type": "mesh",
+				"name": "busHood",
+				"translate": [0, 0, 6],
+				"height": 1,
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshLambertMaterial",
+					"name": "busHoodMat",
+					"DIFFUSE COLOR COMMENT": "SCHOOL BUS YELLOW IS STILL #FFD800",
+					"diffuseColor": [1, 0.84705882352, 0]
+				}
+			},
+			{
 				"COMMENT": "Wheels Node",
 				"type": "node",
 				"name": "wheelsNode",
