@@ -4,6 +4,7 @@
 "name": "rootNode",
 "scriptFiles": ["cameraMotions.js", "scene3cCamerasScript.js", "busScripts.js"],
 "userData": { "scripts": ["drive", "moveCamera", "cameraTrack"]},
+"backgroundMusic": "Dreams Become Real.mp3"
 
 "children":
 [
