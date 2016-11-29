@@ -18,27 +18,41 @@ var XAXIS = new THREE.Vector3(1,0,0);
 
 function drive(node)
 {
+    var wav = node.userData["wheelAngularVelocity"];
+
     if(pressedKeys[UP_ARROW] == true) // FORWARD
     {
         // DETERMINE WHEELS' ROTATIONAL VELOCITY
-        node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration/10, 2.0);
+        wav = Math.min(wav + frameDuration/10, 2.0);
+    }
+    else if (pressedKeys[DOWN_ARROW] == true) // REVERSE
+    {
+        // DETERMINE WHEELS' ROTATIONAL VELOCITY
+        wav = Math.max(wav - frameDuration/10, -2.0);
+    }
+    else if (wav != 0.0) // COME TO A REST
+    {
+        var sign = wav/Math.abs(wav) // 1 if positive, -1 if negative
+        wav = wav - sign * frameDuration/10; // this will get wheel angular velocity to approach zero
+    }
+    wheels.userData["wheelAngularVelocity"] = wav;
 
-        // ACTUALLY ROTATE THE WHEELS
-        // var children = node.children;
-        // var wheels = children["wheelsNode"];
-        var wheels = currentScene.getObjectByName("wheelsNode");
-        if(wheels !== undefined)
+    // ACTUALLY ROTATE THE WHEELS
+    // var children = node.children;
+    // var wheels = children["wheelsNode"];
+    var wheels = currentScene.getObjectByName("wheelsNode");
+    if(wheels !== undefined)
+    {
+        for (var i = 0; i < wheels.children.length; i++)
         {
-            for (var i = 0; i < wheels.children.length; i++)
-            {
-                wheels.children[i].rotateY(-1 * wheels.userData["wheelAngularVelocity"] * frameDuration);
-            }
-            console.log("ω: " + wheels.userData["wheelAngularVelocity"] + " | θ: " + wheels.children[0].rotation.y  + " | α: " + frameDuration/10);
+            wheels.children[i].rotateY(-1 * wav * frameDuration);
         }
-        else
-        {
-            console.log("wheels undefined")
-        }
+        console.log("ω: " + wav + " | θ: " + wheels.children[0].rotation.y  + " | α: " + frameDuration/10);
+    }
+    else
+    {
+        console.log("wheels undefined")
+    }
 
         // MOVE THE BUS
         // node.position.z
