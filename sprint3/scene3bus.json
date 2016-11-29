@@ -12,7 +12,7 @@
 		"COMMENT": "CAMERA TRACKING BUS",
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [-5, 0, 12],
+		"eye": [0, 0, 12],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 30,
