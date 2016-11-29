@@ -18,6 +18,13 @@ var XAXIS = new THREE.Vector3(1,0,0);
 
 function drive(node)
 {
+    var wheels = currentScene.getObjectByName("wheelsNode");
+    if(wheels === undefined)
+    {
+        console.log("wheels undefined")
+        return;
+    }
+
     var wav = node.userData["wheelAngularVelocity"];
 
     if(pressedKeys[UP_ARROW] == true) // FORWARD
@@ -40,20 +47,12 @@ function drive(node)
     // ACTUALLY ROTATE THE WHEELS
     // var children = node.children;
     // var wheels = children["wheelsNode"];
-    var wheels = currentScene.getObjectByName("wheelsNode");
-    if(wheels !== undefined)
+    for (var i = 0; i < wheels.children.length; i++)
     {
-        for (var i = 0; i < wheels.children.length; i++)
-        {
-            wheels.children[i].rotateY(-1 * wav * frameDuration);
-        }
-        console.log("ω: " + wav + " | θ: " + wheels.children[0].rotation.y  + " | α: " + frameDuration/10);
+        wheels.children[i].rotateY(-1 * wav * frameDuration);
     }
-    else
-    {
-        console.log("wheels undefined")
-    }
+    console.log("ω: " + wav + " | θ: " + wheels.children[0].rotation.y  + " | α: " + frameDuration/10);
 
-        // MOVE THE BUS
-        // node.position.z
+    // MOVE THE BUS
+    // node.position.z
 }
