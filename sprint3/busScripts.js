@@ -31,7 +31,7 @@ function drive(node)
         {
             for (var i = 0; i < wheels.children.length; i++)
             {
-                wheels.children[i].rotateOnAxis(XAXIS, wheels.userData["wheelAngularVelocity"] * frameDuration);
+                wheels.children[i].rotateY(wheels.userData["wheelAngularVelocity"] * frameDuration);
             }
             console.log("ω: " + wheels.userData["wheelAngularVelocity"] + " | θ: " + wheels.children[0].rotate);
         }
