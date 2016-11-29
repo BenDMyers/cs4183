@@ -65,7 +65,7 @@
 			"specularColor": [0.1, 0.1, 0.1],
 			"shininess": 10
 		}
-	}
+	},
 	{
 		"COMMENT": "It's a bus!",
 		"type": "node",
