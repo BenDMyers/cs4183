@@ -671,12 +671,6 @@ function parseMesh(jsonNode, sceneNode)
 	{
 		material.side = THREE.BackSide;
 	}
-	if("tile" in jsonNode && jsonNode["tile"] === "true")
-	{
-		// Eternal gratitude for @stemoski for this: https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Repeat.html
-		material.texture.wrapS = material.texture.wrapT = THREE.RepeatWrapping;
-		material.texture.repeat.set(200, 200);
-	}
 
 	// Create the mesh geometry
 	var geometryType = jsonNode["geometry"];
@@ -856,6 +850,14 @@ function parseTexture(textureURL, jsonNode)
 			texture.needsUpdate = true;
 		}
 	);
+
+	if("tile" in jsonNode && jsonNode["tile"] === "true")
+	{
+		// Eternal gratitude for @stemoski for this: https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Repeat.html
+		texture.wrapS = material.texture.wrapT = THREE.RepeatWrapping;
+		texture.repeat.set(200, 200);
+	}
+
 	return texture;
 }
 
