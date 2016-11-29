@@ -191,11 +191,11 @@
 		"type": "mesh",
 		"name": "sand",
 		"translate": [0, -3, 0],
-		"rotate": [0, 1, 0, 1.570796],
 		"width": 10000,
-		"height": 10000,
-		"geometry": "plane",
-		"tile": "true",
+		"height": 3,
+		"depth": 10000,
+		"geometry": "cube",
+		"tile": "false",
 		"material":
 		{
 			"type": "meshLambertMaterial",
