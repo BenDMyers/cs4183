@@ -21,7 +21,7 @@ function drive(node)
     if(pressedKeys[UP_ARROW] == true) // FORWARD
     {
         // DETERMINE WHEELS' ROTATIONAL VELOCITY
-        node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration, 1.0);
+        node.userData["wheelAngularVelocity"] = Math.min(node.userData["wheelAngularVelocity"] + frameDuration/100, 1.0);
 
         // ACTUALLY ROTATE THE WHEELS
         // var children = node.children;
@@ -31,7 +31,7 @@ function drive(node)
         {
             for (var i = 0; i < wheels.children.length; i++)
             {
-                wheels.children[i].rotateY(wheels.userData["wheelAngularVelocity"] * frameDuration);
+                wheels.children[i].rotateY(-1 * wheels.userData["wheelAngularVelocity"] * frameDuration);
             }
             console.log("ω: " + wheels.userData["wheelAngularVelocity"] + " | θ: " + wheels.children[0].rotate);
         }

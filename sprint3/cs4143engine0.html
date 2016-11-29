@@ -667,6 +667,7 @@ function parseMesh(jsonNode, sceneNode)
 
 	// Get the material
 	var material = parseMaterial(jsonNode["material"]);
+	material.side = THREE.DoubleSide;
 
 	// Create the mesh geometry
 	var geometryType = jsonNode["geometry"];
