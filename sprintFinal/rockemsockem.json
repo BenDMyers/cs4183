@@ -1,0 +1,25 @@
+{
+"COMMENT": "ROCK 'EM SOCK 'EM ROBOTS",
+"type": "node",
+"name": "rootNode",
+"scriptFiles": [ "rockemsockem.js" ],
+
+"children":
+[
+	{
+		"type": "perspectiveCamera",
+		"name": "camera1",
+		"eye": [0, 2, 2],
+		"center": [0, 0, 0],
+		"vup": [0, 1, 0],
+		"fov": 20
+	},
+	{
+		"type": "hemisphereLight",
+		"name": "hlight",
+		"skyColor": [1.0, 1.0, 1.0],
+		"groundColor": [0.0, 0.0, 0.0],
+		"intensity": 0.6
+	}
+]
+}
