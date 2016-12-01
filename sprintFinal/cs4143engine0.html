@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+=============================================================================
+Originally: CS 4143 GAME ENGINE BASE
+Author: David Cline (on Github @clinedav)
+=============================================================================
+
+Description:
+	For use by students in CS 4143 at Oklahoma State University, Fall 2016.
+	Provides basic code for:
+		- loading several object types
+		- a game loop
+		- keyboard and mouse input
+		- scripting
+
+Running a scene:
+	Scene files are written in JSON, and must be specified as part of the
+	URL when loading the engine.  If scene0a.json is the relative URL of the
+	scene, then the engine should be started with:
+		.../cs4143engine0.html?url=scene0a.json
+
+SimpleHTTPServer:
+	Python provides a simple http server that can be used to test files
+	on the local machine (since the file server will likely not work.
+	From the directory that you want to be the root of localhost,
+	run python with the command:
+		python -m SimpleHTTPServer
+	It should respond with
+		Serving HTTP on 0.0.0.0 port 8000 ...
+	At this point, in your browser, you should be able to access files
+	using the URL
+		http://localhost:8000/
+
+=============================================================================
+-->
+
+<!-- HTML HEAD TAG -->
+<head>
+<title>SPRINT 3 -- Ben Myers</title>
+<meta charset="utf-8">
+
+<!-- CSS THAT DEFINES THE STYLE IN WHICH HTML ELEMENTS WILL BE RENDERED -->
+<style>
+	body {
+		font-family: sans-serif;	/* Tells what font to use by default */
+		background-color: #000;		/* Black background */
+		color: #fff;				/* White foreground */
+		margin: 0px; 				/* How much space to draw around everything */
+		overflow: hidden;			/* Hides the scroll bar */
+	}
+	#left {
+		color: #fff;				/* White foreground for these #info elements */
+									/* Unspecified background is transparent */
+		opacity: 0.8;				/* opacity of element */
+		position: absolute;			/* #info elements do not flow with document */
+		left: 5px;					/* left margin */
+		top: 5px;					/* left margin */
+		text-align: left;			/* Text alignment */
+		z-index: 100;				/* High draw order (drawn on top) */
+		display:block;				/* Display elements should be stacked vertically */
+	}
+</style>
+</head>
+
+<!-- ==================================================================== -->
+
+<!-- HTML BODY TAG - TURNS OFF RIGHT CLICK -->
+<body oncontextmenu="return false;">
+
+<!-- DEFINE LEFT DIV TAG - FOR DEBUG PRINTOUTS -->
+<div id="left">
+<pre id="debug"></pre>
+</div>
+
+<!-- INCLUDE SCRIPTS HERE -->
+<script src="http://cs.okstate.edu/~clined/classes/gameDesignFall2016/code/threejs/build/three.js"></script>
+<script src="http://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+
+<script src="http://threejs.org/examples/js/shaders/CopyShader.js"></script>
+<script src="http://threejs.org/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="http://threejs.org/examples/js/postprocessing/RenderPass.js"></script>
+<script src="http://threejs.org/examples/js/postprocessing/MaskPass.js"></script>
+<script src="http://threejs.org/examples/js/postprocessing/ShaderPass.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+
+<!-- ==================================================================== -->
+<!-- THE ACTUAL JAVASCRIPT ENGINE CODE -->
+<!-- ==================================================================== -->
+
+<script>
+
+//----------------------------------------------------------------------//
+// GLOBAL VARIABLES
+//----------------------------------------------------------------------//
+
+// GENERAL CONSTANTS
+var XAXIS = new THREE.Vector3(1,0,0);
+var YAXIS = new THREE.Vector3(0,1,0);
+var ZAXIS = new THREE.Vector3(0,0,1);
+
+var DEBUG = true; 		// Whether to run in debug mode
+var startTime = 0; 		// When the scene was loaded (in seconds)
+
+var sceneURL;           // URL of the scene to be loaded
+var rendererContainer;	// A div element that will hold the renderer
+var loadingManager;		// loading manager
+
+// MOUSE DATA
+var mouseX = 0;			// Current position of mouse
+var mouseY = 0;
+var mousePrevX = 0;		// Previous position of mouse
+var mousePrevY = 0;
+var mouseDown = 0;  	// Which mouse button currently down
+var mouseScroll = 0;	// How much the mouse wheel has scrolled
+var mousePrevScroll = 0;
+
+// KEYBOARD DATA
+var pressedKeys = {};	// Which keys are currently depressed on the keyboard
+
+// WINDOW SIZE
+var windowWidth = 100;	// Current width and height of the window
+var windowHeight = 100;
+
+// SCENE SPECIFIC DATA
+var currentScene;		// The current scene graph
+var currentCamera;		// The current camera used to render the scene
+var currentRenderer;	// The current renderer used to render the scene
+
+var startTime = 0;
+var frameStartTime = 0;
+var frameDuration = 0;  // duration of last frame
+var frameNum = 0;       // current frame number
+
+// INITIALIZATION AND STARTUP (EXECUTES WHEN PAGE LOADS)
+processArgs();
+init();
+loadScene(sceneURL);
+animate();
+
+//----------------------------------------------------------------------//
+// PROCESSES THE URL ARGUMENTS, WHICH SHOULD CONTAIN THE SCENE URL
+//----------------------------------------------------------------------//
+
+function processArgs()
+{
+    var href = window.location.href;
+    var args = href.slice(href.indexOf('?') + 1).split('&');
+
+    for(var i = 0; i < args.length; i++) {
+    	var arg = args[i].split('=');
+    	if (arg[0] == 'url') {
+    		sceneURL = arg[1];
+    	}
+    	else if (arg[0] == 'debug') {
+    		if (arg[1] == 'true') DEBUG = true;
+    		else DEBUG = false;
+    	}
+    }
+
+    if (sceneURL === undefined) {
+    	sceneURL = "scene0a.json"
+    	DEBUG = true;
+    	debug("No scene specified\n");
+    	debug("Use: .../cs4143engine0.html?url=sceneURL\n");
+    }
+}
+
+//----------------------------------------------------------------------//
+// PERFORM GENERAL INITIALIZATION. CREATE THE RENDERER AND LOADING
+// MANAGER, AND START LISTENING TO GUI EVENTS.
+//----------------------------------------------------------------------//
+
+function init()
+{
+	debug("init\n");
+
+	// Create a container to hold the renderer and add it to the page
+	rendererContainer = document.createElement( 'div' );
+	document.body.appendChild( rendererContainer );
+
+	// Make the loading manager for Three.js.
+	loadingManager = new THREE.LoadingManager();
+	loadingManager.onProgress = function ( item, loaded, total ) {
+		// do nothing
+	};
+
+	// Create renderer and add it to the container (div element)
+	var renderer = new THREE.WebGLRenderer( {antialias:true} );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+	windowWidth = window.innerWidth;
+	windowHeight = window.innerHeight;
+	renderer.setSize( windowWidth, windowHeight );
+	rendererContainer.appendChild( renderer.domElement );
+	currentRenderer = renderer;
+
+	// Add event listeners so we can respond to events
+	window.addEventListener( 'resize', onWindowResize, false );
+	//
+	document.addEventListener( 'mouseup', onMouseUp, false );
+	document.addEventListener( 'mousedown', onMouseDown, false );
+	document.addEventListener( 'mousemove', onMouseMove, false );
+	document.addEventListener( 'mousewheel', onMouseWheel, false);
+	document.addEventListener( 'DOMMouseScroll', onMouseWheel, false); // firefox
+	//
+	window.onkeydown = onKeyDown;
+	window.onkeyup = onKeyUp;
+}
+
+//------------------------------------------------------------------//
+// EVENT LISTENERS
+//------------------------------------------------------------------//
+
+function onWindowResize(event)
+{
+	//debug("onWindowResize\n");
+
+	windowWidth = window.innerWidth;
+	windowHeight = window.innerHeight;
+
+	currentCamera.aspect = windowWidth / windowHeight;
+	currentCamera.updateProjectionMatrix();
+
+	currentRenderer.setSize( windowWidth, windowHeight );
+}
+
+//------------------------------------------------------------------//
+
+function onMouseUp(event)
+{
+	//debug("onMouseUp\n");
+	mouseDown = 0;
+}
+
+function onMouseDown(event)
+{
+	//debug("onMouseDown " + event.which + "\n");
+	mouseDown = event.which;
+}
+
+function onMouseMove(event)
+{
+	//debug("onMouseMove " + event.clientX + "," + event.clientY + "\n");
+	//mousePrevX = mouseX;  // don't do this yet because asynchronous
+	//mousePrevY = mouseY;
+	mouseX = event.clientX;
+	mouseY = event.clientY;
+}
+
+function onMouseWheel(event)
+{
+	if (event.detail > 0 || event.detail < 0) {
+		mouseScroll += event.detail/120.0;
+	}
+	if (event.wheelDelta > 0 || event.wheelDelta < 0) {
+		mouseScroll += event.wheelDelta/120.0;
+	}
+
+	//debug("onMouseWheel " + mouseScroll + "\n");
+}
+
+//------------------------------------------------------------------//
+
+function onKeyDown(event)
+{
+	var key = event.keyCode ? event.keyCode : event.which;
+	pressedKeys[key] = true;
+	debug("onKeyDown " + key + "\n");
+}
+
+function onKeyUp(event)
+{
+	var key = event.keyCode ? event.keyCode : event.which;
+	delete pressedKeys[key];
+	//debug("onKeyDown " + key + "\n");
+}
+
+//----------------------------------------------------------------------//
+// PRINT A DEBUG MESSAGE
+//----------------------------------------------------------------------//
+
+function debug(message)
+{
+	if (DEBUG)
+	{
+		var element = document.getElementById("debug");
+		element.innerHTML += message;
+	}
+	console.log(message);
+}
+
+//----------------------------------------------------------------------//
+// GET THE ELAPSED TIME (SINCE THE PAGE LOADED) IN SECONDS
+//----------------------------------------------------------------------//
+
+function getElapsedTime()
+{
+	var d = new Date();
+	var t = d.getTime() * 0.001 - startTime;
+	return t;
+}
+
+//----------------------------------------------------------------------//
+// LOAD A SCENE (ASYNCHRONOUSLY)
+// THE SCENE IS LOADED FROM THE SPECIFIED URL AS A STRING, AND THEN
+// PARSED AS A JSON OBJECT.  AT THAT POINT parseScene IS CALLED ON
+// IT, WHICH RECURSIVELY WALKS THE parseTree CREATING A Three.js scene.
+//----------------------------------------------------------------------//
+
+function loadScene(sceneURL)
+{
+	var httpRequest = new XMLHttpRequest();
+	httpRequest.open("GET", sceneURL, true);
+	httpRequest.send(null);
+	httpRequest.onload =
+		function() {
+			debug("loading " + sceneURL + " ...\n");
+            var jsonParseTree = JSON.parse(httpRequest.responseText);
+            debug("parsing\n");
+            parseScene(jsonParseTree);
+            debug("done.\n");
+        }
+}
+
+//----------------------------------------------------------------------//
+// SETS THE CURRENT CAMERA
+//----------------------------------------------------------------------//
+function setCurrentCamera(camera)
+{
+	currentCamera = camera;
+}
+
+//----------------------------------------------------------------------//
+// ENTRY POINT TO RECURSIVE FUNCTION THAT TRAVERSES THE JSON PARSE
+// TREE AND MAKES A SCENE.
+//----------------------------------------------------------------------//
+
+function parseScene(jsonParseTree)
+{
+	debug("parseScene\n");
+
+	var scene = new THREE.Scene();
+	currentScene = scene;
+	parseSceneNode(jsonParseTree, scene);
+	startTime = (new Date()).getTime() * 0.001; // reset start time
+	currentScene = scene;
+}
+
+//----------------------------------------------------------------------//
+// THE MAIN RECURSIVE FUNCTION OF THE PARSER.
+// THE JOB OF parseSceneNode IS TO TRAVERSE THE JSON OBJECT jsonNode
+// AND POPULATE A CORRESPONDING Three.js SceneNode
+//----------------------------------------------------------------------//
+
+function parseSceneNode(jsonNode, sceneNode)
+{
+	debug("parseSceneNode " + jsonNode["name"] + ":" + jsonNode["type"] + "\n");
+	if (jsonNode === undefined || sceneNode === undefined) return;
+
+	// Handle the transform of the node (translation, rotation, etc.)
+	parseTransform(jsonNode, sceneNode);
+
+	// Load any script files (note that these are not scripts attached
+	// to the current node, just files that contain code.)
+	if ("scriptFiles" in jsonNode) {
+		var scriptList = jsonNode["scriptFiles"];
+		for (var i=0; i<scriptList.length; i++) {
+			var scriptURL = scriptList[i];
+			loadScript(scriptURL);
+		}
+	}
+
+	// User data that will be placed in the node. Can be arbitrary.
+	// Includes the names of any scripts attached to the node.
+	if ("userData" in jsonNode) {
+		sceneNode["userData"] = jsonNode["userData"];
+	} else {
+		sceneNode["userData"] = {};
+	}
+
+	// Load and play background music
+	if ("backgroundMusic" in jsonNode) {
+		var audio = new Audio(jsonNode["backgroundMusic"]);
+		debug("playing " + jsonNode["backgroundMusic"] + "\n");
+		audio.play();
+	}
+
+	// The name of the node (useful to look up later in a script)
+	if ("name" in jsonNode) {
+		sceneNode["name"] = jsonNode["name"];
+	}
+
+	// Whether the node starts out as visible.
+	if ("visible" in jsonNode) {
+		sceneNode.visible = jsonNode["visible"];
+	}
+
+	// Traverse all the child nodes. The typical code pattern here is:
+	//   1. call a special routine that creates the child based on its type.
+	//      This routine also deals with attributes specific to that node type.
+	//   2. Make a recursive call to parseSceneNode, which handles general
+	//      properties that any node can include.
+
+	if ("children" in jsonNode)
+	{
+		var children = jsonNode["children"];
+		for (var i=0; i<children.length; i++)
+		{
+			var childJsonNode = children[i];
+			var childType = childJsonNode["type"];
+
+			if (childType == "node") { // empty object to hold a transform
+				var childSceneNode = new THREE.Object3D();
+				sceneNode.add(childSceneNode);
+				parseSceneNode(childJsonNode, childSceneNode);
+			}
+			if (childType == "perspectiveCamera") {
+				var camera = parsePerspectiveCamera(childJsonNode);
+				sceneNode.add(camera);
+				if (currentCamera === undefined) currentCamera = camera;
+				parseSceneNode(childJsonNode, camera);
+			}
+			else if (childType == "directionalLight") {
+				var light = parseDirectionalLight(childJsonNode);
+				sceneNode.add(light);
+				parseSceneNode(childJsonNode, light);
+			}
+			else if (childType == "ambientLight") {
+				var light = parseAmbientLight(childJsonNode);
+				sceneNode.add(light);
+				parseSceneNode(childJsonNode, light);
+			}
+			else if (childType == "pointLight") {
+				var light = parsePointLight(childJsonNode);
+				sceneNode.add(light);
+				parseSceneNode(childJsonNode, light);
+			}
+			else if (childType == "hemisphereLight") {
+				var light = parseHemisphereLight(childJsonNode);
+				sceneNode.add(light);
+				parseSceneNode(childJsonNode, light);
+			}
+			else if (childType == "spotLight") {
+				var light = parseSpotLight(childJsonNode);
+				sceneNode.add(light);
+				parseSceneNode(childJsonNode, light);
+			}
+			else if (childType == "mesh") {
+				var mesh = parseMesh(childJsonNode, sceneNode);
+				sceneNode.add(mesh);
+				parseSceneNode(childJsonNode, mesh);
+			}
+			else if (childType == "sprite") {
+				var sprite = parseSprite(childJsonNode);
+				sceneNode.add(sprite);
+				parseSceneNode(childJsonNode, sprite);
+			}
+		}
+	}
+}
+
+//----------------------------------------------------------------------//
+// PARSE A TRANSFORM
+//----------------------------------------------------------------------//
+
+function parseTransform(jsonNode, sceneNode)
+{
+	//debug("parseTransform\n");
+
+	if ("translate" in jsonNode) {
+		var translate = jsonNode["translate"];
+		sceneNode.position.x += translate[0];
+		sceneNode.position.y += translate[1];
+		sceneNode.position.z += translate[2];
+	}
+	if ("scale" in jsonNode) {
+		var scale = jsonNode["scale"];
+		sceneNode.scale.x *= scale[0];
+		sceneNode.scale.y *= scale[1];
+		sceneNode.scale.z *= scale[2];
+	}
+	if ("rotate" in jsonNode) {
+		var rotate = jsonNode["rotate"];
+		var axis = new THREE.Vector3(rotate[0], rotate[1], rotate[2]);
+		var radians = rotate[3];
+		sceneNode.rotateOnAxis(axis, radians);
+	}
+}
+
+//----------------------------------------------------------------------//
+// PARSE A PERSPECTIVE CAMERA
+//----------------------------------------------------------------------//
+
+function parsePerspectiveCamera(jsonNode)
+{
+	//debug("parsePerspectiveCamera\n");
+
+	// Start with default values
+	var near = 0.2;
+	var far = 10000.0;
+	var aspect = windowWidth / windowHeight;
+	var fovy = 60.0;
+	var eye = [0.0, 0.0, 100.0];
+	var vup = [0.0, 1.0, 0.0];
+	var center = [0.0, 0.0, 0.0];
+
+	// Replace with data from jsonNode
+	if ("near"   in jsonNode) near   = jsonNode["near"];
+	if ("far"    in jsonNode) far    = jsonNode["far"];
+	if ("fov"    in jsonNode) fovy   = jsonNode["fov"];
+	if ("eye"    in jsonNode) eye    = jsonNode["eye"];
+	if ("vup"    in jsonNode) vup    = jsonNode["vup"];
+	if ("center" in jsonNode) center = jsonNode["center"];
+
+	// Create and return the camera
+	var camera = new THREE.PerspectiveCamera( fovy, aspect, near, far );
+	camera.position.set( eye[0], eye[1], eye[2] );
+	camera.up.set( vup[0], vup[1], vup[2] );
+	camera.lookAt( new THREE.Vector3(center[0], center[1], center[2]) );
+	return camera;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A DIRECTIONAL LIGHT
+//----------------------------------------------------------------------//
+
+function parseDirectionalLight(jsonNode)
+{
+	//debug("parseDirectionalLight\n");
+
+	// Start with default values
+	var color = [1.0, 1.0, 1.0];
+	var position = [1.0, 1.0, 1.0];
+
+	// Replace with data from jsonNode
+	if ("color"    in jsonNode) color    = jsonNode["color"];
+	if ("position" in jsonNode) position = jsonNode["position"];
+
+	// Create the light and return it
+	var c = new THREE.Color(color[0], color[1], color[2]);
+	var light = new THREE.DirectionalLight( c );
+	light.position.set( position[0], position[1], position[2] );
+	return light;
+}
+
+//----------------------------------------------------------------------//
+// PARSE AN AMBIENT LIGHT
+//----------------------------------------------------------------------//
+
+function parseAmbientLight(jsonNode)
+{
+	//debug("parseAmbientLight\n");
+
+	// Start with default values
+	var color = [1.0, 1.0, 1.0];
+
+	// Replace with data from jsonNode
+	if ("color" in jsonNode) color = jsonNode["color"];
+
+	// Create the light and return it
+	var c = new THREE.Color(color[0], color[1], color[2]);
+	var light = new THREE.AmbientLight( c );
+	return light;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A POINT LIGHT
+//----------------------------------------------------------------------//
+
+function parsePointLight(jsonNode)
+{
+	//debug("parsePointLight\n");
+
+	// Start with default values
+	var color = [1.0, 1.0, 1.0];
+	var intensity = 1.0;
+	var distance = 1000;
+	var position = [1.0, 1.0, 1.0];
+
+	// Replace with data from jsonNode
+	if ("color"     in jsonNode) color      = jsonNode["color"];
+	if ("intensity" in jsonNode) intensity  = jsonNode["intensity"];
+	if ("distance"  in jsonNode) distance   = jsonNode["distance"];
+	if ("position"  in jsonNode) position   = jsonNode["position"];
+
+	// Create the light and return it
+	var c = new THREE.Color(color[0], color[1], color[2]);
+	var light = new THREE.PointLight( c, intensity, distance );
+	light.position.set( position[0], position[1], position[2] );
+	return light;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A HEMISPHERE LIGHT
+//----------------------------------------------------------------------//
+
+function parseHemisphereLight(jsonNode)
+{
+	//debug("parseHemisphereLight\n");
+
+	// Start with default values
+	var skyColor = [1.0, 1.0, 1.0];
+	var groundColor = [1.0, 1.0, 1.0];
+	var intensity = [1.0, 1.0, 1.0];
+
+	// Replace with data from jsonNode
+	if ("skyColor"    in jsonNode) skyColor    = jsonNode["skyColor"];
+	if ("groundColor" in jsonNode) groundColor = jsonNode["groundColor"];
+	if ("intensity"   in jsonNode) intensity   = jsonNode["intensity"];
+
+	// Create the light and return it
+	var sc = new THREE.Color(skyColor[0], skyColor[1], skyColor[2]);
+	var gc = new THREE.Color(groundColor[0], groundColor[1], groundColor[2]);
+	var light = new THREE.HemisphereLight( sc, gc, intensity );
+	return light;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A SPOT LIGHT
+//----------------------------------------------------------------------//
+
+function parseSpotLight(jsonNode)
+{
+	//debug("parseSpotLight\n");
+
+	// Start with default values
+	var color = [1.0, 1.0, 1.0];
+	var intensity = 1.0;
+	var distance = 1000;
+	var angle = 0.1;
+	var penumbra = 0;
+	var position = [1.0, 1.0, 1.0];
+	var decay = 1.0;
+	var castShadow = false;
+
+	// Replace with data from jsonNode
+	if ("color"      in jsonNode) color       = jsonNode["color"];
+	if ("intensity"  in jsonNode) intensity   = jsonNode["intensity"];
+	if ("distance"   in jsonNode) distance    = jsonNode["distance"];
+	if ("angle"      in jsonNode) angle       = jsonNode["angle"];
+	if ("penumbra"   in jsonNode) penumbra    = jsonNode["penumbra"];
+	if ("position"   in jsonNode) position    = jsonNode["position"];
+	if ("decay"      in jsonNode) decay       = jsonNode["decay"];
+	if ("castShadow" in jsonNode) castShadow  = jsonNode["castShadow"];
+
+	// Create the light and return it
+	var c = new THREE.Color(color[0], color[1], color[2]);
+	var light = new THREE.SpotLight( c, intensity, distance, angle, penumbra, decay);
+	light.position.set( position[0], position[1], position[2] );
+	light.castShadow = castShadow;
+	if ("target" in jsonNode) light.target = currentScene.getObjectByName(jsonNode["target"]);
+
+	return light;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A MESH
+//----------------------------------------------------------------------//
+
+function parseMesh(jsonNode, sceneNode)
+{
+	//debug("parseMesh\n");
+
+	// Get the material
+	var material = parseMaterial(jsonNode["material"]);
+	if("invert" in jsonNode && jsonNode["invert"] === "true")
+	{
+		material.side = THREE.BackSide;
+	}
+
+	// Create the mesh geometry
+	var geometryType = jsonNode["geometry"];
+	var geometry;
+
+	if (geometryType == "sprite") {
+		return parseSprite(jsonNode);
+	}
+	else if(geometryType.endsWith("obj")) {
+		return parseObj(jsonNode, sceneNode);
+	}
+	else if (geometryType == "cube") {
+		var width = 2;
+		var height = 2;
+		var depth = 2;
+		if ("width"  in jsonNode) width  = jsonNode["width"];
+		if ("height" in jsonNode) height = jsonNode["height"];
+		if ("depth"  in jsonNode) depth  = jsonNode["depth"];
+		geometry = new THREE.BoxGeometry(width, height, depth);
+	}
+	else if (geometryType == "sphere") {
+		var radius = 1;
+		var widthSegments = 8;
+		var heightSegments = 6;
+		if ("radius"         in jsonNode) radius         = jsonNode["radius"];
+		if ("widthSegments"  in jsonNode) widthSegments  = jsonNode["widthSegments"];
+		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
+		geometry = new THREE.SphereGeometry(radius, heightSegments, widthSegments);
+	}
+	else if (geometryType == "plane") {
+		var width = 2;
+		var height = 2;
+		if ("width"  in jsonNode) width  = jsonNode["width"];
+		if ("height" in jsonNode) height = jsonNode["height"];
+		geometry = new THREE.PlaneGeometry(width, height);
+	}
+	else if (geometryType == "cone") {
+		var radius = 1;
+		var height = 1;
+		var radiusSegments = 8;
+		var heightSegments = 8;
+		if ("radius"         in jsonNode) radius         = jsonNode["radius"];
+		if ("height"         in jsonNode) height         = jsonNode["height"];
+		if ("radiusSegments" in jsonNode) radiusSegments = jsonNode["radiusSegments"];
+		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
+		geometry = new THREE.ConeGeometry(radius, height, radiusSegments, heightSegments);
+	}
+	else if (geometryType == "cylinder") {
+		var radiusTop = 1;
+		var radiusBottom = 1;
+		var height = 1;
+		var radiusSegments = 8;
+		var heightSegments = 8;
+		if ("radiusTop"      in jsonNode) radiusTop      = jsonNode["radiusTop"];
+		if ("radiusBottom"   in jsonNode) radiusBottom   = jsonNode["radiusBottom"];
+		if ("height"         in jsonNode) height         = jsonNode["height"];
+		if ("radiusSegments" in jsonNode) radiusSegments = jsonNode["radiusSegments"];
+		if ("heightSegments" in jsonNode) heightSegments = jsonNode["heightSegments"];
+		geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments);
+	}
+	else if (geometryType = "torus") {
+		var radius = 1;
+		var tube = 0.5;
+		var radialSegments = 8;
+		var tubularSegments = 8;
+		if ("radius"          in jsonNode) radius          = jsonNode["radius"];
+		if ("tube"            in jsonNode) tube            = jsonNode["tube"];
+		if ("radialSegments"  in jsonNode) radialSegments  = jsonNode["radialSegments"];
+		if ("tubularSegments" in jsonNode) tubularSegments = jsonNode["tubularSegments"];
+		geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
+	}
+	else if (geometryType = "sprite") {
+
+	}
+
+	// Create the mesh and return it
+	var mesh = new THREE.Mesh( geometry, material );
+	mesh.receiveShadow = true;
+	mesh.castShadow = true;
+	return mesh;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A MATERIAL
+//----------------------------------------------------------------------//
+
+function parseMaterial(jsonNode)
+{
+	if (jsonNode === undefined) return new MeshLambertMaterial();
+	var type = jsonNode["type"];
+
+	debug("parseMaterial " + type + "\n");
+
+	// Make the material
+	var material;
+	if (type == "meshPhongMaterial") {
+		material = new THREE.MeshPhongMaterial();
+	}
+	else if (type == "meshBasicMaterial") {
+		material = new THREE.MeshBasicMaterial();
+	}
+	else if (type == "spriteMaterial") {
+		material = new THREE.SpriteMaterial();
+	}
+	else { // meshLambertMaterial
+		material = new THREE.MeshLambertMaterial();
+	}
+
+	// Set the material properties
+	if ("color" in jsonNode) {
+		var d = jsonNode["color"];
+		material.color = new THREE.Color(d[0], d[1], d[2]);
+	}
+	if ("diffuseColor" in jsonNode) {
+		var d = jsonNode["diffuseColor"];
+		material.color = new THREE.Color(d[0], d[1], d[2]);
+	}
+	if ("map" in jsonNode) {
+		var tex = parseTexture( jsonNode["map"], jsonNode );
+		material.map = tex;
+	}
+	if ("diffuseMap" in jsonNode) {
+		var tex = parseTexture( jsonNode["diffuseMap"], jsonNode );
+		material.map = tex;
+	}
+	if ("specularColor" in jsonNode) {
+		var c = jsonNode["specularColor"];
+		material.specular = new THREE.Color(c[0], c[1], c[2]);
+	}
+	if ("specularMap" in jsonNode) {
+		var tex = parseTexture( jsonNode["specularMap"], jsonNode );
+		material.specularMap = tex;
+	}
+	if ("shininess" in jsonNode) {
+		var s = jsonNode["shininess"];
+		material.shininess = s;
+	}
+	if ("bumpMap" in jsonNode) {
+		var tex = parseTexture( jsonNode["bumpMap"], jsonNode );
+		material.bumpMap = tex;
+	}
+	if ("bumpScale" in jsonNode) {
+		var s = jsonNode["bumpScale"];
+		material.bumpScale = s;
+	}
+
+	// Return the material
+	return material;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A TEXTURE MAP - ASYNCHRONOUSLY LOADS THE TEXTURE IMAGE
+//----------------------------------------------------------------------//
+
+function parseTexture(textureURL, jsonNode)
+{
+	//debug("parseTexture: " + textureURL + "\n");
+	var texture = new THREE.Texture();
+	texture.anisotropy = currentRenderer.getMaxAnisotropy();
+	if ("repeat" in jsonNode) {
+		var repeat = jsonNode["repeat"];
+		texture.repeat.x = repeat[0];
+		texture.repeat.y = repeat[1];
+	}
+	if ("offset" in jsonNode) {
+		var offset = jsonNode["offset"];
+		texture.offset.x = offset[0];
+		texture.offset.y = offset[1];
+	}
+
+	if (texture.anisotropy > 4.0) texture.anisotropy = 4.0;
+	var loader = new THREE.ImageLoader(loadingManager);
+	loader.load(
+		textureURL,
+		function(image) { // callback function
+			texture.image = image;
+			texture.needsUpdate = true;
+		}
+	);
+
+	if("tile" in jsonNode && jsonNode["tile"] === "true")
+	{
+		// Eternal gratitude for @stemoski for this: https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Texture-Repeat.html
+		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+		texture.repeat.set(200, 200);
+	}
+
+	return texture;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A SPRITE
+//----------------------------------------------------------------------//
+
+function parseSprite(spriteNode)
+{
+	var material = parseMaterial(spriteNode["material"]);
+
+	var sprite = new THREE.Sprite(material);
+
+	if ("translate" in spriteNode) {
+		var t = spriteNode["translate"];
+		sprite.position.set(t[0], t[1], t[2]);
+	}
+	if ("scale" in spriteNode) {
+		var scale = spriteNode["scale"];
+		sprite.scale.set(scale[0], scale[1], scale[2]);
+	}
+
+	return sprite;
+}
+
+//----------------------------------------------------------------------//
+// PARSE A .OBJ EXTERNAL MESH
+//----------------------------------------------------------------------//
+
+function parseObj(jsonNode, parentSceneNode)
+{
+	var material = parseMaterial(jsonNode["material"]);
+	var modelURL = jsonNode["geometry"];
+
+	// Callbacks for different aspects of loading
+	var onLoad = function(mesh) {
+		mesh.traverse(onTraverse);
+		parentSceneNode.add(mesh);
+		parseSceneNode(jsonNode, mesh);
+	}
+	var onTraverse = function (child) {
+		if (child instanceof THREE.Mesh) {
+			child.material = material;
+		}
+	};
+	var onProgress = function (x) {
+		// nothing
+	};
+	var onError = function (x) {
+		debug("Error! could not load " + modelURL);
+	};
+
+	// Load the model using the callbacks previously defined
+	var loader = new THREE.OBJLoader(loadingManager);
+	loader.load(modelURL, onLoad, onProgress, onError);
+}
+
+//----------------------------------------------------------------------//
+// ADD A SCRIPT TO THE RUNNING PAGE FROM AN EXTERNAL URL
+//----------------------------------------------------------------------//
+
+function loadScript(scriptURL)
+{
+	//debug("loadScript " + scriptURL + "\n");
+
+    // Create an element for the script
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = scriptURL;
+
+    // Add the script element to the head of the page
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+}
+
+//----------------------------------------------------------------------//
+// THE MAIN FUNCTION OF THE GAME (ANIMATION) LOOP
+//----------------------------------------------------------------------//
+
+function animate()
+{
+	requestAnimationFrame(animate);	// schedules another call to animate
+	animateFrame();					// updates the scene for the frame
+	render();						// draws the scene
+}
+
+//----------------------------------------------------------------------//
+// CONTROLS ANIMATING A SINGLE FRAME
+//----------------------------------------------------------------------//
+
+function animateFrame()
+{
+	// Update the current camera and scene
+	if (currentCamera !== undefined) currentCamera.updateProjectionMatrix();
+
+	TWEEN.update();
+	if (currentScene  !== undefined) currentScene.traverse(runScripts);
+
+	var t = getElapsedTime();
+	frameDuration = t - frameStartTime;
+ 	frameStartTime = t;
+ 	frameNum++;
+
+	// Update previous mouse state here because animateFrame
+	// out of sync with mouse listeners (onMouseMove, onMouseWheel)
+	mousePrevX = mouseX;
+	mousePrevY = mouseY;
+	mousePrevScroll =  mouseScroll;
+}
+
+//----------------------------------------------------------------------//
+// CALLBACK TO RUN ALL THE SCRIPTS FOR A GIVEN sceneNode
+//----------------------------------------------------------------------//
+
+function runScripts(sceneNode)
+{
+	var scripts = sceneNode.userData.scripts;
+	if (scripts === undefined) return;
+
+	for (var j=0; j<scripts.length; j++) {
+		var s = scripts[j];
+		var f = window[s]; // look up function by name
+		if (f !== undefined) f(sceneNode);
+	}
+}
+
+//----------------------------------------------------------------------//
+// RENDER CURRENT SCENE WITH CURRENT RENDERER USING CURRENT CAMERA
+//----------------------------------------------------------------------//
+
+function render()
+{
+	if (currentScene && currentCamera && currentRenderer) {
+		currentRenderer.render(currentScene, currentCamera);
+	}
+	else {
+		//debug("Problem rendering\n");
+	}
+}
+
+//----------------------------------------------------------------------//
+// INTERPOLATES TWO COORDINATES USING TWEEN.JS
+// 		mesh IS THE OBJECT WHOSE POSITION SHOULD BE INTERPOLATED
+//		initialPosition AND targetPosition SHOULD BE 2D ARRAYS ({X,Y})
+//		timespan SHOULD BE A NUMBER IN MILLISECONDS
+//----------------------------------------------------------------------//
+function tween(mesh, initialPosition, targetPosition, timespan)
+{
+	var tween = new TWEEN.Tween(initialPosition).to(targetPosition, timespan);
+	tween.onUpdate(function()
+	{
+    	mesh.position.x = position.x;
+    	mesh.position.y = position.y;
+	});
+	tween.start();
+}
+
+//----------------------------------------------------------------------//
+</script>
+
+</body>
+</html>
