@@ -80,6 +80,7 @@ function attack(node)
             node.userData["pose"] = "unswinging";
             console.log(node.name + " IS UNSWINGING ME RIGHT ROUND LIKE A RECORD BABY");
             currentScene.getObjectByName(node.userData["enemy"]).userData["health"] -= Math.floor(Math.random() * (30 - 10)) + 10;
+            console.log(node.userData["enemy"] + " Health: " + currentScene.getObjectByName(node.userData["enemy"]).health);
             if(root.userData["gameState"] === "playing" && currentScene.getObjectByName(node.userData["enemy"]).userData["health"] <= 0)
             {
                 root.userData["gameState"] == node.userData["enemy"] + "Death";
