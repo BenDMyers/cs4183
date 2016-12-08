@@ -93,7 +93,7 @@ function attack(node)
         node.userData["rotationAmount"] -= 5*frameDuration;
         if(node.userData["rotationAmount"] <= 0)
         {
-            console.log(node.name " IS IN COOLDOWN");
+            console.log(node.name + " IS IN COOLDOWN");
             node.userData["pose"] = "cooldown";
             node.userData["cooldown"] = 10;
             node.userData["held"] = pressedKeys[node.userData["attackKey"]];
@@ -111,5 +111,14 @@ function attack(node)
             node.userData["pose"] = "poised";
             console.log(node.name " IS POISED FOR ATTACK");
         }
+    }
+}
+
+function death(node)
+{
+    if(node.userData["health"] <= 0)
+    {
+        var head = currentScene.getObjectByName(node.name + "Head");
+        head.position.y = Math.min(head.position.y + frameDuration*5, 1.25);
     }
 }
