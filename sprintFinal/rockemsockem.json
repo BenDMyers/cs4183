@@ -178,11 +178,11 @@
 						"COMMENT": "BLUE ROD",
 						"type": "mesh",
 						"name": "blueRod",
-						"translate": [0, 1, 0],
+						"translate": [0, 0.99999, 0],
 						"geometry": "cylinder",
 						"height": 0.25,
-						"radiusTop": 0.01,
-						"radiusBottom": 0.01,
+						"radiusTop": 0.03,
+						"radiusBottom": 0.03,
 						"material":
 						{
 							"type": "meshPhongMaterial",
@@ -354,11 +354,11 @@
 						"COMMENT": "BLUE ROD",
 						"type": "mesh",
 						"name": "blueRod",
-						"translate": [0, 1, 0],
+						"translate": [0, -0.99999, 0],
 						"geometry": "cylinder",
 						"height": 0.25,
-						"radiusTop": 0.01,
-						"radiusBottom": 0.01,
+						"radiusTop": 0.03,
+						"radiusBottom": 0.03,
 						"material":
 						{
 							"type": "meshPhongMaterial",

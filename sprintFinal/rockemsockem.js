@@ -66,6 +66,10 @@ function attack(node)
     {
         return;
     }
+    if(root.userData["gameState"].endsWith("Death") && node.userData["pose"] === "poised")
+    {
+        return;
+    }
     if(node.userData["pose"] === "poised" && node.userData["cooldown"] <= 0 && pressedKeys[node.userData["attackKey"]] && root.userData["gameState"] === "playing")
     {
         node.userData["pose"] = "swinging";
@@ -79,8 +83,9 @@ function attack(node)
         {
             node.userData["pose"] = "unswinging";
             console.log(node.name + " IS UNSWINGING ME RIGHT ROUND LIKE A RECORD BABY");
-            currentScene.getObjectByName(node.userData["enemy"]).userData["health"] -= Math.floor(Math.random() * (30 - 10)) + 10;
-            console.log(node.userData["enemy"] + " Health: " + currentScene.getObjectByName(node.userData["enemy"]).health);
+            var damage = Math.floor(Math.random() * (30 - 10)) + 10;
+            currentScene.getObjectByName(node.userData["enemy"]).userData["health"] -= damage;
+            console.log(node.userData["enemy"] + " Health: " + currentScene.getObjectByName(node.userData["enemy"]).userData["health"]);
             if(root.userData["gameState"] === "playing" && currentScene.getObjectByName(node.userData["enemy"]).userData["health"] <= 0)
             {
                 root.userData["gameState"] == node.userData["enemy"] + "Death";
@@ -117,12 +122,13 @@ function attack(node)
 
 function death(node)
 {
-    if(node.userData["health"] <= 0)
+    if(node.userData["health"] <= 0 && !node.userData["dead"])
     {
         var head = currentScene.getObjectByName(node.name + "Head");
         head.position.y = Math.min(head.position.y + frameDuration*5, 1.25);
         if(head.position.y == 1.25)
         {
+            node.userData["dead"] = true;
             var ding = new Audio("Ding Sound Effect.mp3");
             ding.play();
         }
