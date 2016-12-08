@@ -9,7 +9,7 @@
 	{
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [0, 5, 5],
+		"eye": [0, 5, 3],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 20
@@ -33,8 +33,8 @@
 				"type": "mesh",
 				"name": "ring",
 				"translate": [0,0,0],
-				"ROTATE COMMENT": "",
-				"depth": 1,
+				"ROTATE COMMENT": "TODO: implement",
+				"height": 1,
 				"geometry": "cube",
 				"material":
 				{
@@ -43,7 +43,8 @@
 					"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0],
 					"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-					"specularColor": [0.1, 0.1, 0.1]
+					"specularColor": [0.1, 0.1, 0.1],
+					"shininess": 10,
 				}
 			}
 		]
