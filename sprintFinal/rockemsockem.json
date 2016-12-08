@@ -188,7 +188,7 @@
 						"COMMENT": "BLUE - SWINGING ARM NODE",
 						"type": "node",
 						"name": "blueArm",
-						"translate": [0, 0.875, -0.175],
+						"translate": [0, 0.875, -0.225],
 						"rotate": [0, 0, 1, 0],
 						"children":
 						[
