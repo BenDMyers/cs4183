@@ -65,7 +65,7 @@
 					"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0],
 					"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-					"specularColor": [0.1, 0.1, 0.1],
+					"specularColor": [1, 1, 1],
 					"shininess": 10
 				}
 			},
@@ -99,7 +99,7 @@
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -119,7 +119,7 @@
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -139,7 +139,7 @@
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -159,7 +159,7 @@
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -180,7 +180,7 @@
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -209,7 +209,7 @@
 									"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 									"diffuseColor": [0, 1, 1],
 									"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-									"specularColor": [0.1, 0.1, 0.1],
+									"specularColor": [1, 1, 1],
 									"shininess": 10
 								}
 							}
@@ -248,7 +248,7 @@
 							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -268,7 +268,7 @@
 							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -288,7 +288,7 @@
 							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -308,7 +308,7 @@
 							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -329,7 +329,7 @@
 							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-							"specularColor": [0.1, 0.1, 0.1],
+							"specularColor": [1, 1, 1],
 							"shininess": 10
 						}
 					},
@@ -358,7 +358,7 @@
 									"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 									"diffuseColor": [1, 0, 0],
 									"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-									"specularColor": [0.1, 0.1, 0.1],
+									"specularColor": [1, 1, 1],
 									"shininess": 10
 								}
 							}
