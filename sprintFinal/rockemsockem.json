@@ -37,7 +37,9 @@
 		"name": "spot",
 		"color": [1, 1, 1],
 		"position": [0, 10, 0],
-		"castShadow": true
+		"castShadow": true,
+		"penumbra": 0.2,
+		"decay": 1.0
 	},
 	{
 		"COMMENT": "RING NODE",
@@ -166,7 +168,7 @@
 						"name": "blueLeftArm",
 						"geometry": "cube",
 						"translate": [0, 0.708333, 0.225],
-						"rotate": [0, 0 , 1, -0.785398],
+						"rotate": [0, 0 , 1, 0.785398],
 						"width": 0.2,
 						"height": 0.33333,
 						"depth": 0.1,
