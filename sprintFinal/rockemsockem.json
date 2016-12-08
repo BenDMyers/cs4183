@@ -222,7 +222,7 @@
 				"type": "node",
 				"name": "red",
 				"translate": [0.25, 0, 0],
-				"rotate": [0, 1, 1, 3.141593],
+				"rotate": [0, 1, 0, 3.141593],
 				"userData":
 				{
 					"health": 300,
