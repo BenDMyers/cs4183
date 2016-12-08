@@ -87,7 +87,9 @@
 					"enemy": "red",
 					"pose": "poised",
 					"scripts": ["attack"],
-					"cooldown": 0
+					"cooldown": 0,
+					"rotationAmount": 0,
+					"held": false
 				},
 				"children":
 				[
@@ -239,7 +241,9 @@
 					"enemy": "blue",
 					"pose": "poised",
 					"scripts": ["attack"],
-					"cooldown": 0
+					"cooldown": 0,
+					"rotationAmount": 0,
+					"held": false
 				},
 				"children":
 				[
