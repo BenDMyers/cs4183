@@ -63,17 +63,17 @@ function readout()
 
 function instructions()
 {
-    return "<h1>Q - Red Attack | Space - Start | P - Blue Attack</h1>";
+    return "<h1 style="text-shadow: 2px 2px 8px #000000">Q - Red Attack | Space - Start | P - Blue Attack</h1>";
 }
 
 function redDeath()
 {
-    return "<h1>Blue wins!</h1>";
+    return "<h1 style="text-shadow: 2px 2px 8px #000000">Blue wins!</h1>";
 }
 
 function blueDeath()
 {
-    return "<h1>Red wins!</h1>";
+    return "<h1 style="text-shadow: 2px 2px 8px #000000">Red wins!</h1>";
 }
 
 function start()
@@ -173,6 +173,7 @@ function death(node)
 {
     if(node.userData["health"] <= 0 && !node.userData["dead"])
     {
+        root.userData["gameState"] = node.name + "Death";
         var head = currentScene.getObjectByName(node.name + "Head");
         head.position.y = Math.min(head.position.y + frameDuration*5, 1.25);
         if(head.position.y == 1.25)
