@@ -68,17 +68,17 @@ function attack(node)
     }
     else if(node.userData["pose"] === "swinging")
     {
-        currentScene.getObjectByName(node.userData["arm"]).rotateOnAxis(ZAXIS, 3*frameDuration);
-        node.userData["rotationAmount"] += 3*frameDuration;
-        if(node.userData["rotationAmount"] >= 1.8326)
+        currentScene.getObjectByName(node.userData["arm"]).rotateOnAxis(ZAXIS, 5*frameDuration);
+        node.userData["rotationAmount"] += 5*frameDuration;
+        if(node.userData["rotationAmount"] >= 1)
         {
             node.userData["pose"] = "unswinging";
         }
     }
     else if(node.userData["pose"] === "unswinging")
     {
-        currentScene.getObjectByName(node.userData["arm"]).rotateOnAxis(ZAXIS, -3*frameDuration);
-        node.userData["rotationAmount"] -= 3*frameDuration;
+        currentScene.getObjectByName(node.userData["arm"]).rotateOnAxis(ZAXIS, -5*frameDuration);
+        node.userData["rotationAmount"] -= 5*frameDuration;
         if(node.userData["rotationAmount"] <= 0)
         {
             node.userData["pose"] = "cooldown";
@@ -93,7 +93,7 @@ function attack(node)
         {
             node.userData["held"] = false;
         }
-        if(node.userData["cooldown"] == 0 && !node.userData["held"])
+        if(node.userData["cooldown"] < 0 && !node.userData["held"])
         {
             node.userData["pose"] = "poised";
         }
