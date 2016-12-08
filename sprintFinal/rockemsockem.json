@@ -140,9 +140,29 @@
 						}
 					},
 					{
+						"COMMENT": "BLUE HEAD",
+						"type": "mesh",
+						"name": "blueHead",
+						"geometry": "cube",
+						"translate": [0, 1, 0],
+						"width": 0.25,
+						"height": 0.25,
+						"depth": 0.25,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueHeadPhong",
+							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
+							"diffuseColor": [0, 1, 1],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
 						"COMMENT": "BLUE - NONSWINGING ARM",
 						"type": "mesh",
-						"name": "blueLeftArmNode",
+						"name": "blueLeftArm",
 						"geometry": "cube",
 						"translate": [0, 0.75, 0.225],
 						"width": 0.1,

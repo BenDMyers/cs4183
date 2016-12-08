@@ -635,7 +635,7 @@ function parseSpotLight(jsonNode)
 	var penumbra = 0;
 	var position = [1.0, 1.0, 1.0];
 	var decay = 1.0;
-	var castShadow = false;
+	var castShadow = true;
 
 	// Replace with data from jsonNode
 	if ("color"      in jsonNode) color       = jsonNode["color"];
