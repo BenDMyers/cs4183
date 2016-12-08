@@ -59,17 +59,17 @@ function readout()
 
 function instructions()
 {
-    return "<h1><style="color:cyan;">Q</h1><t><t><t><style="color:red;">P</h1>";
+    return "<pre>Q - Red Attack | Space - Start | P - Blue Attack</pre>";
 }
 
 function redDeath()
 {
-    return "";
+    return "<pre>Blue wins!";
 }
 
 function blueDeath();
 {
-    return "";
+    return "<pre>Red wins!</pre>";;
 }
 
 function start()
