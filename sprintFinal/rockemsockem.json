@@ -7,7 +7,7 @@
 {
 	"scripts": ["start"],
 	"gameState": "waiting",
-	"blur": 2.0
+	"backgroundMusic": "Killers.mp3"
 },
 
 "children":

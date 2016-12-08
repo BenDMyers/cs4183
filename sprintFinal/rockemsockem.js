@@ -66,7 +66,7 @@ function attack(node)
     {
         return;
     }
-    if(node.userData["pose"] === "poised" && node.userData["cooldown"] == 0 && pressedKeys[node.userData["attackKey"]] && root.userData["gameState"] === "playing")
+    if(node.userData["pose"] === "poised" && node.userData["cooldown"] <= 0 && pressedKeys[node.userData["attackKey"]] && root.userData["gameState"] === "playing")
     {
         node.userData["pose"] = "swinging";
         console.log(node.name + " IS SWINGING ME RIGHT ROUND LIKE A RECORD BABY");
@@ -120,5 +120,10 @@ function death(node)
     {
         var head = currentScene.getObjectByName(node.name + "Head");
         head.position.y = Math.min(head.position.y + frameDuration*5, 1.25);
+        if(head.position.y == 1.25)
+        {
+            var ding = new Audio("Ding Sound Effect.mp3");
+            ding.play();
+        }
     }
 }
