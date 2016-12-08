@@ -80,7 +80,7 @@ function start()
 {
     if(root.userData["gameState"] === "waiting" && pressedKeys[SPACE])
     {
-        root.userData["gameState"] = "playing";
+        currentScene.getObjectByName("rootNode").userData["gameState"] = "playing";
     }
 }
 
@@ -109,15 +109,15 @@ function cameraSpin(node)
 
 function attack(node)
 {
-    if(root.userData["gameState"] === "waiting")
+    if(currentScene.getObjectByName("rootNode").userData["gameState"] === "waiting")
     {
         return;
     }
-    if(root.userData["gameState"].endsWith("Death") && node.userData["pose"] === "poised")
+    if(currentScene.getObjectByName("rootNode").userData["gameState"].endsWith("Death") && node.userData["pose"] === "poised")
     {
         return;
     }
-    if(node.userData["pose"] === "poised" && node.userData["cooldown"] <= 0 && pressedKeys[node.userData["attackKey"]] && root.userData["gameState"] === "playing")
+    if(node.userData["pose"] === "poised" && node.userData["cooldown"] <= 0 && pressedKeys[node.userData["attackKey"]] && currentScene.getObjectByName("rootNode").userData["gameState"] === "playing")
     {
         node.userData["pose"] = "swinging";
         console.log(node.name + " IS SWINGING ME RIGHT ROUND LIKE A RECORD BABY");
@@ -135,10 +135,10 @@ function attack(node)
             var damage = Math.floor(Math.random() * (30 - 10)) + 10;
             currentScene.getObjectByName(node.userData["enemy"]).userData["health"] -= damage;
             console.log(node.userData["enemy"] + " Health: " + currentScene.getObjectByName(node.userData["enemy"]).userData["health"]);
-            if(root.userData["gameState"] === "playing" && currentScene.getObjectByName(node.userData["enemy"]).userData["health"] <= 0)
+            if(currentScene.getObjectByName("rootNode").userData["gameState"] === "playing" && currentScene.getObjectByName(node.userData["enemy"]).userData["health"] <= 0)
             {
-                root.userData["gameState"] == node.userData["enemy"] + "Death";
-                console.log(root.userData["gameState"]);
+                currentScene.getObjectByName("rootNode").userData["gameState"] == node.userData["enemy"] + "Death";
+                console.log(currentScene.getObjectByName("rootNode").userData["gameState"]);
             }
         }
     }
@@ -173,7 +173,7 @@ function death(node)
 {
     if(node.userData["health"] <= 0 && !node.userData["dead"])
     {
-        root.userData["gameState"] = node.name + "Death";
+        currentScene.getObjectByName("rootNode").userData["gameState"] = node.name + "Death";
         var head = currentScene.getObjectByName(node.name + "Head");
         head.position.y = Math.min(head.position.y + frameDuration*5, 1.25);
         if(head.position.y == 1.25)
