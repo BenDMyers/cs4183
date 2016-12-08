@@ -37,9 +37,10 @@ function readout()
     root = currentScene.getObjectByName("rootNode");
     console.log(root.userData["gameState"]);
 
-    document.removeChild(READOUT);
+    READOUT.parentNode.removeChild(READOUT);
 
     READOUT = document.createElement( 'div' );
+    READOUT.id = "readout";
     // READOUT.innerHTML = getReadout();
     if(root.userData["gameState"] === "waiting")
     {
