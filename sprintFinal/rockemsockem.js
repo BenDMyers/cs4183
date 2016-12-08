@@ -1,12 +1,31 @@
 var fnum = 0;
 var root = currentScene.getObjectByName("rootNode");
+var camera = currentScene.getObjectByName("camera1");
+
+var composer = new THREE.EffectComposer( currentRenderer );
+composer.addPass( new THREE.RenderPass( currentScene, camera ) );
 
 // KEYBOARD CONSTANTS
 var Q_KEY = 81;
 var P_KEY = 80;
 var SPACE = 32;
 
-console.log(root.userData["gameState"]);
+// console.log(root.userData["gameState"]);
+
+function blur()
+{
+    if(root.gameState !== "playing")
+    {
+        // root.userData["blur"] = Math.min(root.userData["blur"] + frameDuration, 1.0)
+        hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+        hblur.renderToScreen();
+        composer.addPass( hblur );
+        vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+        vblur.renderToScreen = true;
+        composer.addPass( vblur );
+        composer.render();
+    }
+}
 
 function start()
 {

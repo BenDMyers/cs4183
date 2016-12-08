@@ -2,11 +2,12 @@
 "COMMENT": "ROCK 'EM SOCK 'EM ROBOTS",
 "type": "node",
 "name": "rootNode",
-"scriptFiles": [ "rockemsockem.js" ],
+"scriptFiles": [ "rockemsockem.js", "blur" ],
 "userData":
 {
 	"scripts": ["start"],
-	"gameState": "waiting"
+	"gameState": "waiting",
+	"blur": 1.0
 },
 
 "children":
