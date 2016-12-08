@@ -144,10 +144,10 @@
 						"type": "mesh",
 						"name": "blueLeftArmNode",
 						"geometry": "cube",
-						"translate": [0, 0.125, 0.25],
-						"width": 0.2,
+						"translate": [0.1, 0.625, 0.25],
+						"width": 0.1,
 						"height": 0.25,
-						"depth": 0.25,
+						"depth": 0.1,
 						"material":
 						{
 							"type": "meshPhongMaterial",
