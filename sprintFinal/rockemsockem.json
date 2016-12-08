@@ -197,7 +197,7 @@
 								"type": "mesh",
 								"name": "blueRightArm",
 								"geometry": "cube",
-								"translate": [0, -0.166667, 0.05],
+								"translate": [0.125, -0.166667, 0.15],
 								"rotate": [0, 0, 1, 0.785398],
 								"width": 0.15,
 								"height": 0.33333,
