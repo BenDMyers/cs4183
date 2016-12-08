@@ -63,17 +63,17 @@ function readout()
 
 function instructions()
 {
-    return "<h1 style="text-shadow: 2px 2px 8px #000000">Q - Red Attack | Space - Start | P - Blue Attack</h1>";
+    return "<h1 style=\"text-shadow: 2px 2px 8px #000000\">Q - Red Attack | Space - Start | P - Blue Attack</h1>";
 }
 
 function redDeath()
 {
-    return "<h1 style="text-shadow: 2px 2px 8px #000000">Blue wins!</h1>";
+    return "<h1 style=\"text-shadow: 2px 2px 8px #000000\">Blue wins!</h1>";
 }
 
 function blueDeath()
 {
-    return "<h1 style="text-shadow: 2px 2px 8px #000000">Red wins!</h1>";
+    return "<h1 style=\"text-shadow: 2px 2px 8px #000000\">Red wins!</h1>";
 }
 
 function start()
