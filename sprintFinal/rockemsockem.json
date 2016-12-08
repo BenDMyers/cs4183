@@ -6,7 +6,7 @@
 "backgroundMusic": "Killers.mp3",
 "userData":
 {
-	"scripts": ["start"],
+	"scripts": ["start", "readout"],
 	"gameState": "waiting"
 },
 

@@ -12,21 +12,64 @@ var SPACE = 32;
 
 // console.log(root.userData["gameState"]);
 
-function blur()
+// function blur()
+// {
+//     if(root.gameState !== "playing")
+//     {
+//         root.userData["blur"] = Math.min(root.userData["blur"] + frameDuration, 2.0)
+//         hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+//         hblur.uniforms['h'].value = root.userData["blur"];
+//         hblur.renderToScreen();
+//         composer.addPass( hblur );
+//         vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+//         hblur.uniforms['v'].value = root.userData["blur"];
+//         vblur.renderToScreen = true;
+//         composer.addPass( vblur );
+//         composer.render();
+//     }
+// }
+
+function readout()
 {
-    if(root.gameState !== "playing")
+    var READOUT = document.createElement( 'div' );
+    // READOUT.innerHTML = getReadout();
+    if(root.userData["gameState"] === "waiting")
     {
-        root.userData["blur"] = Math.min(root.userData["blur"] + frameDuration, 2.0)
-        hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
-        hblur.uniforms['h'].value = root.userData["blur"];
-        hblur.renderToScreen();
-        composer.addPass( hblur );
-        vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
-        hblur.uniforms['v'].value = root.userData["blur"];
-        vblur.renderToScreen = true;
-        composer.addPass( vblur );
-        composer.render();
+        READOUT.innerHTML = instructions();
     }
+    else if (root.userData["gameState"] === "redDeath")
+    {
+        READOUT.innerHTML = redDeath();
+    }
+    else if (root.userData["gameState"] === "blueDeath")
+    {
+        READOUT.innerHTML = blueDeath();
+    }
+    else
+    {
+        READOUT.innerHTML = "";
+    }
+    READOUT.style["position"] = "absolute";
+    READOUT.style["width"] = "100%";
+    READOUT.style["text-align"] = "center";
+    READOUT.style["bottom"] = "0px";
+    // READOUT.style["color"] = "#ff0"
+    document.body.insertBefore(READOUT, document.body.firstChild);
+}
+
+function instructions()
+{
+    return "<h1><style="color:cyan;">Q</h1><t><t><t><style="color:red;">P</h1>";
+}
+
+function redDeath()
+{
+    return "";
+}
+
+function blueDeath();
+{
+    return "";
 }
 
 function start()
