@@ -9,13 +9,13 @@
 	{
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [0, 5, 3],
+		"eye": [0, 3, 5],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 20,
 		"userData":
 		{
-			"scripts": ["cameraTrack"],
+			"scripts": ["cameraSpin", "cameraTrack"],
 			"target": "ringNode"
 		}
 	},
@@ -24,7 +24,7 @@
 		"name": "hlight",
 		"skyColor": [1.0, 1.0, 1.0],
 		"groundColor": [0.0, 0.0, 0.0],
-		"intensity": 0.6
+		"intensity": 1.0
 	},
 	{
 		"COMMENT": "RING NODE",
@@ -48,7 +48,7 @@
 					"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0],
 					"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-					"specularColor": [0.1, 0.1, 0.1],
+					"specularColor": [1.0, 1.0, 1.0],
 					"shininess": 10
 				}
 			}
