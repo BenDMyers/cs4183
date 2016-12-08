@@ -187,7 +187,7 @@
 						"COMMENT": "BLUE - SWINGING ARM NODE",
 						"type": "node",
 						"name": "blueArm",
-						"translate": [0, 0.75, 0.175],
+						"translate": [0, 0.75, -0.175],
 						"rotate": [0, 0, 1, 0],
 						"children":
 						[
@@ -196,7 +196,7 @@
 								"type": "mesh",
 								"name": "blueRightArm",
 								"geometry": "cube",
-								"translate": [-0.125, -0.166667, -0.225],
+								"translate": [0, -0.166667, -0.225],
 								"rotate": [0, 0, 1, 0.785398],
 								"width": 0.2,
 								"height": 0.33333,
