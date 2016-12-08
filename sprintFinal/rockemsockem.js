@@ -77,6 +77,7 @@ function attack(node)
             if(root.userData["gameState"] === "playing" && currentScene.getObjectByName(node.userData["enemy"]).userData["health"] <= 0)
             {
                 root.userData["gameState"] == node.userData["enemy"] + "Death";
+                console.log(root.userData["gameState"]);
             }
         }
     }
@@ -87,7 +88,7 @@ function attack(node)
         if(node.userData["rotationAmount"] <= 0)
         {
             node.userData["pose"] = "cooldown";
-            node.userData["cooldown"] = 2;
+            node.userData["cooldown"] = 10;
             node.userData["held"] = pressedKeys[node.userData["attackKey"]];
         }
     }
