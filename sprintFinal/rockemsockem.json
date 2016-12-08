@@ -5,7 +5,7 @@
 "scriptFiles": [ "rockemsockem.js" ],
 "userData":
 {
-	"scripts": [],
+	"scripts": ["start"],
 	"gameState": "waiting"
 },
 
@@ -21,7 +21,8 @@
 		"userData":
 		{
 			"scripts": ["cameraSpin", "cameraTrack"],
-			"target": "ringNode"
+			"target": "ringNode",
+			"speed": 0
 		}
 	},
 	{
@@ -80,7 +81,7 @@
 				"COMMENT": "BLUE ROBOT",
 				"type": "node",
 				"name": "blue",
-				"translate": [-1,0,0],
+				"translate": [-0.25,0,0],
 				"userData":
 				{
 					"health": 300,
@@ -94,10 +95,10 @@
 						"type": "mesh",
 						"name": "blueLeg1",
 						"geometry": "cube",
-						"translate": [0, 0.5, -0.3],
-						"width": 0.25,
-						"height": 0.5,
-						"depth": 0.25,
+						"translate": [0, 0.125, -0.1],
+						"width": 0.0833333,
+						"height": 0.25,
+						"depth": 0.125,
 						"material":
 						{
 							"type": "meshPhongMaterial",
@@ -114,10 +115,10 @@
 						"type": "mesh",
 						"name": "blueLeg2",
 						"geometry": "cube",
-						"translate": [0, 0.5, 0.3],
-						"width": 0.25,
-						"height": 0.5,
-						"depth": 0.25,
+						"translate": [0, 0.125, 0.1],
+						"width": 0.0833333,
+						"height": 0.25,
+						"depth": 0.125,
 						"material":
 						{
 							"type": "meshPhongMaterial",
