@@ -81,6 +81,8 @@ function attack(node)
         node.userData["rotationAmount"] += 5*frameDuration;
         if(node.userData["rotationAmount"] >= 1)
         {
+            var hit = new Audio("hit.mp3");
+            hit.play();
             node.userData["pose"] = "unswinging";
             console.log(node.name + " IS UNSWINGING ME RIGHT ROUND LIKE A RECORD BABY");
             var damage = Math.floor(Math.random() * (30 - 10)) + 10;

@@ -342,7 +342,7 @@
 						"material":
 						{
 							"type": "meshPhongMaterial",
-							"name": "blueHeadPhong",
+							"name": "redHeadPhong",
 							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
@@ -353,8 +353,8 @@
 					{
 						"COMMENT": "BLUE ROD",
 						"type": "mesh",
-						"name": "blueRod",
-						"translate": [0, -0.99999, 0],
+						"name": "redRod",
+						"translate": [0, 0.99999, 0],
 						"geometry": "cylinder",
 						"height": 0.25,
 						"radiusTop": 0.03,
@@ -362,7 +362,7 @@
 						"material":
 						{
 							"type": "meshPhongMaterial",
-							"name": "blueNeckPhong",
+							"name": "redNeckPhong",
 							"DIFFUSE COLOR COMMENT": "NECKS ARE #696969",
 							"diffuseColor": [0.411765, 0.411765, 0.411765],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE THE SAME COLOR AS THE METAL",
