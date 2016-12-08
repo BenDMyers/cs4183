@@ -10,7 +10,7 @@
 		"type": "perspectiveCamera",
 		"name": "camera1",
 		"eye": [0, 2, 2],
-		"center": [0, 0, 0],
+		"center": [0, 0, -3],
 		"vup": [0, 1, 0],
 		"fov": 20
 	},
