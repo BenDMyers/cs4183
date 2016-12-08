@@ -39,11 +39,11 @@ function start()
 
 function cameraTrack(node)
 {
-	// var target = currentScene.getObjectByName(node.userData["target"]);
-	// if(target !== undefined)
-	// {
-		node.lookAt([0, 0.5, 0]);
-	// }
+	var target = currentScene.getObjectByName(node.userData["target"]);
+	if(target !== undefined)
+	{
+		node.lookAt(target.position);
+	}
 }
 
 function cameraSpin(node)
