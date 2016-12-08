@@ -82,9 +82,12 @@
 				"userData":
 				{
 					"health": 300,
-					"attackKey": 81,
+					"attackKey": 80,
 					"arm": "blueArm",
-					"enemy": "red"
+					"enemy": "red",
+					"pose": "poised",
+					"scripts": ["attack"],
+					"cooldown": 0
 				},
 				"children":
 				[
@@ -233,7 +236,10 @@
 					"health": 300,
 					"attackKey": 81,
 					"arm": "redArm",
-					"enemy": "blue"
+					"enemy": "blue",
+					"pose": "poised",
+					"scripts": ["attack"],
+					"cooldown": 0
 				},
 				"children":
 				[

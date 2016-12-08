@@ -59,3 +59,15 @@ function cameraSpin(node)
         node.position.z = z;
     }
 }
+
+function attack(node)
+{
+    if(node.userData["pose"] === "poised" && node.userData["cooldown"] == 0 && pressedKeys[node.userData["attackKey"]])
+    {
+        node.userData["pose"] = "swinging";
+    }
+    else if(node.userData["pose"] === "swinging")
+    {
+        currentScene.getObjectByName(node.userData["arm"]).rotateOnAxis(ZAXIS, frameDuration);
+    }
+}
