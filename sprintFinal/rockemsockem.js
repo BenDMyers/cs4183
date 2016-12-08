@@ -16,13 +16,13 @@ function blur()
 {
     if(root.gameState !== "playing")
     {
-        // root.userData["blur"] = Math.min(root.userData["blur"] + frameDuration, 1.0)
+        root.userData["blur"] = Math.min(root.userData["blur"] + frameDuration, 2.0)
         hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
-        hblur.uniforms['h'].value = 2;
+        hblur.uniforms['h'].value = root.userData["blur"];
         hblur.renderToScreen();
         composer.addPass( hblur );
         vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
-        hblur.uniforms['v'].value = 2;
+        hblur.uniforms['v'].value = root.userData["blur"];
         vblur.renderToScreen = true;
         composer.addPass( vblur );
         composer.render();

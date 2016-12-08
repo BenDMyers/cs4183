@@ -5,9 +5,9 @@
 "scriptFiles": [ "rockemsockem.js" ],
 "userData":
 {
-	"scripts": ["start", "blur"],
+	"scripts": ["start"],
 	"gameState": "waiting",
-	"blur": 1.0
+	"blur": 2.0
 },
 
 "children":
