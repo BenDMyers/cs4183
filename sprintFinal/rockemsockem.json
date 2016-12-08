@@ -14,7 +14,7 @@
 	{
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [0, 3, 5],
+		"eye": [0, 3, -5],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 20,
@@ -86,7 +86,8 @@
 				{
 					"health": 300,
 					"attackKey": 81,
-					"arm": "blueArm"
+					"arm": "blueArm",
+					"enemy": "red"
 				},
 				"children":
 				[
@@ -123,6 +124,26 @@
 						{
 							"type": "meshPhongMaterial",
 							"name": "blueLeg2Phong",
+							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
+							"diffuseColor": [0, 1, 1],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "BLUE ROBOT - TORSO",
+						"type": "mesh",
+						"name": "blueTorso",
+						"geometry": "cube",
+						"translate": [0, 0.625, 0],
+						"width": 0.2,
+						"height": 0.5,
+						"depth": 0.35,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueTorsoPhong",
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
