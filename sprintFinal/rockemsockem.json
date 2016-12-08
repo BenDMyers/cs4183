@@ -33,10 +33,11 @@
 		"intensity": 0.6
 	},
 	{
-		"type": "pointLight",
-		"name": "plight1",
+		"type": "spotLight",
+		"name": "spot",
 		"color": [1, 1, 1],
-		"position": [0, 2, -0.3]
+		"position": [10, 10, 10],
+		"castShadow": true
 	},
 	{
 		"COMMENT": "RING NODE",
