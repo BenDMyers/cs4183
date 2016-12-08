@@ -37,7 +37,10 @@ function readout()
     root = currentScene.getObjectByName("rootNode");
     console.log(root.userData["gameState"]);
 
-    READOUT.parentNode.removeChild(READOUT);
+    if(READOUT !== undefined)
+    {
+        READOUT.parentNode.removeChild(READOUT);
+    }
 
     READOUT = document.createElement( 'div' );
     READOUT.id = "readout";
