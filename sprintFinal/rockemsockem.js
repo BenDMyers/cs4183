@@ -18,9 +18,11 @@ function blur()
     {
         // root.userData["blur"] = Math.min(root.userData["blur"] + frameDuration, 1.0)
         hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+        hblur.uniforms['h'].value = 2;
         hblur.renderToScreen();
         composer.addPass( hblur );
         vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+        hblur.uniforms['v'].value = 2;
         vblur.renderToScreen = true;
         composer.addPass( vblur );
         composer.render();
