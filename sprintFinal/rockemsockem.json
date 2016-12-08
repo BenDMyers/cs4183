@@ -151,7 +151,7 @@
 						"material":
 						{
 							"type": "meshPhongMaterial",
-							"name": "blueTorsoPhong",
+							"name": "blueLeftArmPhong",
 							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
 							"diffuseColor": [0, 1, 1],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
