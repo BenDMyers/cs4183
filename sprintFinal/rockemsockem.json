@@ -15,7 +15,7 @@
 		"fov": 20,
 		"userData":
 		{
-			"scripts": ["cameraSpin", "cameraTrack"],
+			"scripts": ["cameraTrack"],
 			"target": "ringNode"
 		}
 	},
@@ -57,6 +57,7 @@
 				"name": "ring",
 				"translate": [0,0,0],
 				"ROTATE COMMENT": "TODO: implement",
+				"rotate": [0,1,0,0.785398],
 				"height": 0.2,
 				"geometry": "cube",
 				"material":
@@ -66,7 +67,7 @@
 					"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
 					"diffuseColor": [1, 0.84705882352, 0],
 					"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-					"specularColor": [1.0, 1.0, 1.0],
+					"specularColor": [0.1, 0.1, 0.1],
 					"shininess": 10
 				}
 			}
