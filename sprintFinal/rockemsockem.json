@@ -27,6 +27,24 @@
 		"intensity": 0.6
 	},
 	{
+		"type": "directionalLight",
+		"name": "dlight1",
+		"color": [1, 1, 1],
+		"position": [1, 2, 1]
+	},
+	{
+		"type": "directionalLight",
+		"name": "dlight2",
+		"color": [0.1, 0.1, 0.1],
+		"position": [-1, 0.1, 0.5]
+	},
+	{
+		"type": "directionalLight",
+		"name": "dlight3",
+		"color": [0.1, 0.1, 0.1],
+		"position": [0, 0, 1]
+	},
+	{
 		"COMMENT": "RING NODE",
 		"type": "node",
 		"name": "ringNode",
@@ -39,7 +57,7 @@
 				"name": "ring",
 				"translate": [0,0,0],
 				"ROTATE COMMENT": "TODO: implement",
-				"height": 0.4,
+				"height": 0.2,
 				"geometry": "cube",
 				"material":
 				{

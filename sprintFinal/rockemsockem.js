@@ -13,8 +13,8 @@ function cameraSpin(node)
 {
     fnum++;
     var frameRate = 60.0;
-    var x = 5.0 * Math.cos(fnum/(frameRate*3) + 4.71239);
-    var z = 5.0 * Math.sin(fnum/(frameRate*3) + 4.71239);
+    var x = 5.0 * Math.cos(fnum/(frameRate*-3) + 4.71239);
+    var z = 5.0 * Math.sin(fnum/(frameRate*-3) + 4.71239);
     node.position.x = x;
     node.position.z = z;
 }
