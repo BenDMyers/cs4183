@@ -3,6 +3,11 @@
 "type": "node",
 "name": "rootNode",
 "scriptFiles": [ "rockemsockem.js" ],
+"userData":
+{
+	"scripts": [],
+	"gameState": "waiting"
+},
 
 "children":
 [
@@ -15,7 +20,7 @@
 		"fov": 20,
 		"userData":
 		{
-			"scripts": ["cameraTrack"],
+			"scripts": ["cameraSpin", "cameraTrack"],
 			"target": "ringNode"
 		}
 	},
@@ -70,6 +75,11 @@
 					"specularColor": [0.1, 0.1, 0.1],
 					"shininess": 10
 				}
+			},
+			{
+				"COMMENT": "BLUE ROBOT",
+				"type": "node",
+				"name":
 			}
 		]
 	}
