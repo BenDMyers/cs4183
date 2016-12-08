@@ -2,8 +2,10 @@ var fnum = 0;
 var root = currentScene.getObjectByName("rootNode");
 var camera = currentScene.getObjectByName("camera1");
 
-var composer = new THREE.EffectComposer( currentRenderer );
-composer.addPass( new THREE.RenderPass( currentScene, camera ) );
+// var composer = new THREE.EffectComposer( currentRenderer );
+// composer.addPass( new THREE.RenderPass( currentScene, camera ) );
+
+var READOUT;
 
 // KEYBOARD CONSTANTS
 var Q_KEY = 81;
@@ -35,7 +37,9 @@ function readout()
     root = currentScene.getObjectByName("rootNode");
     console.log(root.userData["gameState"]);
 
-    var READOUT = document.createElement( 'div' );
+    document.removeChild(READOUT);
+
+    READOUT = document.createElement( 'div' );
     // READOUT.innerHTML = getReadout();
     if(root.userData["gameState"] === "waiting")
     {
