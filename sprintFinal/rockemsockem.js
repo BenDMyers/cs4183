@@ -64,10 +64,10 @@ function instructions()
 
 function redDeath()
 {
-    return "<pre>Blue wins!";
+    return "<pre>Blue wins!</pre>";
 }
 
-function blueDeath();
+function blueDeath()
 {
     return "<pre>Red wins!</pre>";;
 }
