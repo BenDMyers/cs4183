@@ -90,7 +90,7 @@
 					"cooldown": 0,
 					"rotationAmount": 0,
 					"held": false,
-					"dead": false,
+					"dead": false
 				},
 				"children":
 				[
@@ -266,7 +266,7 @@
 					"cooldown": 0,
 					"rotationAmount": 0,
 					"held": false,
-					"dead": false,
+					"dead": false
 				},
 				"children":
 				[
