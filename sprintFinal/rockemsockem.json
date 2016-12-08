@@ -89,7 +89,8 @@
 					"scripts": ["attack"],
 					"cooldown": 0,
 					"rotationAmount": 0,
-					"held": false
+					"held": false,
+					"dead": false,
 				},
 				"children":
 				[
@@ -174,6 +175,27 @@
 						}
 					},
 					{
+						"COMMENT": "BLUE ROD",
+						"type": "mesh",
+						"name": "blueRod",
+						"translate": [0, 1, 0],
+						"geometry": "cylinder",
+						"height": 0.25,
+						"radiusTop": 0.01,
+						"radiusBottom": 0.01,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueNeckPhong",
+							"DIFFUSE COLOR COMMENT": "NECKS ARE #696969",
+							"diffuseColor": [0.411765, 0.411765, 0.411765],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE THE SAME COLOR AS THE METAL",
+							"specularColor": [0.411765, 0.411765, 0.411765],
+							"SHININESS COMMENT": "QUITE SHINY",
+							"shininess": 10
+						}
+					},
+					{
 						"COMMENT": "BLUE - NONSWINGING ARM",
 						"type": "mesh",
 						"name": "blueLeftArm",
@@ -243,7 +265,8 @@
 					"scripts": ["attack"],
 					"cooldown": 0,
 					"rotationAmount": 0,
-					"held": false
+					"held": false,
+					"dead": false,
 				},
 				"children":
 				[
@@ -324,6 +347,27 @@
 							"diffuseColor": [1, 0, 0],
 							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
 							"specularColor": [1, 1, 1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "BLUE ROD",
+						"type": "mesh",
+						"name": "blueRod",
+						"translate": [0, 1, 0],
+						"geometry": "cylinder",
+						"height": 0.25,
+						"radiusTop": 0.01,
+						"radiusBottom": 0.01,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueNeckPhong",
+							"DIFFUSE COLOR COMMENT": "NECKS ARE #696969",
+							"diffuseColor": [0.411765, 0.411765, 0.411765],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE THE SAME COLOR AS THE METAL",
+							"specularColor": [0.411765, 0.411765, 0.411765],
+							"SHININESS COMMENT": "QUITE SHINY",
 							"shininess": 10
 						}
 					},

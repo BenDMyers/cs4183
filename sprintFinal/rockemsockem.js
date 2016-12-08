@@ -109,7 +109,7 @@ function attack(node)
         if(node.userData["cooldown"] < 0 && !node.userData["held"])
         {
             node.userData["pose"] = "poised";
-            console.log(node.name " IS POISED FOR ATTACK");
+            console.log(node.name + " IS POISED FOR ATTACK");
         }
     }
 }
