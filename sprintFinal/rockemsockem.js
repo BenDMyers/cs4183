@@ -32,8 +32,8 @@ function cameraSpin(node)
         fnum++;
         node.userData["speed"] = Math.min(node.userData["speed"] + frameDuration, 1.0);
         var frameRate = 60.0;
-        var x = 5.0 * Math.cos(node.userData["speed"] * fnum/(frameRate*-3));
-        var z = 5.0 * Math.sin(node.userData["speed"] * fnum/(frameRate*-3));
+        var x = 5.0 * Math.cos(node.userData["speed"] * fnum/(frameRate*-3) + 4.71239);
+        var z = 5.0 * Math.sin(node.userData["speed"] * fnum/(frameRate*-3) + 4.71239);
         node.position.x = x;
         node.position.z = z;
     }
