@@ -27,20 +27,20 @@
 		"intensity": 0.6
 	},
 	{
-		"type": "directionalLight",
-		"name": "dlight1",
+		"type": "pointLight",
+		"name": "plight1",
 		"color": [1, 1, 1],
 		"position": [1, 2, 1]
 	},
 	{
-		"type": "directionalLight",
-		"name": "dlight2",
+		"type": "pointLight",
+		"name": "plight2",
 		"color": [0.1, 0.1, 0.1],
 		"position": [-1, 0.1, 0.5]
 	},
 	{
-		"type": "directionalLight",
-		"name": "dlight3",
+		"type": "pointLight",
+		"name": "plight3",
 		"color": [0.1, 0.1, 0.1],
 		"position": [0, 0, 1]
 	},
