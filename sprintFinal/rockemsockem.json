@@ -39,8 +39,7 @@
 		"position": [0, 10, 0],
 		"castShadow": true,
 		"penumbra": 0.2,
-		"decay": 1.0,
-		"angle": 3.14159
+		"decay": 1.0
 	},
 	{
 		"COMMENT": "RING NODE",
@@ -168,8 +167,8 @@
 						"type": "mesh",
 						"name": "blueLeftArm",
 						"geometry": "cube",
-						"translate": [0, 0.708333, 0.225],
-						"rotate": [-0.1, 0 , 1, 0.785398],
+						"translate": [-0.125, 0.708333, 0.225],
+						"rotate": [0, 0 , 1, 0.785398],
 						"width": 0.2,
 						"height": 0.33333,
 						"depth": 0.1,
@@ -183,6 +182,37 @@
 							"specularColor": [0.1, 0.1, 0.1],
 							"shininess": 10
 						}
+					},
+					{
+						"COMMENT": "BLUE - SWINGING ARM NODE",
+						"type": "node",
+						"name": "blueArm",
+						"translate": [0, 0.75, 0.175],
+						"rotate": [0, 0, 1, 0],
+						"children":
+						[
+							{
+								"COMMENT": "BLUE - SWINGING ARM",
+								"type": "mesh",
+								"name": "blueRightArm",
+								"geometry": "cube",
+								"translate": [-0.125, -0.166667, -0.225],
+								"rotate": [0, 0, 1, 0.785398],
+								"width": 0.2,
+								"height": 0.33333,
+								"depth": 0.1,
+								"material":
+								{
+									"type": "meshPhongMaterial",
+									"name": "blueRightArmPhong",
+									"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
+									"diffuseColor": [0, 1, 1],
+									"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+									"specularColor": [0.1, 0.1, 0.1],
+									"shininess": 10
+								}
+							}
+						]
 					}
 				]
 			}
