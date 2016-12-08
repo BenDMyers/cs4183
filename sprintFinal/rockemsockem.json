@@ -20,6 +20,23 @@
 		"skyColor": [1.0, 1.0, 1.0],
 		"groundColor": [0.0, 0.0, 0.0],
 		"intensity": 0.6
+	},
+	{
+		"COMMENT": "RING",
+		"type": "mesh",
+		"name": "ring",
+		"translate": [0,0,0],
+		"depth": 1,
+		"geometry": "cube",
+		"material":
+		{
+			"type": "meshPhongMaterial",
+			"name": "ringPhong",
+			"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
+			"diffuseColor": [1, 0.84705882352, 0],
+			"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+			"specularColor": [0.1, 0.1, 0.1]
+		}
 	}
 ]
 }
