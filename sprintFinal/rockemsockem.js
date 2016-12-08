@@ -31,6 +31,10 @@ var SPACE = 32;
 
 function readout()
 {
+    // I'll just take this here so it happens everytime
+    root = currentScene.getObjectByName("rootNode");
+    console.log(root.userData["gameState"]);
+
     var READOUT = document.createElement( 'div' );
     // READOUT.innerHTML = getReadout();
     if(root.userData["gameState"] === "waiting")
