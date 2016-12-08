@@ -6,6 +6,8 @@ var Q_KEY = 81;
 var P_KEY = 80;
 var SPACE = 32;
 
+console.log(root.userData["gameState"]);
+
 function start()
 {
     if(root.userData["gameState"] === "waiting" && pressedKeys[SPACE])

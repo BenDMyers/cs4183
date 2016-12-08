@@ -83,11 +83,50 @@
 				"translate": [-1,0,0],
 				"userData":
 				{
-					"health": 300
+					"health": 300,
+					"attackKey": 81,
+					"arm": "blueArm"
 				},
 				"children":
 				[
-					
+					{
+						"COMMENT": "BLUE ROBOT - LEFT LEG",
+						"type": "mesh",
+						"name": "blueLeg1",
+						"translate": [0, 0.5, -0.3],
+						"width": 0.25,
+						"height": 0.5,
+						"depth": 0.25,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueLeg1Phong",
+							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
+							"diffuseColor": [0, 1, 1],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "BLUE ROBOT - RIGHT LEG",
+						"type": "mesh",
+						"name": "blueLeg2",
+						"translate": [0, 0.5, 0.3],
+						"width": 0.25,
+						"height": 0.5,
+						"depth": 0.25,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueLeg2Phong",
+							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
+							"diffuseColor": [0, 1, 1],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					}
 				]
 			}
 		]
