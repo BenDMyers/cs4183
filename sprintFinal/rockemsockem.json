@@ -79,7 +79,16 @@
 			{
 				"COMMENT": "BLUE ROBOT",
 				"type": "node",
-				"name":
+				"name": "blue",
+				"translate": [-1,0,0],
+				"userData":
+				{
+					"health": 300
+				},
+				"children":
+				[
+					
+				]
 			}
 		]
 	}
