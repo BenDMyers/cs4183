@@ -36,7 +36,7 @@
 		"type": "pointLight",
 		"name": "plight1",
 		"color": [1, 1, 1],
-		"position": [0, 6, -0.3]
+		"position": [0, 2, -0.3]
 	},
 	{
 		"COMMENT": "RING NODE",
@@ -164,9 +164,9 @@
 						"type": "mesh",
 						"name": "blueLeftArm",
 						"geometry": "cube",
-						"translate": [0, 0.75, 0.225],
-						"width": 0.1,
-						"height": 0.25,
+						"translate": [0, 0.708333, 0.225],
+						"width": 0.2,
+						"height": 0.33333,
 						"depth": 0.1,
 						"material":
 						{
