@@ -30,7 +30,7 @@ function cameraSpin(node)
     if(root.userData["gameState"] !== "waiting")
     {
         fnum++;
-        node.userData["speed"] = Math.min(node.userData["speed"] + frameDuration, 1.0);
+        node.userData["speed"] = Math.min(node.userData["speed"] + frameDuration/3.0, 1.0);
         var frameRate = 60.0;
         var x = 5.0 * Math.cos(node.userData["speed"] * fnum/(frameRate*-3) + 4.71239);
         var z = 5.0 * Math.sin(node.userData["speed"] * fnum/(frameRate*-3) + 4.71239);

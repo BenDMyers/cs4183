@@ -36,19 +36,7 @@
 		"type": "pointLight",
 		"name": "plight1",
 		"color": [1, 1, 1],
-		"position": [1, 2, 1]
-	},
-	{
-		"type": "pointLight",
-		"name": "plight2",
-		"color": [0.1, 0.1, 0.1],
-		"position": [-1, 0.1, 0.5]
-	},
-	{
-		"type": "pointLight",
-		"name": "plight3",
-		"color": [0.1, 0.1, 0.1],
-		"position": [0, 0, 1]
+		"position": [0, 6, -0.3]
 	},
 	{
 		"COMMENT": "RING NODE",
@@ -140,6 +128,26 @@
 						"width": 0.2,
 						"height": 0.5,
 						"depth": 0.35,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueTorsoPhong",
+							"DIFFUSE COLOR COMMENT": "BLUE BOT IS CYAN (#00FFFF)",
+							"diffuseColor": [0, 1, 1],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "BLUE - NONSWINGING ARM",
+						"type": "mesh",
+						"name": "blueLeftArmNode",
+						"geometry": "cube",
+						"translate": [0, 0.125, 0.25],
+						"width": 0.2,
+						"height": 0.25,
+						"depth": 0.25,
 						"material":
 						{
 							"type": "meshPhongMaterial",
