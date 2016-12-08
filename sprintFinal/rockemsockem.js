@@ -62,9 +62,14 @@ function cameraSpin(node)
 
 function attack(node)
 {
-    if(node.userData["pose"] === "poised" && node.userData["cooldown"] == 0 && pressedKeys[node.userData["attackKey"]])
+    if(root.userData["gameState"] === "waiting")
+    {
+        return;
+    }
+    if(node.userData["pose"] === "poised" && node.userData["cooldown"] == 0 && pressedKeys[node.userData["attackKey"]] && root.userData["gameState"] === "playing")
     {
         node.userData["pose"] = "swinging";
+        console.log(node.name + " IS SWINGING ME RIGHT ROUND LIKE A RECORD BABY");
     }
     else if(node.userData["pose"] === "swinging")
     {
@@ -73,6 +78,7 @@ function attack(node)
         if(node.userData["rotationAmount"] >= 1)
         {
             node.userData["pose"] = "unswinging";
+            console.log(node.name + " IS UNSWINGING ME RIGHT ROUND LIKE A RECORD BABY");
             currentScene.getObjectByName(node.userData["enemy"]).userData["health"] -= Math.floor(Math.random() * (30 - 10)) + 10;
             if(root.userData["gameState"] === "playing" && currentScene.getObjectByName(node.userData["enemy"]).userData["health"] <= 0)
             {
@@ -87,6 +93,7 @@ function attack(node)
         node.userData["rotationAmount"] -= 5*frameDuration;
         if(node.userData["rotationAmount"] <= 0)
         {
+            console.log(node.name " IS IN COOLDOWN");
             node.userData["pose"] = "cooldown";
             node.userData["cooldown"] = 10;
             node.userData["held"] = pressedKeys[node.userData["attackKey"]];
@@ -102,6 +109,7 @@ function attack(node)
         if(node.userData["cooldown"] < 0 && !node.userData["held"])
         {
             node.userData["pose"] = "poised";
+            console.log(node.name " IS POISED FOR ATTACK");
         }
     }
 }
