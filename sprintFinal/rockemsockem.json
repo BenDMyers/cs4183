@@ -24,7 +24,7 @@
 		"name": "hlight",
 		"skyColor": [1.0, 1.0, 1.0],
 		"groundColor": [0.0, 0.0, 0.0],
-		"intensity": 1.0
+		"intensity": 0.6
 	},
 	{
 		"COMMENT": "RING NODE",
@@ -39,7 +39,7 @@
 				"name": "ring",
 				"translate": [0,0,0],
 				"ROTATE COMMENT": "TODO: implement",
-				"height": 1,
+				"height": 0.4,
 				"geometry": "cube",
 				"material":
 				{
