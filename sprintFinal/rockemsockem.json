@@ -216,6 +216,155 @@
 						]
 					}
 				]
+			},
+			{
+				"COMMENT": "RED ROBOT",
+				"type": "node",
+				"name": "red",
+				"translate": [0.25, 0, 0],
+				"rotate": [0, 1, 1, 3.141593],
+				"userData":
+				{
+					"health": 300,
+					"attackKey": 81,
+					"arm": "redArm",
+					"enemy": "blue"
+				},
+				"children":
+				[
+					{
+						"COMMENT": "RED ROBOT - LEFT LEG",
+						"type": "mesh",
+						"name": "redLeg1",
+						"geometry": "cube",
+						"translate": [0, 0.125, -0.09],
+						"width": 0.1666667,
+						"height": 0.5,
+						"depth": 0.1666667,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "redLeg1Phong",
+							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
+							"diffuseColor": [1, 0, 0],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "RED ROBOT - RIGHT LEG",
+						"type": "mesh",
+						"name": "redLeg2",
+						"geometry": "cube",
+						"translate": [0, 0.125, 0.09],
+						"width": 0.1666667,
+						"height": 0.5,
+						"depth": 0.1666667,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "redLeg2Phong",
+							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
+							"diffuseColor": [1, 0, 0],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "RED ROBOT - TORSO",
+						"type": "mesh",
+						"name": "redTorso",
+						"geometry": "cube",
+						"translate": [0, 0.625, 0],
+						"width": 0.2,
+						"height": 0.5,
+						"depth": 0.35,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "redTorsoPhong",
+							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
+							"diffuseColor": [1, 0, 0],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "RED HEAD",
+						"type": "mesh",
+						"name": "redHead",
+						"geometry": "cube",
+						"translate": [0, 1, 0],
+						"width": 0.25,
+						"height": 0.25,
+						"depth": 0.25,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "blueHeadPhong",
+							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
+							"diffuseColor": [1, 0, 0],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "RED - NONSWINGING ARM",
+						"type": "mesh",
+						"name": "redLeftArm",
+						"geometry": "cube",
+						"translate": [0.125, 0.7, 0.225],
+						"rotate": [0, 0, 1, 0.785398],
+						"width": 0.15,
+						"height": 0.33333,
+						"depth": 0.1,
+						"material":
+						{
+							"type": "meshPhongMaterial",
+							"name": "redLeftArmPhong",
+							"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
+							"diffuseColor": [1, 0, 0],
+							"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+							"specularColor": [0.1, 0.1, 0.1],
+							"shininess": 10
+						}
+					},
+					{
+						"COMMENT": "RED - SWINGING ARM NODE",
+						"type": "node",
+						"name": "redArm",
+						"translate": [0, 0.875, -0.225],
+						"rotate": [0, 0, 1, 0],
+						"children":
+						[
+							{
+								"COMMENT": "RED - SWINGING ARM",
+								"type": "mesh",
+								"name": "redRightArm",
+								"geometry": "cube",
+								"translate": [0.125, -0.166667, 0],
+								"rotate": [0, 0, 1, 0.785398],
+								"width": 0.15,
+								"height": 0.33333,
+								"depth": 0.1,
+								"material":
+								{
+									"type": "meshPhongMaterial",
+									"name": "redRightArmPhong",
+									"DIFFUSE COLOR COMMENT": "RED BOT IS #FF0000",
+									"diffuseColor": [1, 0, 0],
+									"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+									"specularColor": [0.1, 0.1, 0.1],
+									"shininess": 10
+								}
+							}
+						]
+					}
+				]
 			}
 		]
 	}
