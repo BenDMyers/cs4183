@@ -12,7 +12,12 @@
 		"eye": [0, 5, 3],
 		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
-		"fov": 20
+		"fov": 20,
+		"userData":
+		{
+			"scripts": ["cameraTrack"],
+			"target": "ringNode"
+		}
 	},
 	{
 		"type": "hemisphereLight",
@@ -44,7 +49,7 @@
 					"diffuseColor": [1, 0.84705882352, 0],
 					"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
 					"specularColor": [0.1, 0.1, 0.1],
-					"shininess": 10,
+					"shininess": 10
 				}
 			}
 		]
