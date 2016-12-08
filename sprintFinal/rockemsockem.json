@@ -9,8 +9,8 @@
 	{
 		"type": "perspectiveCamera",
 		"name": "camera1",
-		"eye": [0, 2, 2],
-		"center": [0, 0, -3],
+		"eye": [0, 5, 5],
+		"center": [0, 0, 0],
 		"vup": [0, 1, 0],
 		"fov": 20
 	},
@@ -22,21 +22,31 @@
 		"intensity": 0.6
 	},
 	{
-		"COMMENT": "RING",
-		"type": "mesh",
-		"name": "ring",
+		"COMMENT": "RING NODE",
+		"type": "node",
+		"name": "ringNode",
 		"translate": [0,0,0],
-		"depth": 1,
-		"geometry": "cube",
-		"material":
-		{
-			"type": "meshPhongMaterial",
-			"name": "ringPhong",
-			"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
-			"diffuseColor": [1, 0.84705882352, 0],
-			"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
-			"specularColor": [0.1, 0.1, 0.1]
-		}
+		"children":
+		[
+			{
+				"COMMENT": "RING",
+				"type": "mesh",
+				"name": "ring",
+				"translate": [0,0,0],
+				"ROTATE COMMENT": "",
+				"depth": 1,
+				"geometry": "cube",
+				"material":
+				{
+					"type": "meshPhongMaterial",
+					"name": "ringPhong",
+					"DIFFUSE COLOR COMMENT": "RING YELLOW IS #FFD800",
+					"diffuseColor": [1, 0.84705882352, 0],
+					"SPECULAR COLOR COMMENT": "SPECULAR HIGHLIGHTS ARE WHITE BUT NOT BRIGHT",
+					"specularColor": [0.1, 0.1, 0.1]
+				}
+			}
+		]
 	}
 ]
 }
