@@ -3,11 +3,11 @@
 "type": "node",
 "name": "rootNode",
 "scriptFiles": [ "rockemsockem.js" ],
+"backgroundMusic": "Killers.mp3",
 "userData":
 {
 	"scripts": ["start"],
-	"gameState": "waiting",
-	"backgroundMusic": "Killers.mp3"
+	"gameState": "waiting"
 },
 
 "children":
