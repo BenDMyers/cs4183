@@ -53,23 +53,23 @@ function readout()
     READOUT.style["width"] = "100%";
     READOUT.style["text-align"] = "center";
     READOUT.style["bottom"] = "0px";
-    // READOUT.style["color"] = "#ff0"
+    READOUT.style["color"] = "#ffffff"
     document.body.insertBefore(READOUT, document.body.firstChild);
 }
 
 function instructions()
 {
-    return "<pre>Q - Red Attack | Space - Start | P - Blue Attack</pre>";
+    return "<h1>Q - Red Attack | Space - Start | P - Blue Attack</h1>";
 }
 
 function redDeath()
 {
-    return "<pre>Blue wins!</pre>";
+    return "<h1>Blue wins!</h1>";
 }
 
 function blueDeath()
 {
-    return "<pre>Red wins!</pre>";;
+    return "<h1>Red wins!</h1>";
 }
 
 function start()
